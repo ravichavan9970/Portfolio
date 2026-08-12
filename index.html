@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ravindra Chavan | Associate Software Engineer | Java Full Stack Developer</title>
+    <meta name="description" content="Ravindra Chavan - Associate Software Engineer & Java Full Stack Developer. Specialized in Java 21, Spring Boot 3, Spring Security JWT, MySQL, React, Microservices, and Docker." />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://ravindrachavan-portfolio.vercel.app" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Ravindra Chavan | Associate Software Engineer | Java Full Stack Developer" />
+    <meta property="og:description" content="Ravindra Chavan - Associate Software Engineer & Java Full Stack Developer. Building scalable enterprise applications with Java 21, Spring Boot, MySQL, and React." />
+    <meta property="og:image" content="https://ravindrachavan-portfolio.vercel.app/images/profile.jpg" />
+    <meta property="og:url" content="https://ravindrachavan-portfolio.vercel.app" />
+    <meta property="og:site_name" content="Ravindra Chavan Portfolio" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ravindra Chavan | Associate Software Engineer | Java Full Stack Developer" />
+    <meta name="twitter:description" content="Ravindra Chavan - Associate Software Engineer & Java Full Stack Developer. Building scalable enterprise applications with Java 21, Spring Boot, MySQL, and React." />
+    <meta name="twitter:image" content="https://ravindrachavan-portfolio.vercel.app/images/profile.jpg" />
+    <meta name="twitter:url" content="https://ravindrachavan-portfolio.vercel.app" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Inline Theme Synchronization Script -->
+    <script>
+      (function() {
+        const savedMode = localStorage.getItem('portfolio-theme');
+        let isDark = true;
+        if (savedMode === 'light') {
+          isDark = false;
+        } else if (savedMode === 'dark') {
+          isDark = true;
+        }
+        if (isDark) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      })();
+    </script>
+  </head>
+  <body class="bg-bg-darkest text-text-main antialiased selection:bg-cyan-500/30 selection:text-cyan-200">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
