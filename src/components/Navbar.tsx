@@ -38,7 +38,7 @@ const accentRegistry = {
   cyan:    { primary: '#06B6D4', hover: '#0891B2', light: '#67E8F9', glow: 'rgba(6,182,212,0.35)',  glowSoft: 'rgba(8,145,178,0.15)',   secondary: '#8B5CF6', secondaryHover: '#7C3AED', secondaryLight: '#A78BFA' },
   rose:    { primary: '#F43F5E', hover: '#E11D48', light: '#FB7185', glow: 'rgba(244,63,94,0.35)',  glowSoft: 'rgba(225,29,72,0.15)',   secondary: '#8B5CF6', secondaryHover: '#7C3AED', secondaryLight: '#A78BFA' },
   slate:   { primary: '#64748B', hover: '#475569', light: '#94A3B8', glow: 'rgba(100,116,139,0.35)',glowSoft: 'rgba(71,85,105,0.15)',   secondary: '#334155', secondaryHover: '#1E293B', secondaryLight: '#64748B' },
-} as const;
+};
 
 type AccentKey = keyof typeof accentRegistry;
 
@@ -75,6 +75,16 @@ export default function Navbar() {
 
   const dropdownRef = useRef<HTMLDivElement>(null);
   const mobileDropdownRef = useRef<HTMLDivElement>(null);
+  const mobilePanelRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleAvailabilityChange = (e: Event) => {
+      const customEvent = e as CustomEvent<string>;
+      if (customEvent.detail) setAvailabilityId(customEvent.detail);
+    };
+    window.addEventListener('availability-change', handleAvailabilityChange);
+    return () => window.removeEventListener('availability-change', handleAvailabilityChange);
+  }, []);
 
   const currentAvailability = availabilityOptions.find(o => o.id === availabilityId) || availabilityOptions[0];
 
@@ -115,11 +125,31 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // ── Persisted theme state ──────────────────────────────────────────────────
-  const [themeMode, setThemeMode] = useState<'light' | 'dark'>(() => {
+  // ── Close customizer when clicking outside ─────────────────────────────────
+  useEffect(() => {
+    const handleOutside = (e: MouseEvent) => {
+      const target = e.target as Node;
+      const modalEl = document.getElementById('admin-auth-modal');
+      if (modalEl && modalEl.contains(target)) return;
+
+      const inDesktop = dropdownRef.current?.contains(target);
+      const inMobile  = mobileDropdownRef.current?.contains(target);
+      const inMobilePanel = mobilePanelRef.current?.contains(target);
+      if (!inDesktop && !inMobile && !inMobilePanel) {
+        setCustomizerOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleOutside);
+    return () => document.removeEventListener('mousedown', handleOutside);
+  }, []);
+
+  // ── Persisted theme state (supports light, dark, and double-click blood-red) ──
+  const [themeMode, setThemeMode] = useState<'light' | 'dark' | 'blood-red'>(() => {
     const saved = localStorage.getItem('portfolio-theme');
-    if (saved === 'light' || saved === 'dark') return saved;
-    return new Date().getHours() >= 6 && new Date().getHours() < 18 ? 'light' : 'dark';
+    if (saved === 'blood-red') return 'blood-red';
+    if (saved === 'dark') return 'dark';
+    if (saved === 'light') return 'light';
+    return 'light';
   });
 
   const [themeColor, setThemeColor] = useState<AccentKey>(() => {
@@ -129,57 +159,89 @@ export default function Navbar() {
 
   // Derive the live accent tokens from the current color selection
   const accent = accentRegistry[themeColor];
-  const isDark = themeMode === 'dark';
+  const isDark = themeMode === 'dark' || themeMode === 'blood-red';
+  const isBloodRed = themeMode === 'blood-red';
 
-  // ── Sync HTML class + CSS variables whenever theme state changes ───────────
+  // ── Sync HTML class whenever theme state changes ───────────────────────────
   useEffect(() => {
-    if (isDark) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
+    const root = document.documentElement;
+    root.classList.remove('dark', 'blood-red');
+    if (themeMode === 'blood-red') {
+      root.classList.add('dark', 'blood-red');
+    } else if (themeMode === 'dark') {
+      root.classList.add('dark');
     }
     localStorage.setItem('portfolio-theme', themeMode);
-  }, [themeMode, isDark]);
+    window.dispatchEvent(new Event('themechange'));
+  }, [themeMode]);
 
   useEffect(() => {
     const root = document.documentElement;
-    root.style.setProperty('--color-primary',           accent.primary);
-    root.style.setProperty('--color-primary-hover',     accent.hover);
-    root.style.setProperty('--color-primary-light',     accent.light);
-    root.style.setProperty('--color-secondary',         accent.secondary);
-    root.style.setProperty('--color-secondary-hover',   accent.secondaryHover);
-    root.style.setProperty('--color-secondary-light',   accent.secondaryLight);
+    if (isBloodRed) {
+      root.style.setProperty('--color-primary',           '#FF0000');
+      root.style.setProperty('--color-primary-hover',     '#CC0000');
+      root.style.setProperty('--color-primary-light',     '#FF3333');
+      root.style.setProperty('--color-secondary',         '#990000');
+      root.style.setProperty('--color-secondary-hover',   '#660000');
+      root.style.setProperty('--color-secondary-light',   '#CC0000');
+    } else {
+      root.style.setProperty('--color-primary',           accent.primary);
+      root.style.setProperty('--color-primary-hover',     accent.hover);
+      root.style.setProperty('--color-primary-light',     accent.light);
+      root.style.setProperty('--color-secondary',         accent.secondary);
+      root.style.setProperty('--color-secondary-hover',   accent.secondaryHover);
+      root.style.setProperty('--color-secondary-light',   accent.secondaryLight);
+    }
     localStorage.setItem('theme-color', themeColor);
-  }, [themeColor, accent]);
+  }, [themeColor, accent, isBloodRed]);
 
-  // ── Close customizer when clicking outside ─────────────────────────────────
-  useEffect(() => {
-    const handleOutside = (e: MouseEvent) => {
-      const inDesktop = dropdownRef.current?.contains(e.target as Node);
-      const inMobile  = mobileDropdownRef.current?.contains(e.target as Node);
-      if (!inDesktop && !inMobile) setCustomizerOpen(false);
-    };
-    document.addEventListener('mousedown', handleOutside);
-    return () => document.removeEventListener('mousedown', handleOutside);
-  }, []);
+  const toggleTheme = (e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    const nextMode = (themeMode === 'dark' || themeMode === 'blood-red') ? 'light' : 'dark';
+    setThemeMode(nextMode);
+    localStorage.setItem('portfolio-theme', nextMode);
+    const root = document.documentElement;
+    root.classList.remove('dark', 'blood-red');
+    if (nextMode === 'dark') {
+      root.classList.add('dark');
+    }
+    window.dispatchEvent(new Event('themechange'));
+  };
 
-  const toggleTheme = () => setThemeMode(p => p === 'dark' ? 'light' : 'dark');
+  const handleDoubleClickTheme = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const nextMode = themeMode === 'blood-red' ? 'dark' : 'blood-red';
+    setThemeMode(nextMode);
+    localStorage.setItem('portfolio-theme', nextMode);
+    const root = document.documentElement;
+    root.classList.remove('dark', 'blood-red');
+    if (nextMode === 'blood-red') {
+      root.classList.add('dark', 'blood-red');
+    } else {
+      root.classList.add('dark');
+    }
+    window.dispatchEvent(new Event('themechange'));
+  };
 
   const isActive = (path: string) =>
     path === '/' ? location.pathname === '/' : location.pathname.startsWith(path);
 
   // ── Solid Header Color Tokens (Solid White Light, Solid Dark #0F172A) ────────
-  const headerBg     = isDark ? '#0F172A' : '#FFFFFF';
-  const headerBorder = isDark ? (scrolled ? '#334155' : '#1E293B') : (scrolled ? '#CBD5E1' : '#E5E7EB');
+  const headerBg     = isBloodRed ? 'rgba(11, 0, 2, 0.45)' : (isDark ? '#0F172A' : '#FFFFFF');
+  const headerBorder = isBloodRed ? 'rgba(255, 0, 0, 0.35)' : (isDark ? (scrolled ? '#334155' : '#1E293B') : (scrolled ? '#CBD5E1' : '#E5E7EB'));
   const headerShadow = scrolled
-    ? (isDark ? '0 6px 20px rgba(0,0,0,0.35)' : '0 2px 12px rgba(15,23,42,0.06)')
-    : (isDark ? '0 2px 8px rgba(0,0,0,0.2)'   : '0 2px 4px rgba(15,23,42,0.02)');
+    ? (isBloodRed ? '0 8px 30px rgba(255,0,0,0.35)' : (isDark ? '0 6px 20px rgba(0,0,0,0.35)' : '0 2px 12px rgba(15,23,42,0.06)'))
+    : (isBloodRed ? '0 4px 16px rgba(255,0,0,0.25)' : (isDark ? '0 2px 8px rgba(0,0,0,0.2)'   : '0 2px 4px rgba(15,23,42,0.02)'));
 
-  const pillBg     = isDark ? '#111827' : '#FFFFFF';
-  const pillBorder = isDark ? '#1E293B' : '#E5E7EB';
-  const pillShadow = isDark
-    ? '0 4px 16px rgba(0, 0, 0, 0.35)'
-    : '0 4px 16px rgba(15, 23, 42, 0.08)';
+  const pillBg     = isBloodRed ? 'rgba(20, 0, 5, 0.35)' : (isDark ? '#111827' : '#FFFFFF');
+  const pillBorder = isBloodRed ? 'rgba(255, 0, 0, 0.35)' : (isDark ? '#1E293B' : '#E5E7EB');
+  const pillShadow = isBloodRed
+    ? '0 6px 24px rgba(255, 0, 0, 0.3)'
+    : (isDark ? '0 4px 16px rgba(0, 0, 0, 0.35)' : '0 4px 16px rgba(15, 23, 42, 0.08)');
 
   // Nav link text & hover colors per mode
   const inactiveColor = isDark ? '#CBD5E1' : '#475569';
@@ -192,7 +254,6 @@ export default function Navbar() {
 
   // Utility buttons solid tokens
   const utilBg       = isDark ? '#1E293B' : '#F8FAFC';
-  const utilBgActive = isDark ? '#1E293B' : '#EDE9FE';
   const utilBorder   = isDark ? '#1E293B' : '#E5E7EB';
   const utilColor    = isDark ? '#CBD5E1' : '#475569';
 
@@ -200,13 +261,58 @@ export default function Navbar() {
   const panelBg     = isDark ? '#0F172A' : '#FFFFFF';
   const panelBorder = isDark ? '#1E293B' : '#E5E7EB';
 
-  // ─────────────────────────────────────────────────────────────────────────────
-  // Sub-components
-  // ─────────────────────────────────────────────────────────────────────────────
+  const toggleCustomizer = (e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    setCustomizerOpen(prev => !prev);
+  };
 
   /** Shared theme & availability settings panel */
   const SettingsPanel = () => (
-    <div className="space-y-4">
+    <div className="space-y-4 text-left">
+      {/* Theme Mode Selector */}
+      <div>
+        <p className="text-[10px] uppercase tracking-widest font-bold font-mono mb-2"
+           style={{ color: isDark ? '#94A3B8' : '#64748B' }}>
+          Theme Mode
+        </p>
+        <div className="grid grid-cols-2 gap-2">
+          <button
+            key="dark-mode"
+            type="button"
+            onClick={(e) => { e.stopPropagation(); setThemeMode('dark'); }}
+            className="flex items-center justify-center gap-2 p-2.5 rounded-xl cursor-pointer transition-all border font-mono text-[11px] font-bold"
+            style={{
+              borderColor: isDark ? accent.primary : panelBorder,
+              background: isDark ? '#1E293B' : '#F9FAFB',
+              color: isDark ? accent.primary : '#64748B',
+            }}
+          >
+            <Moon size={14} style={{ color: isDark ? '#FBBF24' : undefined }} />
+            <span>Dark</span>
+            {isDark && <Check size={12} style={{ color: accent.primary }} />}
+          </button>
+
+          <button
+            key="light-mode"
+            type="button"
+            onClick={(e) => { e.stopPropagation(); setThemeMode('light'); }}
+            className="flex items-center justify-center gap-2 p-2.5 rounded-xl cursor-pointer transition-all border font-mono text-[11px] font-bold"
+            style={{
+              borderColor: !isDark ? accent.primary : panelBorder,
+              background: !isDark ? '#EDE9FE' : '#1E293B',
+              color: !isDark ? accent.primary : '#94A3B8',
+            }}
+          >
+            <Sun size={14} style={{ color: !isDark ? '#F59E0B' : undefined }} />
+            <span>Light</span>
+            {!isDark && <Check size={12} style={{ color: accent.primary }} />}
+          </button>
+        </div>
+      </div>
+
       {/* Availability Status Selector */}
       <div>
         <div className="flex items-center justify-between mb-2">
@@ -222,18 +328,17 @@ export default function Navbar() {
           {availabilityOptions.map((opt) => {
             const sel = availabilityId === opt.id;
             return (
-              <motion.button
+              <button
                 key={opt.id}
+                type="button"
                 onClick={() => handleStatusOptionClick(opt.id)}
-                className="flex items-center justify-between px-3 py-2 rounded-xl cursor-pointer transition-all border text-left"
+                className="flex items-center justify-between px-3 py-2 rounded-xl cursor-pointer transition-all border text-left w-full"
                 style={{
                   borderColor: sel ? accent.primary : panelBorder,
                   background: sel
                     ? (isDark ? '#1E293B' : '#EDE9FE')
                     : (isDark ? '#1E293B' : '#F9FAFB'),
                 }}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
               >
                 <div className="flex items-center gap-2">
                   <span className={`w-2.5 h-2.5 rounded-full ${opt.dotBg}`} />
@@ -245,7 +350,7 @@ export default function Navbar() {
                   <Lock size={10} className="text-text-muted opacity-60" />
                   {sel && <Check size={12} style={{ color: accent.primary }} />}
                 </div>
-              </motion.button>
+              </button>
             );
           })}
         </div>
@@ -262,8 +367,9 @@ export default function Navbar() {
             const sel = themeColor === c.name;
             const tok = accentRegistry[c.name];
             return (
-              <motion.button
+              <button
                 key={c.name}
+                type="button"
                 onClick={() => setThemeColor(c.name)}
                 className="flex flex-col items-center gap-1.5 p-2 rounded-xl cursor-pointer relative overflow-hidden"
                 style={{
@@ -274,27 +380,12 @@ export default function Navbar() {
                     : (isDark ? '#1E293B' : '#F9FAFB'),
                   transition: 'all 250ms ease',
                 }}
-                whileHover={{ scale: 1.07 }}
-                whileTap={{ scale: 0.93 }}
               >
                 <div
                   className="w-6 h-6 rounded-full flex items-center justify-center relative shadow-sm"
                   style={{ background: tok.primary }}
                 >
-                  <AnimatePresence>
-                    {sel && (
-                      <motion.span
-                        key="check"
-                        initial={{ scale: 0, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        exit={{ scale: 0, opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                        className="flex items-center justify-center"
-                      >
-                        <Check size={11} className="text-white" strokeWidth={3} />
-                      </motion.span>
-                    )}
-                  </AnimatePresence>
+                  {sel && <Check size={11} className="text-white" strokeWidth={3} />}
                 </div>
                 <span
                   className="text-[9px] font-bold font-mono"
@@ -302,33 +393,12 @@ export default function Navbar() {
                 >
                   {c.label}
                 </span>
-              </motion.button>
+              </button>
             );
           })}
         </div>
       </div>
     </div>
-  );
-
-  /** Utility button */
-  const UtilBtn = ({
-    onClick, active = false, label, children,
-  }: { onClick: () => void; active?: boolean; label?: string; children: React.ReactNode }) => (
-    <motion.button
-      onClick={onClick}
-      aria-label={label}
-      title={label}
-      className="relative p-2.5 rounded-[14px] cursor-pointer flex items-center justify-center overflow-hidden border transition-all"
-      style={{
-        borderColor: active ? accent.primary : utilBorder,
-        background:  active ? utilBgActive : utilBg,
-        color:       active ? accent.primary : utilColor,
-      }}
-      whileHover={{ y: -1, scale: 1.05 }}
-      whileTap={{ scale: 0.93 }}
-    >
-      {children}
-    </motion.button>
   );
 
   // ─────────────────────────────────────────────────────────────────────────────
@@ -345,7 +415,7 @@ export default function Navbar() {
         boxShadow:    headerShadow,
       }}
     >
-      {/* ── Main Container (Solid White in Light mode, Solid #0F172A in Dark mode) ── */}
+      {/* ── Main Container ── */}
       <div className="w-full max-w-[1400px] mx-auto px-6 h-full flex items-center justify-between">
 
         {/* ── Logo Section with Dynamic Status Subtitle ── */}
@@ -402,38 +472,84 @@ export default function Navbar() {
           </motion.nav>
         </div>
 
-        {/* ── Utilities Section (Right) ────────────────────────────────────── */}
+        {/* ── Utilities Section (Right - Desktop) ──────────────────────────── */}
         <div className="hidden lg:flex items-center gap-3 shrink-0 relative" ref={dropdownRef}>
 
-          {/* Theme mode toggle button */}
-          <UtilBtn onClick={toggleTheme} label="Toggle theme mode">
-            <motion.div
-              animate={{ rotate: isDark ? 180 : 0 }}
-              transition={{ duration: 0.5, ease: 'easeOut' }}
+          {/* Desktop Theme Mode Toggle Button */}
+          <button
+            type="button"
+            onClick={toggleTheme}
+            onDoubleClick={handleDoubleClickTheme}
+            aria-label={isBloodRed ? 'Blood Red theme active' : (isDark ? 'Switch to Light mode' : 'Switch to Dark mode')}
+            title="Single-click: Toggle Light/Dark | Double-click: Toggle Bloody Crimson Red"
+            className="relative h-[38px] px-3.5 rounded-full cursor-pointer flex items-center gap-2 overflow-hidden border transition-all duration-300 hover:scale-105 active:scale-95 select-none z-50 pointer-events-auto shadow-sm"
+            style={{
+              borderColor: isBloodRed ? '#EF4444' : (isDark ? 'rgba(255, 255, 255, 0.12)' : 'rgba(15, 23, 42, 0.12)'),
+              background:  isBloodRed ? 'rgba(153, 27, 27, 0.9)' : (isDark ? 'rgba(30, 41, 59, 0.85)' : 'rgba(255, 255, 255, 0.95)'),
+              backdropFilter: 'blur(12px)',
+              color:       isBloodRed ? '#FFF1F2' : (isDark ? '#F8FAFC' : '#0F172A'),
+              boxShadow:   isBloodRed 
+                ? '0 0 20px rgba(239,68,68,0.5), inset 0 1px 0 rgba(248,113,113,0.3)' 
+                : (isDark ? '0 4px 14px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255,255,255,0.1)' : '0 2px 10px rgba(15, 23, 42, 0.06)'),
+            }}
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={isBloodRed ? 'blood-sun' : (isDark ? 'dark-sun' : 'light-moon')}
+                initial={{ rotate: -120, scale: 0.5, opacity: 0 }}
+                animate={{ rotate: 0, scale: 1, opacity: 1 }}
+                exit={{ rotate: 120, scale: 0.5, opacity: 0 }}
+                transition={{ type: 'spring', stiffness: 380, damping: 22 }}
+                className="flex items-center justify-center"
+              >
+                {isBloodRed ? (
+                  <Sun size={15} className="text-red-500 animate-pulse drop-shadow-[0_0_12px_rgba(239,68,68,0.9)]" />
+                ) : isDark ? (
+                  <Sun size={15} className="text-amber-400 drop-shadow-[0_0_10px_rgba(251,191,36,0.6)]" />
+                ) : (
+                  <Moon size={15} className="text-violet-600 dark:text-violet-400 drop-shadow-[0_0_8px_rgba(139,92,246,0.4)]" />
+                )}
+              </motion.div>
+            </AnimatePresence>
+            <span
+              className="text-[10px] font-mono font-bold tracking-widest uppercase select-none transition-colors duration-300"
+              style={{ color: isBloodRed ? '#FFF1F2' : (isDark ? '#E2E8F0' : '#334155') }}
             >
-              {isDark
-                ? <Sun size={15} style={{ color: '#FBBF24' }} />
-                : <Moon size={15} style={{ color: accent.primary }} />
-              }
-            </motion.div>
-          </UtilBtn>
+              {isBloodRed ? 'BLOOD' : (isDark ? 'DARK' : 'LIGHT')}
+            </span>
+          </button>
 
-          {/* Settings button */}
-          <UtilBtn onClick={() => setCustomizerOpen(o => !o)} active={customizerOpen} label="Theme settings">
+          {/* Desktop Settings Button */}
+          <button
+            type="button"
+            onClick={toggleCustomizer}
+            aria-label="Theme & Availability Settings"
+            title="Theme & Availability Settings"
+            className="relative h-[38px] w-[38px] rounded-full cursor-pointer flex items-center justify-center border transition-all duration-300 hover:scale-105 active:scale-95 select-none z-50 pointer-events-auto shadow-sm"
+            style={{
+              borderColor: customizerOpen ? accent.primary : (isDark ? 'rgba(255, 255, 255, 0.12)' : 'rgba(15, 23, 42, 0.12)'),
+              background:  customizerOpen ? (isDark ? '#1E293B' : '#EDE9FE') : (isDark ? 'rgba(30, 41, 59, 0.85)' : 'rgba(255, 255, 255, 0.95)'),
+              backdropFilter: 'blur(12px)',
+              color:       customizerOpen ? accent.primary : (isDark ? '#F8FAFC' : '#0F172A'),
+              boxShadow:   isDark 
+                ? '0 4px 14px rgba(0, 0, 0, 0.35)' 
+                : '0 2px 10px rgba(15, 23, 42, 0.06)',
+            }}
+          >
             <motion.div animate={{ rotate: customizerOpen ? 90 : 0 }} transition={{ duration: 0.3 }}>
-              <Settings size={15} />
+              <Settings size={16} />
             </motion.div>
-          </UtilBtn>
+          </button>
 
-          {/* Customizer dropdown panel */}
+          {/* Desktop Customizer Dropdown Panel */}
           <AnimatePresence>
             {customizerOpen && (
               <motion.div
-                className="absolute right-0 top-full mt-3 w-[272px] p-6 rounded-2xl z-50"
+                className="absolute right-0 top-full mt-3 w-[280px] p-5 rounded-2xl z-50 text-left pointer-events-auto"
                 style={{
                   background: panelBg,
                   border:     `1px solid ${panelBorder}`,
-                  boxShadow:  `0 24px 60px rgba(0,0,0,0.2), 0 4px 20px ${accent.glowSoft}`,
+                  boxShadow:  `0 24px 60px rgba(0,0,0,0.35), 0 4px 20px ${accent.glowSoft}`,
                 }}
                 initial={{ opacity: 0, y: 10, scale: 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -463,25 +579,80 @@ export default function Navbar() {
 
         {/* ── Mobile Controls (< 1024px) ────────────────────────────────────── */}
         <div className="flex lg:hidden items-center gap-2" ref={mobileDropdownRef}>
-          <UtilBtn onClick={() => setCustomizerOpen(o => !o)} active={customizerOpen} label="Settings">
+          {/* Mobile Theme Mode Toggle Button */}
+          <button
+            type="button"
+            onClick={toggleTheme}
+            onDoubleClick={handleDoubleClickTheme}
+            aria-label={isBloodRed ? 'Blood Red theme active' : (isDark ? 'Switch to Light mode' : 'Switch to Dark mode')}
+            title="Single-click: Toggle Light/Dark | Double-click: Toggle Bloody Crimson Red"
+            className="relative h-[38px] px-3.5 rounded-full cursor-pointer flex items-center gap-2 overflow-hidden border transition-all duration-300 hover:scale-105 active:scale-95 select-none z-50 pointer-events-auto shadow-sm"
+            style={{
+              borderColor: isBloodRed ? '#EF4444' : (isDark ? 'rgba(255, 255, 255, 0.12)' : 'rgba(15, 23, 42, 0.12)'),
+              background:  isBloodRed ? 'rgba(153, 27, 27, 0.9)' : (isDark ? 'rgba(30, 41, 59, 0.85)' : 'rgba(255, 255, 255, 0.95)'),
+              backdropFilter: 'blur(12px)',
+              color:       isBloodRed ? '#FFF1F2' : (isDark ? '#F8FAFC' : '#0F172A'),
+              boxShadow:   isBloodRed 
+                ? '0 0 20px rgba(239,68,68,0.5), inset 0 1px 0 rgba(248,113,113,0.3)' 
+                : (isDark ? '0 4px 14px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255,255,255,0.1)' : '0 2px 10px rgba(15, 23, 42, 0.06)'),
+            }}
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={isBloodRed ? 'blood-sun' : (isDark ? 'dark-sun' : 'light-moon')}
+                initial={{ rotate: -120, scale: 0.5, opacity: 0 }}
+                animate={{ rotate: 0, scale: 1, opacity: 1 }}
+                exit={{ rotate: 120, scale: 0.5, opacity: 0 }}
+                transition={{ type: 'spring', stiffness: 380, damping: 22 }}
+                className="flex items-center justify-center"
+              >
+                {isBloodRed ? (
+                  <Sun size={15} className="text-red-500 animate-pulse drop-shadow-[0_0_12px_rgba(239,68,68,0.9)]" />
+                ) : isDark ? (
+                  <Sun size={15} className="text-amber-400 drop-shadow-[0_0_10px_rgba(251,191,36,0.6)]" />
+                ) : (
+                  <Moon size={15} className="text-violet-600 dark:text-violet-400 drop-shadow-[0_0_8px_rgba(139,92,246,0.4)]" />
+                )}
+              </motion.div>
+            </AnimatePresence>
+            <span
+              className="text-[10px] font-mono font-bold tracking-widest uppercase select-none transition-colors duration-300"
+              style={{ color: isBloodRed ? '#FFF1F2' : (isDark ? '#E2E8F0' : '#334155') }}
+            >
+              {isBloodRed ? 'BLOOD' : (isDark ? 'DARK' : 'LIGHT')}
+            </span>
+          </button>
+
+          {/* Mobile Settings Button */}
+          <button
+            type="button"
+            onClick={toggleCustomizer}
+            aria-label="Settings"
+            className="relative h-[38px] w-[38px] rounded-full cursor-pointer flex items-center justify-center border transition-all duration-300 hover:scale-105 active:scale-95 select-none z-50 pointer-events-auto shadow-sm"
+            style={{
+              borderColor: customizerOpen ? accent.primary : (isDark ? 'rgba(255, 255, 255, 0.12)' : 'rgba(15, 23, 42, 0.12)'),
+              background:  customizerOpen ? (isDark ? '#1E293B' : '#EDE9FE') : (isDark ? 'rgba(30, 41, 59, 0.85)' : 'rgba(255, 255, 255, 0.95)'),
+              backdropFilter: 'blur(12px)',
+              color:       customizerOpen ? accent.primary : (isDark ? '#F8FAFC' : '#0F172A'),
+            }}
+          >
             <motion.div animate={{ rotate: customizerOpen ? 90 : 0 }} transition={{ duration: 0.3 }}>
               <Settings size={16} />
             </motion.div>
-          </UtilBtn>
+          </button>
 
-          <UtilBtn onClick={toggleTheme} label="Toggle Theme">
-            <motion.div
-              animate={{ rotate: isDark ? 180 : 0 }}
-              transition={{ duration: 0.5, ease: 'easeOut' }}
-            >
-              {isDark
-                ? <Sun size={16} style={{ color: '#FBBF24' }} />
-                : <Moon size={16} style={{ color: accent.primary }} />
-              }
-            </motion.div>
-          </UtilBtn>
-
-          <UtilBtn onClick={() => setIsOpen(o => !o)} label="Toggle menu">
+          {/* Mobile Menu Hamburger Toggle */}
+          <button
+            type="button"
+            onClick={() => setIsOpen(o => !o)}
+            aria-label="Toggle menu"
+            className="relative p-2.5 rounded-[14px] cursor-pointer flex items-center justify-center overflow-hidden border transition-all duration-200 hover:scale-105 active:scale-95 pointer-events-auto select-none z-50"
+            style={{
+              borderColor: utilBorder,
+              background:  utilBg,
+              color:       utilColor,
+            }}
+          >
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
                 key={isOpen ? 'close' : 'open'}
@@ -493,7 +664,7 @@ export default function Navbar() {
                 {isOpen ? <X size={18} /> : <Menu size={18} />}
               </motion.div>
             </AnimatePresence>
-          </UtilBtn>
+          </button>
         </div>
 
       </div>
@@ -502,11 +673,12 @@ export default function Navbar() {
       <AnimatePresence>
         {customizerOpen && (
           <motion.div
-            className="absolute left-1/2 -translate-x-1/2 top-full mt-3 w-[90%] max-w-sm p-6 rounded-2xl z-50 text-left pointer-events-auto lg:hidden"
+            ref={mobilePanelRef}
+            className="absolute left-1/2 -translate-x-1/2 top-full mt-3 w-[90%] max-w-sm p-5 rounded-2xl z-50 text-left pointer-events-auto lg:hidden"
             style={{
               background: panelBg,
               border:     `1px solid ${panelBorder}`,
-              boxShadow:  `0 24px 60px rgba(0,0,0,0.2), 0 4px 20px ${accent.glowSoft}`,
+              boxShadow:  `0 24px 60px rgba(0,0,0,0.35), 0 4px 20px ${accent.glowSoft}`,
             }}
             initial={{ opacity: 0, y: 10, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -593,7 +765,7 @@ export default function Navbar() {
       {/* Admin Authentication Modal */}
       <AnimatePresence>
         {authModalOpen && (
-          <div className="fixed inset-0 z-[999999] flex items-center justify-center p-4">
+          <div id="admin-auth-modal" className="fixed inset-0 z-[999999] flex items-center justify-center p-4">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -613,6 +785,7 @@ export default function Navbar() {
               }}
             >
               <button
+                type="button"
                 onClick={() => setAuthModalOpen(false)}
                 className="absolute top-4 right-4 p-1.5 rounded-full bg-white/5 hover:bg-white/15 text-text-title transition-colors"
               >

@@ -18,7 +18,7 @@ export default function AnimatedRole({ className = "" }: AnimatedRoleProps) {
 
   // Monitor theme changes to apply appropriate text color fallbacks and text-shadows
   const [isDarkMode, setIsDarkMode] = useState(() => {
-    const savedMode = localStorage.getItem('theme-mode') || 'dark';
+    const savedMode = localStorage.getItem('portfolio-theme') || 'dark';
     if (savedMode === 'system') {
       return window.matchMedia('(prefers-color-scheme: dark)').matches;
     }
@@ -31,13 +31,17 @@ export default function AnimatedRole({ className = "" }: AnimatedRoleProps) {
     };
     checkTheme();
 
+    window.addEventListener('themechange', checkTheme);
     const observer = new MutationObserver(checkTheme);
     observer.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ['class'],
     });
 
-    return () => observer.disconnect();
+    return () => {
+      window.removeEventListener('themechange', checkTheme);
+      observer.disconnect();
+    };
   }, []);
 
   // Typewriter core animation loop

@@ -34,12 +34,11 @@
     <script>
       (function() {
         const savedMode = localStorage.getItem('portfolio-theme');
-        let isDark = false;
-        if (savedMode) {
-          isDark = savedMode === 'dark';
-        } else {
-          const hour = new Date().getHours();
-          isDark = hour < 6 || hour >= 18;
+        let isDark = true;
+        if (savedMode === 'light') {
+          isDark = false;
+        } else if (savedMode === 'dark') {
+          isDark = true;
         }
         if (isDark) {
           document.documentElement.classList.add('dark');

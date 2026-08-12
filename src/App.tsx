@@ -5,6 +5,7 @@ import SEO from './components/SEO';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import SplashScreen from './components/SplashScreen';
+import BloodHandsOverlay from './components/BloodHandsOverlay';
 
 // Page Imports
 import Home from './pages/Home';
@@ -61,6 +62,9 @@ function AppContent() {
           {/* Dynamic SEO Tag & JSON-LD Manager */}
           <SEO />
           
+          {/* Spooky Shadowy Hands Background Overlay for Blood Red Mode */}
+          <BloodHandsOverlay />
+          
           {/* Cursor Glow Overlay - Aurora Palette */}
           <div 
             className="pointer-events-none fixed inset-0 z-30 transition duration-200 opacity-60 hidden md:block"
@@ -73,7 +77,7 @@ function AppContent() {
           <Navbar />
           
           {/* Page Routing */}
-          <main className="flex-grow pt-[96px]">
+          <main className="flex-grow">
             <RouteScrollManager />
             <Routes>
               <Route path="/" element={<Home />} />
@@ -95,24 +99,26 @@ function AppContent() {
 }
 
 export default function App() {
-  // Sync the theme variable and accent colors directly on load
+  // Sync the theme variable and accent colors directly on load and listen to themechange
   useEffect(() => {
-    const savedMode = localStorage.getItem('portfolio-theme');
-    
-    let isDark = false;
-    if (savedMode) {
-      isDark = savedMode === 'dark';
-    } else {
-      const hour = new Date().getHours();
-      isDark = hour < 6 || hour >= 18;
-    }
-    
-    if (isDark) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-    
+    const syncTheme = () => {
+      const savedMode = localStorage.getItem('portfolio-theme');
+      let isDark = true;
+      if (savedMode === 'light') {
+        isDark = false;
+      } else if (savedMode === 'dark') {
+        isDark = true;
+      }
+      if (isDark) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    };
+
+    syncTheme();
+    window.addEventListener('themechange', syncTheme);
+
     // Set accent colors
     const savedColor = localStorage.getItem('theme-color') || 'purple';
     const themes = {
@@ -132,6 +138,8 @@ export default function App() {
     root.style.setProperty('--color-secondary', activeObj.secondary);
     root.style.setProperty('--color-secondary-hover', activeObj.secondaryHover);
     root.style.setProperty('--color-secondary-light', activeObj.secondaryLight);
+
+    return () => window.removeEventListener('themechange', syncTheme);
   }, []);
 
   return (

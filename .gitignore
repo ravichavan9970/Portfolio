@@ -32,3 +32,6 @@ backend/.env
 
 # Temporary / Downloads
 Downloads/
+scratch/
+public/blood_hands*
+public/wolf_howl_short.mp3

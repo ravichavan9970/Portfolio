@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
-  Mail, MapPin, Phone, Send, 
+  Mail, MapPin, Phone, 
   AlertTriangle, ArrowRight, ShieldCheck 
 } from 'lucide-react';
 import { FaGithub, FaLinkedin, FaWhatsapp, FaInstagram } from 'react-icons/fa';
@@ -13,6 +13,7 @@ export default function ContactPage() {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
 
   const [lastSubmitted, setLastSubmitted] = useState({ name: '', email: '', message: '' });
+  const [lastSubmittedChannel, setLastSubmittedChannel] = useState<'email' | 'whatsapp'>('email');
 
   const validate = () => {
     const tempErrors: Partial<typeof formData> = {};
@@ -35,11 +36,12 @@ export default function ContactPage() {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent | React.MouseEvent, channel: 'email' | 'whatsapp' = 'email') => {
     e.preventDefault();
     if (!validate()) return;
     setStatus('submitting');
     setSubmitError(null);
+    setLastSubmittedChannel(channel);
 
     const name = formData.name;
     const email = formData.email;
@@ -51,15 +53,19 @@ export default function ContactPage() {
     fetch('/api/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, message })
+      body: JSON.stringify({ name, email, message, channel })
     }).catch(() => null);
 
-    // 2. Open Gmail Web Composer directly in new tab with pre-filled content
-    const subject = encodeURIComponent(`Portfolio Message from ${name}`);
-    const body = encodeURIComponent(`Sender Name: ${name}\nSender Email: ${email}\n\nMessage:\n${message}`);
-    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=ravindrachavan265125@gmail.com&su=${subject}&body=${body}`;
-
-    window.open(gmailUrl, '_blank');
+    // 2. Open corresponding app / web link in new tab with pre-filled content
+    if (channel === 'whatsapp') {
+      const waUrl = `https://wa.me/917447661921?text=${encodeURIComponent(`Hi Ravindra,\n\nMy name is ${name} (${email}).\n\nMessage:\n${message}`)}`;
+      window.open(waUrl, '_blank');
+    } else {
+      const subject = encodeURIComponent(`Portfolio Message from ${name}`);
+      const body = encodeURIComponent(`Sender Name: ${name}\nSender Email: ${email}\n\nMessage:\n${message}`);
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=ravindrachavan265125@gmail.com&su=${subject}&body=${body}`;
+      window.open(gmailUrl, '_blank');
+    }
 
     setStatus('success');
     setFormData({ name: '', email: '', message: '' });
@@ -103,7 +109,7 @@ export default function ContactPage() {
           {/* LEFT: Metadata & Availability status */}
           <motion.div 
             className="lg:col-span-5 flex flex-col justify-between p-8 rounded-[32px] border shadow-2xl relative overflow-hidden backdrop-blur-md"
-            style={{ backgroundColor: 'rgba(255,255,255,0.85)', borderColor: 'rgba(125,125,125,0.18)' }}
+            style={{ backgroundColor: 'var(--color-bg-card)', borderColor: 'var(--color-border-dark)' }}
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -197,7 +203,7 @@ export default function ContactPage() {
           {/* RIGHT: Validated Form Center */}
           <motion.div 
             className="lg:col-span-7 p-8 rounded-[32px] border shadow-2xl relative overflow-hidden backdrop-blur-md"
-            style={{ backgroundColor: 'rgba(255,255,255,0.85)', borderColor: 'rgba(125,125,125,0.18)' }}
+            style={{ backgroundColor: 'var(--color-bg-card)', borderColor: 'var(--color-border-dark)' }}
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -212,9 +218,14 @@ export default function ContactPage() {
                 <div className="p-4 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-full animate-bounce">
                   <ShieldCheck size={36} />
                 </div>
-                <h3 className="text-lg font-bold text-[#111827] font-display">Message Prepared & Gmail Opened!</h3>
+                <h3 className="text-lg font-bold text-[#111827] font-display">
+                  {lastSubmittedChannel === 'whatsapp' ? 'Message Prepared & WhatsApp Opened!' : 'Message Prepared & Gmail Opened!'}
+                </h3>
                 <p className="text-xs text-[#374151] max-w-sm leading-relaxed font-semibold">
-                  Gmail Web Composer has been opened in a new tab pre-filled with your message to <span className="text-primary font-bold">ravindrachavan265125@gmail.com</span>.
+                  {lastSubmittedChannel === 'whatsapp' 
+                    ? <>WhatsApp has been opened in a new tab pre-filled with your message to <span className="text-emerald-600 font-bold">+91 74476 61921</span>.</>
+                    : <>Gmail Web Composer has been opened in a new tab pre-filled with your message to <span className="text-primary font-bold">ravindrachavan265125@gmail.com</span>.</>
+                  }
                 </p>
                 <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
                   <a
@@ -245,7 +256,7 @@ export default function ContactPage() {
                 </div>
               </motion.div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6 text-left">
+              <form onSubmit={(e) => handleSubmit(e, 'email')} className="space-y-6 text-left">
                 <div className="flex flex-col gap-1.5">
                   <label htmlFor="name" className="text-[10px] font-semibold text-[#374151] uppercase tracking-[0.08em] font-mono">Full Name</label>
                   <input
@@ -309,14 +320,27 @@ export default function ContactPage() {
                   </div>
                 )}
 
-                <button
-                  type="submit"
-                  disabled={status === 'submitting'}
-                  className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-primary text-white text-xs font-bold transition-all duration-300 disabled:opacity-60 shadow-md shadow-primary/10 cursor-pointer hover:scale-[1.01] active:scale-[0.98]"
-                >
-                  {status === 'submitting' ? "Sending Message..." : "Send Message"}
-                  <Send size={12} />
-                </button>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                  <button
+                    type="button"
+                    onClick={(e) => handleSubmit(e, 'email')}
+                    disabled={status === 'submitting'}
+                    className="w-full flex items-center justify-center gap-2.5 py-3.5 px-4 rounded-xl bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-primary text-white text-xs font-bold transition-all duration-300 disabled:opacity-60 shadow-md shadow-primary/10 cursor-pointer hover:scale-[1.01] active:scale-[0.98]"
+                  >
+                    <Mail size={15} />
+                    <span>{status === 'submitting' && lastSubmittedChannel === 'email' ? "Sending..." : "Send via Email"}</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={(e) => handleSubmit(e, 'whatsapp')}
+                    disabled={status === 'submitting'}
+                    className="w-full flex items-center justify-center gap-2.5 py-3.5 px-4 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-teal-600 hover:to-emerald-500 text-white text-xs font-bold transition-all duration-300 disabled:opacity-60 shadow-md shadow-emerald-500/10 cursor-pointer hover:scale-[1.01] active:scale-[0.98]"
+                  >
+                    <FaWhatsapp size={16} />
+                    <span>{status === 'submitting' && lastSubmittedChannel === 'whatsapp' ? "Sending..." : "Send via WhatsApp"}</span>
+                  </button>
+                </div>
               </form>
             )}
           </motion.div>
