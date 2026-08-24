@@ -143,13 +143,11 @@ export default function Navbar() {
     return () => document.removeEventListener('mousedown', handleOutside);
   }, []);
 
-  // ── Persisted theme state (supports light, dark, and double-click blood-red) ──
-  const [themeMode, setThemeMode] = useState<'light' | 'dark' | 'blood-red'>(() => {
+  // ── Persisted theme state (supports light and dark) ──
+  const [themeMode, setThemeMode] = useState<'light' | 'dark'>(() => {
     const saved = localStorage.getItem('portfolio-theme');
-    if (saved === 'blood-red') return 'blood-red';
-    if (saved === 'dark') return 'dark';
     if (saved === 'light') return 'light';
-    return 'light';
+    return 'dark';
   });
 
   const [themeColor, setThemeColor] = useState<AccentKey>(() => {
@@ -159,16 +157,13 @@ export default function Navbar() {
 
   // Derive the live accent tokens from the current color selection
   const accent = accentRegistry[themeColor];
-  const isDark = themeMode === 'dark' || themeMode === 'blood-red';
-  const isBloodRed = themeMode === 'blood-red';
+  const isDark = themeMode === 'dark';
 
   // ── Sync HTML class whenever theme state changes ───────────────────────────
   useEffect(() => {
     const root = document.documentElement;
     root.classList.remove('dark', 'blood-red');
-    if (themeMode === 'blood-red') {
-      root.classList.add('dark', 'blood-red');
-    } else if (themeMode === 'dark') {
+    if (themeMode === 'dark') {
       root.classList.add('dark');
     }
     localStorage.setItem('portfolio-theme', themeMode);
@@ -177,30 +172,21 @@ export default function Navbar() {
 
   useEffect(() => {
     const root = document.documentElement;
-    if (isBloodRed) {
-      root.style.setProperty('--color-primary',           '#FF0000');
-      root.style.setProperty('--color-primary-hover',     '#CC0000');
-      root.style.setProperty('--color-primary-light',     '#FF3333');
-      root.style.setProperty('--color-secondary',         '#990000');
-      root.style.setProperty('--color-secondary-hover',   '#660000');
-      root.style.setProperty('--color-secondary-light',   '#CC0000');
-    } else {
-      root.style.setProperty('--color-primary',           accent.primary);
-      root.style.setProperty('--color-primary-hover',     accent.hover);
-      root.style.setProperty('--color-primary-light',     accent.light);
-      root.style.setProperty('--color-secondary',         accent.secondary);
-      root.style.setProperty('--color-secondary-hover',   accent.secondaryHover);
-      root.style.setProperty('--color-secondary-light',   accent.secondaryLight);
-    }
+    root.style.setProperty('--color-primary',           accent.primary);
+    root.style.setProperty('--color-primary-hover',     accent.hover);
+    root.style.setProperty('--color-primary-light',     accent.light);
+    root.style.setProperty('--color-secondary',         accent.secondary);
+    root.style.setProperty('--color-secondary-hover',   accent.secondaryHover);
+    root.style.setProperty('--color-secondary-light',   accent.secondaryLight);
     localStorage.setItem('theme-color', themeColor);
-  }, [themeColor, accent, isBloodRed]);
+  }, [themeColor, accent]);
 
   const toggleTheme = (e?: React.MouseEvent) => {
     if (e) {
       e.preventDefault();
       e.stopPropagation();
     }
-    const nextMode = (themeMode === 'dark' || themeMode === 'blood-red') ? 'light' : 'dark';
+    const nextMode = themeMode === 'dark' ? 'light' : 'dark';
     setThemeMode(nextMode);
     localStorage.setItem('portfolio-theme', nextMode);
     const root = document.documentElement;
@@ -211,37 +197,19 @@ export default function Navbar() {
     window.dispatchEvent(new Event('themechange'));
   };
 
-  const handleDoubleClickTheme = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const nextMode = themeMode === 'blood-red' ? 'dark' : 'blood-red';
-    setThemeMode(nextMode);
-    localStorage.setItem('portfolio-theme', nextMode);
-    const root = document.documentElement;
-    root.classList.remove('dark', 'blood-red');
-    if (nextMode === 'blood-red') {
-      root.classList.add('dark', 'blood-red');
-    } else {
-      root.classList.add('dark');
-    }
-    window.dispatchEvent(new Event('themechange'));
-  };
-
   const isActive = (path: string) =>
     path === '/' ? location.pathname === '/' : location.pathname.startsWith(path);
 
   // ── Solid Header Color Tokens (Solid White Light, Solid Dark #0F172A) ────────
-  const headerBg     = isBloodRed ? 'rgba(11, 0, 2, 0.45)' : (isDark ? '#0F172A' : '#FFFFFF');
-  const headerBorder = isBloodRed ? 'rgba(255, 0, 0, 0.35)' : (isDark ? (scrolled ? '#334155' : '#1E293B') : (scrolled ? '#CBD5E1' : '#E5E7EB'));
+  const headerBg     = isDark ? '#0F172A' : '#FFFFFF';
+  const headerBorder = isDark ? (scrolled ? '#334155' : '#1E293B') : (scrolled ? '#CBD5E1' : '#E5E7EB');
   const headerShadow = scrolled
-    ? (isBloodRed ? '0 8px 30px rgba(255,0,0,0.35)' : (isDark ? '0 6px 20px rgba(0,0,0,0.35)' : '0 2px 12px rgba(15,23,42,0.06)'))
-    : (isBloodRed ? '0 4px 16px rgba(255,0,0,0.25)' : (isDark ? '0 2px 8px rgba(0,0,0,0.2)'   : '0 2px 4px rgba(15,23,42,0.02)'));
+    ? (isDark ? '0 6px 20px rgba(0,0,0,0.35)' : '0 2px 12px rgba(15,23,42,0.06)')
+    : (isDark ? '0 2px 8px rgba(0,0,0,0.2)'   : '0 2px 4px rgba(15,23,42,0.02)');
 
-  const pillBg     = isBloodRed ? 'rgba(20, 0, 5, 0.35)' : (isDark ? '#111827' : '#FFFFFF');
-  const pillBorder = isBloodRed ? 'rgba(255, 0, 0, 0.35)' : (isDark ? '#1E293B' : '#E5E7EB');
-  const pillShadow = isBloodRed
-    ? '0 6px 24px rgba(255, 0, 0, 0.3)'
-    : (isDark ? '0 4px 16px rgba(0, 0, 0, 0.35)' : '0 4px 16px rgba(15, 23, 42, 0.08)');
+  const pillBg     = isDark ? '#111827' : '#FFFFFF';
+  const pillBorder = isDark ? '#1E293B' : '#E5E7EB';
+  const pillShadow = isDark ? '0 4px 16px rgba(0, 0, 0, 0.35)' : '0 4px 16px rgba(15, 23, 42, 0.08)';
 
   // Nav link text & hover colors per mode
   const inactiveColor = isDark ? '#CBD5E1' : '#475569';
@@ -479,32 +447,27 @@ export default function Navbar() {
           <button
             type="button"
             onClick={toggleTheme}
-            onDoubleClick={handleDoubleClickTheme}
-            aria-label={isBloodRed ? 'Blood Red theme active' : (isDark ? 'Switch to Light mode' : 'Switch to Dark mode')}
-            title="Single-click: Toggle Light/Dark | Double-click: Toggle Bloody Crimson Red"
+            aria-label={isDark ? 'Switch to Light mode' : 'Switch to Dark mode'}
+            title={isDark ? 'Switch to Light mode' : 'Switch to Dark mode'}
             className="relative h-[38px] px-3.5 rounded-full cursor-pointer flex items-center gap-2 overflow-hidden border transition-all duration-300 hover:scale-105 active:scale-95 select-none z-50 pointer-events-auto shadow-sm"
             style={{
-              borderColor: isBloodRed ? '#EF4444' : (isDark ? 'rgba(255, 255, 255, 0.12)' : 'rgba(15, 23, 42, 0.12)'),
-              background:  isBloodRed ? 'rgba(153, 27, 27, 0.9)' : (isDark ? 'rgba(30, 41, 59, 0.85)' : 'rgba(255, 255, 255, 0.95)'),
+              borderColor: isDark ? 'rgba(255, 255, 255, 0.12)' : 'rgba(15, 23, 42, 0.12)',
+              background:  isDark ? 'rgba(30, 41, 59, 0.85)' : 'rgba(255, 255, 255, 0.95)',
               backdropFilter: 'blur(12px)',
-              color:       isBloodRed ? '#FFF1F2' : (isDark ? '#F8FAFC' : '#0F172A'),
-              boxShadow:   isBloodRed 
-                ? '0 0 20px rgba(239,68,68,0.5), inset 0 1px 0 rgba(248,113,113,0.3)' 
-                : (isDark ? '0 4px 14px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255,255,255,0.1)' : '0 2px 10px rgba(15, 23, 42, 0.06)'),
+              color:       isDark ? '#F8FAFC' : '#0F172A',
+              boxShadow:   isDark ? '0 4px 14px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255,255,255,0.1)' : '0 2px 10px rgba(15, 23, 42, 0.06)',
             }}
           >
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
-                key={isBloodRed ? 'blood-sun' : (isDark ? 'dark-sun' : 'light-moon')}
+                key={isDark ? 'dark-sun' : 'light-moon'}
                 initial={{ rotate: -120, scale: 0.5, opacity: 0 }}
                 animate={{ rotate: 0, scale: 1, opacity: 1 }}
                 exit={{ rotate: 120, scale: 0.5, opacity: 0 }}
                 transition={{ type: 'spring', stiffness: 380, damping: 22 }}
                 className="flex items-center justify-center"
               >
-                {isBloodRed ? (
-                  <Sun size={15} className="text-red-500 animate-pulse drop-shadow-[0_0_12px_rgba(239,68,68,0.9)]" />
-                ) : isDark ? (
+                {isDark ? (
                   <Sun size={15} className="text-amber-400 drop-shadow-[0_0_10px_rgba(251,191,36,0.6)]" />
                 ) : (
                   <Moon size={15} className="text-violet-600 dark:text-violet-400 drop-shadow-[0_0_8px_rgba(139,92,246,0.4)]" />
@@ -513,9 +476,9 @@ export default function Navbar() {
             </AnimatePresence>
             <span
               className="text-[10px] font-mono font-bold tracking-widest uppercase select-none transition-colors duration-300"
-              style={{ color: isBloodRed ? '#FFF1F2' : (isDark ? '#E2E8F0' : '#334155') }}
+              style={{ color: isDark ? '#E2E8F0' : '#334155' }}
             >
-              {isBloodRed ? 'BLOOD' : (isDark ? 'DARK' : 'LIGHT')}
+              {isDark ? 'DARK' : 'LIGHT'}
             </span>
           </button>
 
@@ -583,32 +546,27 @@ export default function Navbar() {
           <button
             type="button"
             onClick={toggleTheme}
-            onDoubleClick={handleDoubleClickTheme}
-            aria-label={isBloodRed ? 'Blood Red theme active' : (isDark ? 'Switch to Light mode' : 'Switch to Dark mode')}
-            title="Single-click: Toggle Light/Dark | Double-click: Toggle Bloody Crimson Red"
+            aria-label={isDark ? 'Switch to Light mode' : 'Switch to Dark mode'}
+            title={isDark ? 'Switch to Light mode' : 'Switch to Dark mode'}
             className="relative h-[38px] px-3.5 rounded-full cursor-pointer flex items-center gap-2 overflow-hidden border transition-all duration-300 hover:scale-105 active:scale-95 select-none z-50 pointer-events-auto shadow-sm"
             style={{
-              borderColor: isBloodRed ? '#EF4444' : (isDark ? 'rgba(255, 255, 255, 0.12)' : 'rgba(15, 23, 42, 0.12)'),
-              background:  isBloodRed ? 'rgba(153, 27, 27, 0.9)' : (isDark ? 'rgba(30, 41, 59, 0.85)' : 'rgba(255, 255, 255, 0.95)'),
+              borderColor: isDark ? 'rgba(255, 255, 255, 0.12)' : 'rgba(15, 23, 42, 0.12)',
+              background:  isDark ? 'rgba(30, 41, 59, 0.85)' : 'rgba(255, 255, 255, 0.95)',
               backdropFilter: 'blur(12px)',
-              color:       isBloodRed ? '#FFF1F2' : (isDark ? '#F8FAFC' : '#0F172A'),
-              boxShadow:   isBloodRed 
-                ? '0 0 20px rgba(239,68,68,0.5), inset 0 1px 0 rgba(248,113,113,0.3)' 
-                : (isDark ? '0 4px 14px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255,255,255,0.1)' : '0 2px 10px rgba(15, 23, 42, 0.06)'),
+              color:       isDark ? '#F8FAFC' : '#0F172A',
+              boxShadow:   isDark ? '0 4px 14px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255,255,255,0.1)' : '0 2px 10px rgba(15, 23, 42, 0.06)',
             }}
           >
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
-                key={isBloodRed ? 'blood-sun' : (isDark ? 'dark-sun' : 'light-moon')}
+                key={isDark ? 'dark-sun' : 'light-moon'}
                 initial={{ rotate: -120, scale: 0.5, opacity: 0 }}
                 animate={{ rotate: 0, scale: 1, opacity: 1 }}
                 exit={{ rotate: 120, scale: 0.5, opacity: 0 }}
                 transition={{ type: 'spring', stiffness: 380, damping: 22 }}
                 className="flex items-center justify-center"
               >
-                {isBloodRed ? (
-                  <Sun size={15} className="text-red-500 animate-pulse drop-shadow-[0_0_12px_rgba(239,68,68,0.9)]" />
-                ) : isDark ? (
+                {isDark ? (
                   <Sun size={15} className="text-amber-400 drop-shadow-[0_0_10px_rgba(251,191,36,0.6)]" />
                 ) : (
                   <Moon size={15} className="text-violet-600 dark:text-violet-400 drop-shadow-[0_0_8px_rgba(139,92,246,0.4)]" />
@@ -617,9 +575,9 @@ export default function Navbar() {
             </AnimatePresence>
             <span
               className="text-[10px] font-mono font-bold tracking-widest uppercase select-none transition-colors duration-300"
-              style={{ color: isBloodRed ? '#FFF1F2' : (isDark ? '#E2E8F0' : '#334155') }}
+              style={{ color: isDark ? '#E2E8F0' : '#334155' }}
             >
-              {isBloodRed ? 'BLOOD' : (isDark ? 'DARK' : 'LIGHT')}
+              {isDark ? 'DARK' : 'LIGHT'}
             </span>
           </button>
 

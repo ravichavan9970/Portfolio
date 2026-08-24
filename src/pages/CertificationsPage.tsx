@@ -37,7 +37,7 @@ export default function CertificationsPage() {
 
   return (
     <motion.div 
-      className="py-24 relative overflow-hidden bg-bg-darkest min-h-screen text-text-main"
+      className="py-24 relative overflow-x-hidden bg-bg-darkest min-h-screen text-text-main"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}

@@ -8,6 +8,8 @@ import {
 } from 'react-icons/si';
 import { MapPin, Mail } from 'lucide-react';
 import AnimatedRole from '../components/AnimatedRole';
+import profileImg from '../assets/profile.jpg';
+import ravindraChavanImg from '../assets/Ravindra_Chavan.png';
 
 export default function AboutPage() {
   // Typewriter effect
@@ -53,7 +55,7 @@ export default function AboutPage() {
   const infoCards = [
     {
       title: "Current Focus",
-      desc: "MultiVendor Marketplace & StudySync",
+      desc: "Shivchhatra Trekkers & MultiVendor",
       icon: "🚀",
       color: "hover:border-primary-light/35 hover:shadow-[0_0_30px_rgba(139,92,246,0.15)]"
     },
@@ -89,7 +91,7 @@ export default function AboutPage() {
 
   return (
     <motion.div 
-      className="py-24 relative overflow-hidden bg-bg-darkest min-h-screen text-text-main pt-[80px]"
+      className="py-24 relative overflow-x-hidden bg-bg-darkest min-h-screen text-text-main pt-[80px]"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -241,11 +243,11 @@ export default function AboutPage() {
                 <div className="relative w-52 h-52 md:w-72 md:h-72 rounded-full p-[3px] bg-gradient-to-tr from-primary via-secondary to-primary-light shadow-[0_0_45px_rgba(139,92,246,0.35)] flex-shrink-0 z-10">
                   <div className="w-full h-full rounded-full overflow-hidden border-4 border-bg-darkest relative bg-bg-dark flex items-center justify-center shadow-inner">
                     <img 
-                      src="/images/profile.jpg" 
+                      src={profileImg} 
                       alt="Ravindra Chavan Profile" 
                       className="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-110"
                       onError={(e) => {
-                        e.currentTarget.src = "/images/Ravindra_Chavan.png";
+                        e.currentTarget.src = ravindraChavanImg;
                       }}
                     />
                     {/* Glass Reflection Highlight */}

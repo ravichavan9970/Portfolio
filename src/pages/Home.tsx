@@ -4,12 +4,14 @@ import {
   ArrowRight, Mail, Layers, Code2, Server, Database, 
   Sparkles, Cpu, Smartphone, CheckCircle2, Compass, BookOpen, AlertTriangle
 } from 'lucide-react';
-import { FaPython, FaReact, FaNodeJs, FaDocker, FaGithub, FaLinkedin, FaWhatsapp, FaInstagram } from 'react-icons/fa';
-import { SiPostgresql, SiTailwindcss, SiTypescript, SiExpress, SiPrisma } from 'react-icons/si';
+import { FaJava, FaPython, FaReact, FaNodeJs, FaDocker, FaGithub, FaLinkedin, FaWhatsapp, FaInstagram } from 'react-icons/fa';
+import { SiSpringboot, SiMysql, SiPostgresql, SiTailwindcss, SiTypescript, SiPrisma, SiSwagger } from 'react-icons/si';
 import AnimatedRole from '../components/AnimatedRole';
 import ProjectModal, { type ProjectModalData } from '../components/ProjectModal';
 import multiVendorAsset from '../assets/MultiVendor.png';
 import studySyncAsset from '../assets/StudySync (1).png';
+import shivchhatraAsset from '../assets/shivchhatra-1.png';
+import profileAsset from '../assets/profile.jpg';
 
 
 
@@ -339,9 +341,9 @@ export default function Home() {
       title: "Backend Core",
       icon: <Server size={20} className="text-secondary-light" />,
       skills: [
-        { name: "Java 21", icon: <FaPython className="text-[#007396]" /> },
-        { name: "Spring Boot 3", icon: <SiExpress className="text-[#6DB33F]" /> },
-        { name: "Spring Security (JWT)", icon: <SiExpress className="text-[#6DB33F]" /> },
+        { name: "Java 21", icon: <FaJava className="text-[#007396]" /> },
+        { name: "Spring Boot 3", icon: <SiSpringboot className="text-[#6DB33F]" /> },
+        { name: "Spring Security (JWT)", icon: <SiSpringboot className="text-[#6DB33F]" /> },
         { name: "Spring Data JPA", icon: <Layers className="text-purple-400" /> },
       ],
       glowClass: "hover:border-secondary-light/35"
@@ -350,7 +352,7 @@ export default function Home() {
       title: "Databases & ORM",
       icon: <Database size={20} className="text-secondary" />,
       skills: [
-        { name: "MySQL 8.0", icon: <SiPostgresql className="text-[#4479A1]" /> },
+        { name: "MySQL 8.0", icon: <SiMysql className="text-[#4479A1]" /> },
         { name: "Hibernate / JPA", icon: <Database className="text-indigo-400" /> },
         { name: "Pessimistic Locking", icon: <Cpu className="text-emerald-400" /> },
       ],
@@ -373,7 +375,7 @@ export default function Home() {
       skills: [
         { name: "Docker & Compose", icon: <FaDocker className="text-[#2496ED]" /> },
         { name: "JUnit 5 & Mockito", icon: <Sparkles className="text-red-400" /> },
-        { name: "Swagger / OpenAPI", icon: <Code2 className="text-[#85EA2D]" /> },
+        { name: "Swagger / OpenAPI", icon: <SiSwagger className="text-[#85EA2D]" /> },
         { name: "Git & GitHub", icon: <FaGithub className="text-white" /> },
       ],
       glowClass: "hover:border-primary/35"
@@ -382,6 +384,24 @@ export default function Home() {
 
   // Project List
   const projectsList = [
+    {
+      title: "Shivchhatra Trekkers – Sahyadri Expeditions & Heritage Hub",
+      tagline: "Enterprise Fort Expeditions, UTR Auditor & Dual-Cloud Disaster Recovery",
+      desc: "Architected a full-stack expedition booking and fortress heritage platform using Java 21, Spring Boot 3.3.3, React 19, and Vite. Features dual-cloud disaster recovery replication across Render web services, dynamic UPI QR instant bookings with 12-digit UTR bank payment auditor, real-time boarding pass tracker (/track), and an encyclopedic Maratha fort guide.",
+      tech: ["Java 21", "Spring Boot 3.3.3", "React 19", "Spring Data JPA", "H2 Disk DB", "Docker", "Tailwind CSS"],
+      categories: ["Full Stack", "React"],
+      link: "https://shivchhatra-trekkers.vercel.app",
+      repo: "https://github.com/ravichavan9970/SHIVCHHATRA_TREKKERS.git",
+      status: "Production Ready",
+      image: shivchhatraAsset,
+      isSpotlight: true,
+      features: [
+        "Enterprise Dual-Cloud Disaster Recovery (1-Click Replicas)",
+        "Direct UPI QR Dynamic Booking & 12-Digit UTR Bank Auditor",
+        "Live Boarding Pass & Expedition Tracker (/track)",
+        "Shivkalin Sacred Forts Encyclopedic Heritage Guide"
+      ]
+    },
     {
       title: "MultiVendor – Marketplace & Service Booking",
       tagline: "High-Concurrency Java 21 Enterprise Marketplace",
@@ -450,6 +470,15 @@ export default function Home() {
     },
     {
       step: "2026",
+      title: "Shivchhatra Trekkers – Enterprise Expeditions & DR Hub",
+      subtitle: "🚩 DUAL-CLOUD DR & EXPEDITION HUB",
+      desc: "Architected a full-stack expedition booking platform with Spring Boot 3.3.3 & React 19 featuring 1-click dual-cloud Render replication, dynamic UPI QR generation, 12-digit UTR payment auditor, and live boarding pass tracker (/track).",
+      tech: ["Java 21", "Spring Boot 3.3.3", "React 19", "H2 Disk DB", "Docker", "Tailwind CSS"],
+      badge: "🚩 DUAL-CLOUD DR & EXPEDITION HUB",
+      highlight: true
+    },
+    {
+      step: "2026",
       title: "MultiVendor Marketplace & Service Booking",
       subtitle: "🔥 FLAGSHIP PROJECT",
       desc: "Built a high-concurrency multi-vendor platform with 10-minute hold reservation daemons (@Scheduled), dual OTP auth, and pessimistic locking.",
@@ -469,7 +498,7 @@ export default function Home() {
 
   return (
     <motion.div
-      className="relative bg-bg-darkest min-h-screen text-text-main overflow-hidden pt-[80px]"
+      className="relative bg-bg-darkest min-h-screen text-text-main overflow-x-hidden pt-[80px]"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -667,7 +696,7 @@ export default function Home() {
                 >
                   <div className="w-full h-full rounded-full overflow-hidden border-4 border-bg-darkest relative bg-bg-dark flex items-center justify-center shadow-inner">
                     <img 
-                      src="/images/profile.jpg" 
+                      src={profileAsset} 
                       alt="Ravindra Chavan profile" 
                       className="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-110"
                       onError={(e) => {
@@ -924,7 +953,7 @@ export default function Home() {
               <span className="text-xs font-bold uppercase tracking-wider text-text-muted font-mono mb-2.5 block">THE PATHWAY</span>
               <h4 className="text-lg font-bold font-display text-text-title mb-4">My Personal Coding Story</h4>
               <p className="text-xs md:text-sm text-text-muted leading-relaxed select-none">
-                My software engineering journey began during my Computer Science degrees (B.Sc. & M.Sc.) at New Arts Commerce & Science College, Shevgaon. Driven by a passion for backend systems, I specialized in Java 21, Spring Boot 3, and MySQL at Naresh i Technologies in Hyderabad. Building projects like MultiVendor Marketplace and StudySync taught me how to solve high-concurrency race conditions, implement dual OTP authentication, and structure clean microservice layers.
+                My software engineering journey began during my Computer Science degrees (B.Sc. & M.Sc.) at New Arts Commerce & Science College, Shevgaon. Driven by a passion for backend systems, I specialized in Java 21, Spring Boot 3, and MySQL at Naresh i Technologies in Hyderabad. Building projects like Shivchhatra Trekkers, MultiVendor Marketplace, and StudySync taught me how to architect dual-cloud disaster recovery systems, how to solve high-concurrency race conditions, implement dual OTP authentication, and structure clean microservice layers.
               </p>
             </motion.div>
 
@@ -1000,20 +1029,20 @@ export default function Home() {
           </div>
 
           {/* Equal height dashboard widgets */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 items-stretch">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
             {skillsCategories.map((category, idx) => (
               <motion.div
                 key={idx}
-                className={`p-6 rounded-[24px] glass-aurora border border-white/5 flex flex-col justify-between h-[500px] min-h-[500px] group text-left transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] ${category.glowClass}`}
+                className={`p-6 rounded-[24px] glass-aurora border border-white/5 flex flex-col justify-between group text-left transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] ${category.glowClass}`}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.5, delay: idx * 0.08 }}
               >
                 {/* Upper content wrapper */}
-                <div className="flex flex-col gap-6 w-full">
+                <div className="flex flex-col gap-5 w-full">
                   {/* Header: Icon + Title */}
-                  <div className="flex items-center gap-2.5 pb-4 border-b border-white/5">
+                  <div className="flex items-center gap-2.5 pb-3.5 border-b border-white/5">
                     <div className="p-2 rounded-lg bg-white/[0.02] border border-white/5">
                       {category.icon}
                     </div>
@@ -1027,7 +1056,7 @@ export default function Home() {
                     {category.skills.map((skill, sIdx) => (
                       <div
                         key={sIdx}
-                        className="flex items-center gap-3 p-2 rounded-xl bg-white/[0.01] border border-white/5 hover:bg-white/[0.03] transition-all duration-200 cursor-default"
+                        className="flex items-center gap-3 p-2.5 rounded-xl bg-white/[0.01] border border-white/5 hover:bg-white/[0.03] transition-all duration-200 cursor-default"
                       >
                         <span className="text-lg flex items-center justify-center">
                           {skill.icon}
@@ -1041,7 +1070,7 @@ export default function Home() {
                 </div>
 
                 {/* Footer Badge - Pushed to bottom */}
-                <div className="mt-auto pt-4 border-t border-white/5">
+                <div className="mt-6 pt-4 border-t border-white/5">
                   <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary/10 border border-primary/20 text-[9px] font-mono font-bold text-primary-light uppercase tracking-wider">
                     Verified Stack
                   </span>
@@ -1331,11 +1360,23 @@ export default function Home() {
                   I host enterprise full-stack Java codebases, microservice modules, and project blueprints on GitHub. Inspect commit logs, read through repository architectures, and follow my work.
                 </p>
 
-                <div className="flex gap-4 mt-6">
+                <div className="flex flex-wrap gap-4 mt-6">
+                  <div className="flex flex-col text-left">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-text-muted font-mono">Shivchhatra Trekkers</span>
+                    <a 
+                      href="https://github.com/ravichavan9970/SHIVCHHATRA_TREKKERS.git" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="text-xs text-amber-400 hover:text-white transition-colors font-bold font-mono"
+                    >
+                      Repository
+                    </a>
+                  </div>
+                  <div className="w-px bg-white/5" />
                   <div className="flex flex-col text-left">
                     <span className="text-[10px] font-bold uppercase tracking-wider text-text-muted font-mono">MultiVendor Marketplace</span>
                     <a 
-                      href="https://github.com/ravichavan9970" 
+                      href="https://github.com/ravichavan9970/MultiVendor.git" 
                       target="_blank" 
                       rel="noopener noreferrer" 
                       className="text-xs text-primary-light hover:text-white transition-colors font-bold font-mono"
@@ -1435,7 +1476,7 @@ export default function Home() {
                       exit={{ opacity: 0 }}
                     >
                       <div className="flex flex-col text-left">
-                        <label htmlFor="name" className="text-xs font-semibold text-[#374151] mb-2 tracking-[0.08em] uppercase font-mono">
+                        <label htmlFor="name" className="text-xs font-semibold text-text-muted mb-2 tracking-[0.08em] uppercase font-mono">
                           Name
                         </label>
                         <input
@@ -1445,12 +1486,12 @@ export default function Home() {
                           value={formState.name}
                           onChange={(e) => setFormState({ ...formState, name: e.target.value })}
                           placeholder="Enter your full name"
-                          className="w-full px-4.5 py-3 rounded-2xl bg-white/75 backdrop-blur-[10px] border-[1.5px] border-[rgba(125,125,125,0.18)] focus:border-primary focus:shadow-[0_0_15px_rgba(139,92,246,0.25)] focus:scale-[1.01] transition-all duration-200 outline-none text-base text-[#111827] font-medium placeholder:text-[#94A3B8] placeholder:font-medium placeholder:transition-opacity placeholder:duration-200 focus:placeholder:opacity-0"
+                          className="w-full px-4.5 py-3 rounded-2xl bg-white/[0.04] border border-white/10 focus:border-primary focus:bg-white/[0.07] focus:shadow-[0_0_20px_rgba(139,92,246,0.25)] transition-all duration-200 outline-none text-sm text-text-title placeholder:text-text-muted/60"
                         />
                       </div>
 
                       <div className="flex flex-col text-left">
-                        <label htmlFor="email" className="text-xs font-semibold text-[#374151] mb-2 tracking-[0.08em] uppercase font-mono">
+                        <label htmlFor="email" className="text-xs font-semibold text-text-muted mb-2 tracking-[0.08em] uppercase font-mono">
                           Email Address
                         </label>
                         <input
@@ -1460,12 +1501,12 @@ export default function Home() {
                           value={formState.email}
                           onChange={(e) => setFormState({ ...formState, email: e.target.value })}
                           placeholder="Enter your email address"
-                          className="w-full px-4.5 py-3 rounded-2xl bg-white/75 backdrop-blur-[10px] border-[1.5px] border-[rgba(125,125,125,0.18)] focus:border-primary focus:shadow-[0_0_15px_rgba(139,92,246,0.25)] focus:scale-[1.01] transition-all duration-200 outline-none text-base text-[#111827] font-medium placeholder:text-[#94A3B8] placeholder:font-medium placeholder:transition-opacity placeholder:duration-200 focus:placeholder:opacity-0"
+                          className="w-full px-4.5 py-3 rounded-2xl bg-white/[0.04] border border-white/10 focus:border-primary focus:bg-white/[0.07] focus:shadow-[0_0_20px_rgba(139,92,246,0.25)] transition-all duration-200 outline-none text-sm text-text-title placeholder:text-text-muted/60"
                         />
                       </div>
 
                       <div className="flex flex-col text-left">
-                        <label htmlFor="message" className="text-xs font-semibold text-[#374151] mb-2 tracking-[0.08em] uppercase font-mono">
+                        <label htmlFor="message" className="text-xs font-semibold text-text-muted mb-2 tracking-[0.08em] uppercase font-mono">
                           Message
                         </label>
                         <textarea
@@ -1474,7 +1515,7 @@ export default function Home() {
                           value={formState.message}
                           onChange={(e) => setFormState({ ...formState, message: e.target.value })}
                           placeholder="Write your message here..."
-                          className="w-full px-4.5 py-3 rounded-2xl bg-white/75 backdrop-blur-[10px] border-[1.5px] border-[rgba(125,125,125,0.18)] focus:border-primary focus:shadow-[0_0_15px_rgba(139,92,246,0.25)] focus:scale-[1.01] transition-all duration-200 outline-none text-base text-[#111827] font-medium placeholder:text-[#94A3B8] placeholder:font-medium placeholder:transition-opacity placeholder:duration-200 focus:placeholder:opacity-0 resize-none min-h-[180px]"
+                          className="w-full px-4.5 py-3 rounded-2xl bg-white/[0.04] border border-white/10 focus:border-primary focus:bg-white/[0.07] focus:shadow-[0_0_20px_rgba(139,92,246,0.25)] transition-all duration-200 outline-none text-sm text-text-title placeholder:text-text-muted/60 resize-none min-h-[180px]"
                         />
                       </div>
 
@@ -1518,12 +1559,12 @@ export default function Home() {
                       <div className="w-16 h-16 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/25 flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(16,185,129,0.2)]">
                         <CheckCircle2 size={36} className="animate-bounce" />
                       </div>
-                      <h4 className="text-xl font-bold text-[#111827] mb-2">
+                      <h4 className="text-xl font-bold text-text-title mb-2">
                         {lastSubmittedChannel === 'whatsapp' ? 'Message Prepared & WhatsApp Opened!' : 'Message Prepared & Gmail Opened!'}
                       </h4>
-                      <p className="text-xs text-[#374151] max-w-sm font-semibold mb-4">
+                      <p className="text-xs text-text-muted max-w-sm font-semibold mb-4">
                         {lastSubmittedChannel === 'whatsapp'
-                          ? <>WhatsApp has been opened in a new tab pre-filled with your message to <span className="text-emerald-600 font-bold">+91 74476 61921</span>.</>
+                          ? <>WhatsApp has been opened in a new tab pre-filled with your message to <span className="text-emerald-400 font-bold">+91 74476 61921</span>.</>
                           : <>Gmail Web Composer has been opened in a new tab pre-filled with your message to <span className="text-primary font-bold">ravindrachavan265125@gmail.com</span>.</>
                         }
                       </p>

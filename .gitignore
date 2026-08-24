@@ -23,12 +23,15 @@ dist-ssr
 *.sln
 *.sw?
 
-# Environment variables
+# Environment variables & Credentials
 .env
 .env.production
 .env.local
 .env.*.local
 backend/.env
+credentials.txt
+credential.txt
+*.txt
 
 # Temporary / Downloads
 Downloads/

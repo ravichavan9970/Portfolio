@@ -75,6 +75,7 @@ export default function SkillsPage() {
   ];
 
   const projectUsage = [
+    { tech: "Java 21 & Spring Boot 3.3.3", project: "Shivchhatra Trekkers", usage: "Engineered dual-cloud disaster recovery sync across Render instances, dynamic UPI QR instant booking engine, and CLOB base64 storage for fortress heritage media." },
     { tech: "Java 21 & Spring Boot 3", project: "MultiVendor Marketplace", usage: "Engineered dual-identifier 6-digit OTP auth, pessimistic locking booking daemons (@Scheduled), and vendor earnings REST APIs." },
     { tech: "Spring Security (JWT)", project: "MultiVendor & StudySync", usage: "Configured BCrypt password hashing, stateless JWT token authentication, and fine-grained Role-Based Access Control (RBAC)." },
     { tech: "MySQL 8.0 & Spring Data JPA", project: "StudySync Productivity App", usage: "Designed normalized 7-table schema, Pomodoro focus analytics queries, and task transaction boundaries." },
@@ -83,7 +84,7 @@ export default function SkillsPage() {
 
   return (
     <motion.div 
-      className="py-24 relative overflow-hidden bg-bg-darkest min-h-screen text-text-main"
+      className="py-24 relative overflow-x-hidden bg-bg-darkest min-h-screen text-text-main"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -107,20 +108,20 @@ export default function SkillsPage() {
         </div>
 
         {/* Dashboard Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
           {categories.map((category, idx) => (
             <motion.div
               key={idx}
-              className="group flex flex-col justify-between p-6 rounded-2xl glass-aurora border border-white/5 h-[500px] min-h-[500px] text-left transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] hover:border-primary/40"
+              className="group flex flex-col justify-between p-6 rounded-2xl glass-aurora border border-white/5 text-left transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] hover:border-primary/40"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.05 }}
             >
               {/* Upper Content Wrapper */}
-              <div className="flex flex-col gap-6 w-full">
+              <div className="flex flex-col gap-5 w-full">
                 {/* Category Header */}
-                <div className="flex items-center gap-2.5 pb-4 border-b border-white/5">
+                <div className="flex items-center gap-2.5 pb-3.5 border-b border-white/5">
                   <div className={`p-2 rounded-lg bg-white/[0.02] border border-white/5 text-primary-light`}>
                     {category.icon}
                   </div>
@@ -130,7 +131,7 @@ export default function SkillsPage() {
                 </div>
 
                 {/* Skills Progress Bars - Starts at same vertical offset */}
-                <div className="flex flex-col gap-4.5">
+                <div className="flex flex-col gap-3.5">
                   {category.skills.map((skill, sIdx) => (
                     <div key={sIdx} className="space-y-1.5">
                       <div className="flex items-center justify-between text-[11px] font-bold text-text-muted font-mono">
@@ -156,7 +157,7 @@ export default function SkillsPage() {
               </div>
 
               {/* Footer Badge - Pushed to bottom */}
-              <div className="mt-auto pt-4 border-t border-white/5">
+              <div className="mt-6 pt-4 border-t border-white/5">
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary/10 border border-primary/20 text-[9px] font-mono font-bold text-primary-light uppercase tracking-wider">
                   ✓ Verified Stack
                 </span>

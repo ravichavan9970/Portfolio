@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import SEO from './components/SEO';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import SplashScreen from './components/SplashScreen';
-import BloodHandsOverlay from './components/BloodHandsOverlay';
 
 // Page Imports
 import Home from './pages/Home';
@@ -57,13 +56,10 @@ function AppContent() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="relative min-h-screen bg-bg-darkest text-text-main selection:bg-cyan-500/30 selection:text-cyan-200 flex flex-col justify-between overflow-hidden"
+          className="min-h-screen w-full bg-bg-darkest text-text-main selection:bg-cyan-500/30 selection:text-cyan-200 flex flex-col justify-between"
         >
           {/* Dynamic SEO Tag & JSON-LD Manager */}
           <SEO />
-          
-          {/* Spooky Shadowy Hands Background Overlay for Blood Red Mode */}
-          <BloodHandsOverlay />
           
           {/* Cursor Glow Overlay - Aurora Palette */}
           <div 

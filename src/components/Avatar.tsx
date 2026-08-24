@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import profileAsset from '../assets/profile.jpg';
+import ravindraChavanAsset from '../assets/Ravindra_Chavan.png';
 
 interface AvatarProps {
   className?: string;
@@ -14,8 +15,7 @@ export default function Avatar({ className = '', size = 'md' }: AvatarProps) {
 
   // Fallbacks to check sequentially if the imported asset fails
   const fallbacks = [
-    '/images/profile.jpg',
-    '/images/Ravindra_Chavan.png',
+    ravindraChavanAsset,
   ];
 
   const sizeClasses = {

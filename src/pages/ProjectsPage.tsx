@@ -2,13 +2,44 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Users, CheckSquare, BarChart3, 
-  ExternalLink, Layers, Database, Cloud, Search, Globe, Award, CheckCircle2
+  ExternalLink, Layers, Database, Cloud, Search, Globe, Award, CheckCircle2,
+  Compass, ShieldCheck, CreditCard
 } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
 import ProjectModal, { type ProjectModalData } from '../components/ProjectModal';
 
-// Only verified projects that exist in this repository
+import shivchhatraImg1 from '../assets/shivchhatra-1.png';
+import shivchhatraImg2 from '../assets/shivchhatra-2.png';
+import multiVendorImg1 from '../assets/multivendor-1.png';
+import multiVendorImg2 from '../assets/multivendor-2.png';
+import studySyncImg1 from '../assets/studysync-1.png';
+import studySyncImg2 from '../assets/studysync-2.png';
+
+// Verified enterprise projects with complete codebases and live deployments
 const projectsList = [
+  {
+    title: "Shivchhatra Trekkers – Sahyadri Expeditions & Heritage Hub",
+    tagline: "Enterprise Fort Expeditions, UTR Auditor & Dual-Cloud Disaster Recovery",
+    desc: "Architected a full-stack expedition booking and fortress heritage platform using Java 21, Spring Boot 3.3.3, React 19, and Vite. Features dual-cloud disaster recovery replication across Render web services, dynamic UPI QR instant bookings with 12-digit UTR bank payment auditor, real-time boarding pass tracker (/track), and an encyclopedic Maratha fort guide.",
+    tech: ["Java 21", "Spring Boot 3.3.3", "React 19", "Spring Data JPA", "H2 Disk DB", "Vite", "Docker", "Tailwind CSS"],
+    categories: ["Full Stack"],
+    github: "https://github.com/ravichavan9970/SHIVCHHATRA_TREKKERS.git",
+    demo: "https://shivchhatra-trekkers.vercel.app",
+    link: "https://shivchhatra-trekkers.vercel.app",
+    repo: "https://github.com/ravichavan9970/SHIVCHHATRA_TREKKERS.git",
+    image: shivchhatraImg1,
+    image2: shivchhatraImg2,
+    features: [
+      "Enterprise Dual-Cloud Disaster Recovery (1-Click Replicas)",
+      "Direct UPI QR Dynamic Booking & 12-Digit UTR Bank Auditor",
+      "Live Boarding Pass & Expedition Tracker (/track)",
+      "Shivkalin Sacred Forts Encyclopedic Heritage Guide",
+      "Multi-Passenger Squad Registration & WhatsApp Lead Link",
+      "CLOB-Supported Base64 Image Vault (Up to 50MB Storage)"
+    ],
+    status: "Production Ready",
+    isFlagship: true
+  },
   {
     title: "MultiVendor – Marketplace & Service Booking Platform",
     tagline: "High-Concurrency Java 21 Enterprise Marketplace",
@@ -19,8 +50,8 @@ const projectsList = [
     demo: "https://github.com/ravichavan9970/MultiVendor.git",
     link: "https://github.com/ravichavan9970/MultiVendor.git",
     repo: "https://github.com/ravichavan9970/MultiVendor.git",
-    image: "/images/multivendor-1.png",
-    image2: "/images/multivendor-2.png",
+    image: multiVendorImg1,
+    image2: multiVendorImg2,
     features: [
       "Dual-Identifier 6-Digit OTP Auth (Email & SMS)",
       "10-Min Hold Reservation (@Scheduled Tasks)",
@@ -40,8 +71,8 @@ const projectsList = [
     demo: "https://github.com/ravichavan9970/StudySync.git",
     link: "https://github.com/ravichavan9970/StudySync.git",
     repo: "https://github.com/ravichavan9970/StudySync.git",
-    image: "/images/studysync-1.png",
-    image2: "/images/studysync-2.png",
+    image: studySyncImg1,
+    image2: studySyncImg2,
     features: [
       "30+ RESTful APIs across 7 Core Modules",
       "Pomodoro Timer with Chart.js Analytics",
@@ -57,7 +88,8 @@ export default function ProjectsPage() {
   const [activeProjectFilter, setActiveProjectFilter] = useState<'All' | 'Full Stack'>('All');
   const [searchQuery, setSearchQuery] = useState('');
   
-  // Flagship project tabs for both projects
+  // Flagship project tabs
+  const [shivchhatraTab, setShivchhatraTab] = useState<'preview' | 'architecture' | 'features' | 'roadmap'>('preview');
   const [multiVendorTab, setMultiVendorTab] = useState<'preview' | 'architecture' | 'features' | 'roadmap'>('preview');
   const [studySyncTab, setStudySyncTab] = useState<'preview' | 'architecture' | 'features' | 'roadmap'>('preview');
   const [selectedModalProject, setSelectedModalProject] = useState<ProjectModalData | null>(null);
@@ -73,8 +105,16 @@ export default function ProjectsPage() {
     return matchesCategory && matchesSearch;
   });
 
-  const multiVendor = projectsList[0];
-  const studySync = projectsList[1];
+  const shivchhatra = projectsList[0];
+  const multiVendor = projectsList[1];
+  const studySync = projectsList[2];
+
+  const shivchhatraFeatures = [
+    { icon: <Cloud size={16} className="text-amber-400" />, title: "Dual-Cloud Disaster Recovery", desc: "1-click full system push/pull replication between Primary and Replica Render instances." },
+    { icon: <CreditCard size={16} className="text-emerald-400" />, title: "Dynamic UPI & 12-Digit UTR", desc: "Merchant scanner generator with UTR receipt auditing and instant verification workflow." },
+    { icon: <Compass size={16} className="text-cyan-400" />, title: "Live Boarding Pass (/track)", desc: "Real-time expedition status polling, printable boarding passes, and WhatsApp lead integration." },
+    { icon: <ShieldCheck size={16} className="text-amber-400" />, title: "Sacred Forts Heritage Guide", desc: "Encyclopedic Maratha fortress directory with Marathi titles, lore, and high-res summit media." }
+  ];
 
   const multiVendorFeatures = [
     { icon: <Users size={16} className="text-primary-light" />, title: "Dual OTP Auth & RBAC", desc: "Dual-identifier 6-digit OTP auth (Email & SMS) with BCrypt password hashing & role authorization." },
@@ -92,7 +132,7 @@ export default function ProjectsPage() {
 
   return (
     <motion.div 
-      className="py-24 relative overflow-hidden bg-bg-darkest min-h-screen text-text-main"
+      className="py-24 relative overflow-x-hidden bg-bg-darkest min-h-screen text-text-main"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -116,11 +156,251 @@ export default function ProjectsPage() {
         </div>
 
         {/* ======================================================== */}
-        {/* SPOTLIGHT 1: MULTIVENDOR MARKETPLACE                     */}
+        {/* SPOTLIGHT 1: SHIVCHHATRA TREKKERS                         */}
+        {/* ======================================================== */}
+        <div className="space-y-10 max-w-6xl mx-auto border-b border-white/10 pb-20">
+          <div className="text-left border-l-4 border-amber-500 pl-4">
+            <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-amber-400">Flagship Project Spotlight 01</span>
+            <h3 className="text-2xl md:text-3xl font-bold font-display text-text-title mt-1">{shivchhatra.title}</h3>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+            {/* Left Details */}
+            <div className="lg:col-span-5 space-y-6 text-left">
+              <div>
+                <div className="flex flex-wrap gap-1.5 mb-4">
+                  {shivchhatra.tech.map((tech) => (
+                    <span key={tech} className="px-2 py-0.5 rounded bg-white/[0.02] border border-white/5 text-text-muted text-[10px] font-bold font-mono">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+                <p className="text-xs sm:text-sm text-text-muted leading-relaxed">
+                  {shivchhatra.desc}
+                </p>
+              </div>
+
+              {/* Features list */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {shivchhatraFeatures.map((feat, idx) => (
+                  <div key={idx} className="p-4 rounded-xl bg-white/[0.01] border border-white/5 flex gap-3 shadow-sm hover:border-amber-500/20 transition-all">
+                    <div className="p-2 h-fit rounded-lg bg-bg-dark border border-white/5 shrink-0">
+                      {feat.icon}
+                    </div>
+                    <div>
+                      <h5 className="text-[11px] font-bold text-text-title mb-1 font-display leading-tight">{feat.title}</h5>
+                      <p className="text-[9px] text-text-muted leading-normal">{feat.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* CTAs */}
+              <div className="flex flex-wrap gap-4">
+                <button
+                  onClick={() => setSelectedModalProject(shivchhatra as any)}
+                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 text-white text-xs font-bold shadow-md shadow-orange-500/20 hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer"
+                >
+                  View Case Study Details
+                  <ExternalLink size={12} />
+                </button>
+                <a
+                  href={shivchhatra.demo}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 text-xs font-bold border border-amber-500/30 hover:scale-105 active:scale-95 transition-all duration-300"
+                >
+                  <Globe size={12} />
+                  Live Website
+                </a>
+                <a
+                  href={shivchhatra.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/[0.02] hover:bg-white/5 text-text-title text-xs font-bold border border-white/5 hover:scale-105 active:scale-95 transition-all duration-300"
+                >
+                  <FaGithub size={12} />
+                  Code Repository
+                </a>
+              </div>
+            </div>
+
+            {/* Right Interactive panel */}
+            <div className="lg:col-span-7">
+              {/* Tab Selector */}
+              <div className="flex flex-wrap items-center gap-1.5 mb-5 border-b border-white/5 pb-2">
+                {[
+                  { id: 'preview', label: 'Trekker Public Portal', icon: <Layers size={12} /> },
+                  { id: 'architecture', label: 'Operations Command Hub', icon: <Database size={12} /> },
+                  { id: 'features', label: 'Challenges & DR Engine', icon: <CheckSquare size={12} /> },
+                  { id: 'roadmap', label: 'Architecture Roadmap', icon: <Cloud size={12} /> },
+                ].map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setShivchhatraTab(tab.id as any)}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all border cursor-pointer ${
+                      shivchhatraTab === tab.id 
+                        ? 'bg-gradient-to-r from-amber-500/20 to-orange-500/20 border-amber-500/40 text-amber-300 shadow-sm' 
+                        : 'text-text-muted border-transparent hover:text-text-title'
+                    }`}
+                  >
+                    {tab.icon}
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
+
+              {/* Content box */}
+              <div className="glass-aurora rounded-2xl overflow-hidden border border-white/5 min-h-[350px] shadow-2xl shadow-orange-950/20">
+                <AnimatePresence mode="wait">
+                  
+                  {/* 1. Public Portal UI */}
+                  {shivchhatraTab === 'preview' && (
+                    <motion.div
+                      key="preview"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      className="flex flex-col justify-between h-full min-h-[350px] bg-[#0F172A] text-slate-200 select-none overflow-hidden"
+                    >
+                      <div className="flex items-center justify-between bg-slate-900 border-b border-slate-800 py-2.5 px-4">
+                        <div className="flex items-center gap-1.5">
+                          <span className="w-2.5 h-2.5 rounded-full bg-red-400 inline-block shadow-sm" />
+                          <span className="w-2.5 h-2.5 rounded-full bg-yellow-400 inline-block shadow-sm" />
+                          <span className="w-2.5 h-2.5 rounded-full bg-green-400 inline-block shadow-sm" />
+                        </div>
+                        <span className="text-[9px] bg-slate-950 border border-slate-800 rounded px-6 py-0.5 text-slate-400 font-mono truncate w-[45%] text-center shadow-inner">
+                          shivchhatra-trekkers.vercel.app
+                        </span>
+                        <span className="px-2 py-0.5 rounded bg-emerald-900/50 text-emerald-300 border border-emerald-500/30 text-[9px] font-mono font-bold uppercase shadow-sm">
+                          LIVE PRODUCTION
+                        </span>
+                      </div>
+
+                      <div 
+                        onClick={() => setSelectedModalProject(shivchhatra as any)}
+                        className="relative w-full h-[320px] overflow-hidden group cursor-pointer"
+                        title="Click to view full project details"
+                      >
+                        <img 
+                          src={shivchhatraImg1} 
+                          alt="Shivchhatra Trekkers Public App Screen" 
+                          className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                        />
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {/* 2. Operations Command Hub */}
+                  {shivchhatraTab === 'architecture' && (
+                    <motion.div
+                      key="architecture"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      className="flex flex-col justify-between h-full min-h-[350px] bg-[#0F172A] text-slate-200 select-none overflow-hidden"
+                    >
+                      <div className="flex items-center justify-between bg-slate-900 border-b border-slate-800 py-2.5 px-4">
+                        <div className="flex items-center gap-1.5">
+                          <span className="w-2.5 h-2.5 rounded-full bg-red-400 inline-block shadow-sm" />
+                          <span className="w-2.5 h-2.5 rounded-full bg-yellow-400 inline-block shadow-sm" />
+                          <span className="w-2.5 h-2.5 rounded-full bg-green-400 inline-block shadow-sm" />
+                        </div>
+                        <span className="text-[9px] bg-slate-950 border border-slate-800 rounded px-6 py-0.5 text-slate-400 font-mono truncate w-[45%] text-center shadow-inner">
+                          operations-hub/production-master
+                        </span>
+                        <span className="px-2 py-0.5 rounded bg-amber-900/50 text-amber-300 border border-amber-500/30 text-[9px] font-mono font-bold uppercase shadow-sm">
+                          COMMAND CENTER
+                        </span>
+                      </div>
+
+                      <div 
+                        onClick={() => setSelectedModalProject(shivchhatra as any)}
+                        className="relative w-full h-[320px] overflow-hidden group cursor-pointer"
+                        title="Click to view full project details"
+                      >
+                        <img 
+                          src={shivchhatraImg2} 
+                          alt="Shivchhatra Operations Hub Command Center" 
+                          className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                        />
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {/* 3. Challenges & DR Engine */}
+                  {shivchhatraTab === 'features' && (
+                    <motion.div
+                      key="features"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      className="p-6 text-left space-y-6"
+                    >
+                      <h5 className="text-sm font-bold text-text-title uppercase tracking-widest border-b border-white/5 pb-2">
+                        DISASTER RECOVERY & ARCHITECTURE RESOLUTIONS
+                      </h5>
+                      <div className="space-y-4">
+                        <div className="space-y-1">
+                          <span className="text-[11px] font-bold text-amber-400 block">Dual-Cloud Replication & Failover</span>
+                          <p className="text-[11px] text-text-muted leading-relaxed">
+                            Built atomic bulk-sync endpoints for 1-click cloud-to-cloud replication between Primary and Secondary Render instances plus offline JSON vault backups.
+                          </p>
+                          <span className="text-[10px] font-mono font-bold text-emerald-400 block">1-Click Full Replication Engine</span>
+                        </div>
+                        
+                        <div className="space-y-1 pt-2 border-t border-white/5">
+                          <span className="text-[11px] font-bold text-amber-400 block">Dynamic UPI QR & 12-Digit UTR Bank Auditor</span>
+                          <p className="text-[11px] text-text-muted leading-relaxed">
+                            Engineered dynamic UPI merchant scanner generation with automated 12-digit UTR validation, receipt base64 storage, and live boarding pass polling.
+                          </p>
+                          <span className="text-[10px] font-mono font-bold text-emerald-400 block">Automated Payment Auditor</span>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {/* 4. Roadmap */}
+                  {shivchhatraTab === 'roadmap' && (
+                    <motion.div
+                      key="roadmap"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      className="p-6 space-y-5 text-left"
+                    >
+                      <h5 className="text-sm font-bold text-text-title mb-1.5 flex items-center gap-2">
+                        <Cloud size={14} className="text-amber-400" />
+                        Shivchhatra Architecture Roadmap
+                      </h5>
+                      <div className="relative border-l border-white/5 pl-6 space-y-4 text-left">
+                        {[
+                          { title: "Spring Boot 3.3.3 & Java 21 LTS REST API", desc: "Persistent disk H2 JPA backend with atomic bulk sync endpoints and 600 req/min cellular rate limits." },
+                          { title: "Live Boarding Pass & Expedition Polling (/track)", desc: "Real-time ticket status polling, printable boarding passes, and WhatsApp expedition lead routing." },
+                          { title: "Enterprise Dual-Cloud Disaster Recovery Engine", desc: "Zero-downtime replication across Render services, browser vault snapshots, and timestamped JSON exports." }
+                        ].map((item, index) => (
+                          <div key={index} className="relative">
+                            <span className="absolute -left-[30px] top-1.5 w-2 h-2 rounded-full bg-amber-400 border border-bg-card" />
+                            <h6 className="text-xs font-bold text-text-title leading-tight">{item.title}</h6>
+                            <p className="text-[9px] text-text-muted mt-0.5 leading-normal">{item.desc}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+
+                </AnimatePresence>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ======================================================== */}
+        {/* SPOTLIGHT 2: MULTIVENDOR MARKETPLACE                     */}
         {/* ======================================================== */}
         <div className="space-y-10 max-w-6xl mx-auto border-b border-white/10 pb-20">
           <div className="text-left border-l-4 border-primary pl-4">
-            <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-primary">Flagship Project Spotlight 01</span>
+            <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-primary">Flagship Project Spotlight 02</span>
             <h3 className="text-2xl md:text-3xl font-bold font-display text-text-title mt-1">{multiVendor.title}</h3>
           </div>
 
@@ -234,7 +514,7 @@ export default function ProjectsPage() {
                         title="Click to view full project details"
                       >
                         <img 
-                          src="/images/multivendor-1.png" 
+                          src={multiVendorImg1} 
                           alt="MultiVendor Marketplace Screen" 
                           className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                         />
@@ -271,7 +551,7 @@ export default function ProjectsPage() {
                         title="Click to view full project details"
                       >
                         <img 
-                          src="/images/multivendor-2.png" 
+                          src={multiVendorImg2} 
                           alt="MultiVendor Vendor Hub Screen" 
                           className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                         />
@@ -347,11 +627,11 @@ export default function ProjectsPage() {
         </div>
 
         {/* ======================================================== */}
-        {/* SPOTLIGHT 2: STUDYSYNC STUDENT PRODUCTIVITY APP           */}
+        {/* SPOTLIGHT 3: STUDYSYNC STUDENT PRODUCTIVITY APP           */}
         {/* ======================================================== */}
         <div className="space-y-10 max-w-6xl mx-auto">
           <div className="text-left border-l-4 border-secondary pl-4">
-            <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-secondary">Flagship Project Spotlight 02</span>
+            <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-secondary">Flagship Project Spotlight 03</span>
             <h3 className="text-2xl md:text-3xl font-bold font-display text-text-title mt-1">{studySync.title}</h3>
           </div>
 
@@ -465,7 +745,7 @@ export default function ProjectsPage() {
                         title="Click to view full project details"
                       >
                         <img 
-                          src="/images/studysync-1.png" 
+                          src={studySyncImg1} 
                           alt="StudySync Student Dashboard Screen" 
                           className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                         />
@@ -502,7 +782,7 @@ export default function ProjectsPage() {
                         title="Click to view full project details"
                       >
                         <img 
-                          src="/images/studysync-2.png" 
+                          src={studySyncImg2} 
                           alt="StudySync Focus Room Screen" 
                           className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                         />
@@ -640,11 +920,11 @@ export default function ProjectsPage() {
                     <div className="bg-slate-100 border-b border-slate-200 py-2 px-3 flex items-center justify-between">
                       <div className="flex gap-1.5">
                         <span className="w-1.5 h-1.5 rounded-full bg-red-400 inline-block" />
-                        <span className="w-1.5 h-1.5 rounded-full bg-yellow-400 inline-block" />
-                        <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-yellow-400 inline-block shadow-sm" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block shadow-sm" />
                       </div>
                       <span className="text-[8px] font-mono text-slate-400 truncate w-[60%] text-center">
-                        {project.title.toLowerCase().replace(/\s+/g, '-')}.ravindra.dev
+                        {project.title.toLowerCase().replace(/[^a-z0-9]/g, '-')}.ravindra.dev
                       </span>
                       <div className="w-3" />
                     </div>

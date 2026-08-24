@@ -37,6 +37,15 @@ export default function JourneyPage() {
     },
     {
       step: "2026",
+      title: "Shivchhatra Trekkers – Sahyadri Expeditions & Heritage Hub",
+      subtitle: "🚩 DUAL-CLOUD DR & EXPEDITION HUB",
+      desc: "Architected a full-stack expedition booking platform with Spring Boot 3.3.3 & React 19 featuring 1-click dual-cloud Render replication, dynamic UPI QR generation, 12-digit UTR payment auditor, live boarding pass tracker (/track), and an encyclopedic Maratha fort guide.",
+      tech: ["Java 21", "Spring Boot 3.3.3", "React 19", "Spring Data JPA", "H2 Disk DB", "Docker", "Tailwind CSS"],
+      badge: "🚩 DUAL-CLOUD DR & EXPEDITION HUB",
+      highlight: true
+    },
+    {
+      step: "2026",
       title: "MultiVendor Marketplace & Service Booking",
       subtitle: "🔥 FLAGSHIP PROJECT",
       desc: "Designed and built a high-concurrency multi-vendor platform with 10-minute hold reservation daemons (@Scheduled), dual-identifier 6-digit OTP auth, pessimistic database locking, and vendor earnings analytics.",
@@ -65,7 +74,7 @@ export default function JourneyPage() {
 
   return (
     <motion.div 
-      className="py-24 relative overflow-hidden bg-bg-darkest min-h-screen text-text-main pt-[128px]"
+      className="py-24 relative overflow-x-hidden bg-bg-darkest min-h-screen text-text-main pt-[128px]"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}

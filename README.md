@@ -16,7 +16,13 @@ Modern, high-performance portfolio website showcasing enterprise Java microservi
 
 ## 💻 Flagship Projects Featured
 
-### 🛒 1. MultiVendor – Marketplace & Service Booking Platform
+### 🚩 1. Shivchhatra Trekkers – Sahyadri Adventure & Disaster Recovery Platform
+- **Live Website**: [https://shivchhatra-trekkers.vercel.app](https://shivchhatra-trekkers.vercel.app)
+- **Repository**: [https://github.com/ravichavan9970/SHIVCHHATRA_TREKKERS.git](https://github.com/ravichavan9970/SHIVCHHATRA_TREKKERS.git)
+- **Tech Stack**: Java 21 LTS, Spring Boot 3.3.3, React 19, Spring Data JPA, H2 Disk DB, Docker, Tailwind CSS, Vite
+- **Highlights**: Enterprise expedition booking system with 1-click dual-cloud disaster recovery replication between primary and secondary Render nodes, dynamic UPI QR merchant scanner with 12-digit UTR payment auditor, real-time boarding pass tracker (`/track`), and encyclopedic Maratha fort guide.
+
+### 🛒 2. MultiVendor – Marketplace & Service Booking Platform
 - **Tech Stack**: Java 21, Spring Boot 3.2.5, Spring Security JWT, Spring Data JPA, MySQL, React, Docker
 - **Repository**: [https://github.com/ravichavan9970/MultiVendor.git](https://github.com/ravichavan9970/MultiVendor.git)
 - **Highlights**: Real-time slot booking engine with 10-minute hold reservation daemons (`@Scheduled`), pessimistic database locking to prevent double-reservations under load, dual-identifier 6-digit OTP auth, and vendor earnings analytics.

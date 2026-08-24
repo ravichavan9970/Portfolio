@@ -81,7 +81,7 @@ export default function Footer() {
         {/* ======================================================== */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 text-left items-start">
           
-          {/* Column 1: Profile Description & Socials */}
+          {/* Column 1: Profile Description */}
           <div className="lg:col-span-4 space-y-4">
             <div>
               <h4 className="font-black text-lg leading-none tracking-tight font-display bg-gradient-to-r from-primary via-primary-light to-secondary bg-clip-text text-transparent bg-300% animate-gradient-flow glow-pulse inline-block">
@@ -94,22 +94,6 @@ export default function Footer() {
             <p className="text-xs text-text-muted leading-relaxed max-w-sm">
               Building scalable, secure enterprise Java applications and high-concurrency systems.
             </p>
-            {/* Social Links with lift, glow, scale */}
-            <div className="flex items-center gap-3 pt-2">
-              {socialLinks.map((social) => (
-                <motion.a
-                  key={social.label}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`p-2.5 rounded-xl bg-white/[0.02] border border-white/5 text-text-muted transition-all duration-300 flex items-center justify-center cursor-pointer ${social.color}`}
-                  whileHover={{ scale: 1.15, y: -3 }}
-                  title={social.label}
-                >
-                  {social.icon}
-                </motion.a>
-              ))}
-            </div>
           </div>
 
           {/* Column 2: Navigation */}
@@ -149,7 +133,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Column 4: Contact */}
+          {/* Column 4: Contact & Socials */}
           <div className="lg:col-span-3 space-y-4">
             <h5 className="text-[10px] font-bold text-text-muted uppercase tracking-widest font-mono">
               Contact
@@ -165,6 +149,22 @@ export default function Footer() {
                   ravindrachavan265125@gmail.com
                 </a>
               </div>
+            </div>
+            {/* Social Links under Contact */}
+            <div className="flex items-center gap-2.5 pt-2">
+              {socialLinks.map((social) => (
+                <motion.a
+                  key={social.label}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`p-2.5 rounded-xl bg-white/[0.02] border border-white/5 text-text-muted transition-all duration-300 flex items-center justify-center cursor-pointer ${social.color}`}
+                  whileHover={{ scale: 1.15, y: -3 }}
+                  title={social.label}
+                >
+                  {social.icon}
+                </motion.a>
+              ))}
             </div>
           </div>
 
