@@ -15,7 +15,7 @@
 
 **Architecting High-Concurrency Java Microservices, Distributed Systems & Dual-Cloud Cloud Platforms**
 
-[🌐 Explore Portfolio](https://github.com/ravichavan9970/Portfolio.git) • [💼 LinkedIn Profile](https://www.linkedin.com/in/ravindra-chavan-4ba744250/) • [📫 Contact Email](mailto:ravindrachavan265125@gmail.com) • [📄 Resume](Ravindra_Chavan_Resume%20.pdf)
+[🌐 Explore Portfolio](https://portfolio-olive-three-73.vercel.app) • [💼 LinkedIn Profile](https://www.linkedin.com/in/ravindra-chavan-4ba744250/) • [📫 Contact Email](mailto:ravindrachavan265125@gmail.com) • [📄 Resume](Ravindra_Chavan_Resume%20.pdf)
 
 </div>
 
