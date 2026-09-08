@@ -162,7 +162,7 @@ export default function Navbar() {
   // ── Sync HTML class whenever theme state changes ───────────────────────────
   useEffect(() => {
     const root = document.documentElement;
-    root.classList.remove('dark', 'blood-red');
+    root.classList.remove('dark');
     if (themeMode === 'dark') {
       root.classList.add('dark');
     }
@@ -190,7 +190,7 @@ export default function Navbar() {
     setThemeMode(nextMode);
     localStorage.setItem('portfolio-theme', nextMode);
     const root = document.documentElement;
-    root.classList.remove('dark', 'blood-red');
+    root.classList.remove('dark');
     if (nextMode === 'dark') {
       root.classList.add('dark');
     }
