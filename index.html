@@ -34,6 +34,10 @@
     <script>
       (function() {
         const savedMode = localStorage.getItem('portfolio-theme');
+        if (savedMode === 'blood-red') {
+          localStorage.setItem('portfolio-theme', 'dark');
+        }
+        document.documentElement.classList.remove('blood-red');
         if (savedMode === 'light') {
           document.documentElement.classList.remove('dark');
         } else {
