@@ -5,6 +5,8 @@ import SEO from './components/SEO';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import SplashScreen from './components/SplashScreen';
+import CommandPalette from './components/CommandPalette';
+import TerminalModal from './components/TerminalModal';
 
 // Page Imports
 import Home from './pages/Home';
@@ -34,6 +36,33 @@ function AppContent() {
       return false;
     }
   });
+
+  // Global Command Palette & Terminal State
+  const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
+  const [terminalOpen, setTerminalOpen] = useState(false);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Ctrl + K or Cmd + K toggles Command Palette
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        setCommandPaletteOpen(prev => !prev);
+      }
+    };
+
+    const handleOpenPalette = () => setCommandPaletteOpen(true);
+    const handleOpenTerminal = () => setTerminalOpen(true);
+
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('open-command-palette', handleOpenPalette);
+    window.addEventListener('open-terminal', handleOpenTerminal);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('open-command-palette', handleOpenPalette);
+      window.removeEventListener('open-terminal', handleOpenTerminal);
+    };
+  }, []);
 
   useEffect(() => {
     const updateMouse = (e: MouseEvent) => {
@@ -70,7 +99,10 @@ function AppContent() {
           />
 
           {/* Main Navigation */}
-          <Navbar />
+          <Navbar 
+            onOpenCommandPalette={() => setCommandPaletteOpen(true)}
+            onOpenTerminal={() => setTerminalOpen(true)}
+          />
           
           {/* Page Routing */}
           <main className="flex-grow">
@@ -88,6 +120,18 @@ function AppContent() {
 
           {/* Footer Branding */}
           <Footer />
+
+          {/* Interactive Developer Overlays */}
+          <CommandPalette
+            isOpen={commandPaletteOpen}
+            onClose={() => setCommandPaletteOpen(false)}
+            onOpenTerminal={() => setTerminalOpen(true)}
+          />
+
+          <TerminalModal
+            isOpen={terminalOpen}
+            onClose={() => setTerminalOpen(false)}
+          />
         </motion.div>
       )}
     </AnimatePresence>

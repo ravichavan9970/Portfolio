@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Sun, Moon, Settings, Check, Lock, KeyRound, Eye, EyeOff } from 'lucide-react';
+import { Menu, X, Sun, Moon, Settings, Check, Lock, KeyRound, Eye, EyeOff, Search, Terminal } from 'lucide-react';
 import Avatar from './Avatar';
 
 export interface AvailabilityOption {
@@ -52,8 +52,13 @@ const colorThemes: { name: AccentKey; label: string }[] = [
   { name: 'slate',   label: 'Slate'   },
 ];
 
+interface NavbarProps {
+  onOpenCommandPalette?: () => void;
+  onOpenTerminal?: () => void;
+}
+
 // ─── Component ────────────────────────────────────────────────────────────────
-export default function Navbar() {
+export default function Navbar({ onOpenCommandPalette, onOpenTerminal }: NavbarProps = {}) {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -441,7 +446,47 @@ export default function Navbar() {
         </div>
 
         {/* ── Utilities Section (Right - Desktop) ──────────────────────────── */}
-        <div className="hidden lg:flex items-center gap-3 shrink-0 relative" ref={dropdownRef}>
+        <div className="hidden lg:flex items-center gap-2.5 shrink-0 relative" ref={dropdownRef}>
+
+          {/* Quick Command Palette Trigger (Ctrl+K) */}
+          <button
+            type="button"
+            onClick={() => onOpenCommandPalette ? onOpenCommandPalette() : window.dispatchEvent(new Event('open-command-palette'))}
+            aria-label="Open Command Palette"
+            title="Command Palette (Ctrl + K)"
+            className="relative h-[38px] px-3 rounded-full cursor-pointer flex items-center gap-2 border transition-all duration-300 hover:scale-105 active:scale-95 select-none z-50 pointer-events-auto shadow-sm"
+            style={{
+              borderColor: isDark ? 'rgba(255, 255, 255, 0.12)' : 'rgba(15, 23, 42, 0.12)',
+              background:  isDark ? 'rgba(30, 41, 59, 0.85)' : 'rgba(255, 255, 255, 0.95)',
+              backdropFilter: 'blur(12px)',
+              color:       isDark ? '#F8FAFC' : '#0F172A',
+              boxShadow:   isDark ? '0 4px 14px rgba(0, 0, 0, 0.35)' : '0 2px 10px rgba(15, 23, 42, 0.06)',
+            }}
+          >
+            <Search size={14} className="text-primary-light" />
+            <span className="text-[10px] font-mono font-bold tracking-wider text-text-muted hidden xl:inline-block">SEARCH</span>
+            <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-white/10 text-primary-light border border-white/10 font-bold">
+              ⌘K
+            </span>
+          </button>
+
+          {/* Interactive Developer Terminal Trigger */}
+          <button
+            type="button"
+            onClick={() => onOpenTerminal ? onOpenTerminal() : window.dispatchEvent(new Event('open-terminal'))}
+            aria-label="Developer Terminal (>_ CLI)"
+            title="Interactive CLI Terminal"
+            className="relative h-[38px] w-[38px] rounded-full cursor-pointer flex items-center justify-center border transition-all duration-300 hover:scale-105 active:scale-95 select-none z-50 pointer-events-auto shadow-sm"
+            style={{
+              borderColor: isDark ? 'rgba(255, 255, 255, 0.12)' : 'rgba(15, 23, 42, 0.12)',
+              background:  isDark ? 'rgba(30, 41, 59, 0.85)' : 'rgba(255, 255, 255, 0.95)',
+              backdropFilter: 'blur(12px)',
+              color:       isDark ? '#34D399' : '#059669',
+              boxShadow:   isDark ? '0 4px 14px rgba(0, 0, 0, 0.35)' : '0 2px 10px rgba(15, 23, 42, 0.06)',
+            }}
+          >
+            <Terminal size={15} />
+          </button>
 
           {/* Desktop Theme Mode Toggle Button */}
           <button
@@ -541,7 +586,41 @@ export default function Navbar() {
         </div>
 
         {/* ── Mobile Controls (< 1024px) ────────────────────────────────────── */}
-        <div className="flex lg:hidden items-center gap-2" ref={mobileDropdownRef}>
+        <div className="flex lg:hidden items-center gap-1.5" ref={mobileDropdownRef}>
+          {/* Mobile Command Palette Button */}
+          <button
+            type="button"
+            onClick={() => onOpenCommandPalette ? onOpenCommandPalette() : window.dispatchEvent(new Event('open-command-palette'))}
+            aria-label="Search and Commands"
+            title="Search and Commands (Ctrl+K)"
+            className="relative h-[38px] w-[38px] rounded-full cursor-pointer flex items-center justify-center border transition-all duration-300 hover:scale-105 active:scale-95 select-none z-50 pointer-events-auto shadow-sm"
+            style={{
+              borderColor: isDark ? 'rgba(255, 255, 255, 0.12)' : 'rgba(15, 23, 42, 0.12)',
+              background:  isDark ? 'rgba(30, 41, 59, 0.85)' : 'rgba(255, 255, 255, 0.95)',
+              backdropFilter: 'blur(12px)',
+              color:       isDark ? '#F8FAFC' : '#0F172A',
+            }}
+          >
+            <Search size={15} />
+          </button>
+
+          {/* Mobile Terminal Button */}
+          <button
+            type="button"
+            onClick={() => onOpenTerminal ? onOpenTerminal() : window.dispatchEvent(new Event('open-terminal'))}
+            aria-label="Developer Terminal"
+            title="Developer Terminal"
+            className="relative h-[38px] w-[38px] rounded-full cursor-pointer flex items-center justify-center border transition-all duration-300 hover:scale-105 active:scale-95 select-none z-50 pointer-events-auto shadow-sm"
+            style={{
+              borderColor: isDark ? 'rgba(255, 255, 255, 0.12)' : 'rgba(15, 23, 42, 0.12)',
+              background:  isDark ? 'rgba(30, 41, 59, 0.85)' : 'rgba(255, 255, 255, 0.95)',
+              backdropFilter: 'blur(12px)',
+              color:       isDark ? '#34D399' : '#059669',
+            }}
+          >
+            <Terminal size={15} />
+          </button>
+
           {/* Mobile Theme Mode Toggle Button */}
           <button
             type="button"
