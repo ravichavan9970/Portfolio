@@ -83,6 +83,194 @@ interface AIAssistantModalProps {
   onClose: () => void;
 }
 
+// ── Query Normalizer (Fixes typos, slang, and common abbreviations) ─────────────
+function normalizeQuery(input: string): string {
+  return input
+    .toLowerCase()
+    .replace(/[^\w\s]/g, ' ')
+    .replace(/\bmi\b/g, 'me')
+    .replace(/\bu\b/g, 'you')
+    .replace(/\bur\b/g, 'your')
+    .replace(/\babt\b/g, 'about')
+    .replace(/\bwht\b/g, 'what')
+    .replace(/\bplz\b|\bpls\b/g, 'please')
+    .replace(/\bproj\b|\bprojets\b|\bprojectz\b/g, 'projects')
+    .replace(/\bskils\b|\bskillz\b/g, 'skills')
+    .replace(/\bexprnc\b|\bexp\b/g, 'experience')
+    .replace(/\bedu\b|\bclg\b/g, 'education')
+    .replace(/\bconatct\b|\bcontct\b/g, 'contact')
+    .replace(/\bdetials\b|\bdetail\b/g, 'details')
+    .replace(/\btele\b/g, 'tell')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function hasAny(q: string, words: string[]): boolean {
+  return words.some(w => q.includes(w));
+}
+
+// ── Rich Interactive Markdown Renderer Component ─────────────────────────────
+function FormattedMessage({ text }: { text: string }) {
+  const [copiedCodeIdx, setCopiedCodeIdx] = useState<number | null>(null);
+
+  const copyCode = (code: string, idx: number) => {
+    navigator.clipboard.writeText(code);
+    setCopiedCodeIdx(idx);
+    setTimeout(() => setCopiedCodeIdx(null), 2000);
+  };
+
+  const parts = text.split(/(```[\s\S]*?```)/g);
+
+  return (
+    <div className="space-y-2 text-xs sm:text-[13px] leading-relaxed select-text text-text-main">
+      {parts.map((part, pIdx) => {
+        if (part.startsWith('```') && part.endsWith('```')) {
+          const lines = part.slice(3, -3).trim().split('\n');
+          const firstLine = lines[0].trim();
+          const hasLang = /^[a-zA-Z0-9_-]+$/.test(firstLine);
+          const lang = hasLang ? firstLine : 'code';
+          const codeContent = hasLang ? lines.slice(1).join('\n') : lines.join('\n');
+
+          return (
+            <div key={pIdx} className="my-3 rounded-xl overflow-hidden border border-white/10 bg-black/60 shadow-md">
+              <div className="px-3 py-1.5 bg-white/[0.04] border-b border-white/10 flex items-center justify-between text-[11px] font-mono text-text-muted">
+                <span className="uppercase tracking-wider text-amber-400 font-bold">{lang}</span>
+                <button
+                  type="button"
+                  onClick={() => copyCode(codeContent, pIdx)}
+                  className="flex items-center gap-1 hover:text-white transition-colors cursor-pointer text-[10px]"
+                >
+                  {copiedCodeIdx === pIdx ? (
+                    <>
+                      <Check size={11} className="text-emerald-400" />
+                      <span className="text-emerald-400">Copied</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy size={11} />
+                      <span>Copy</span>
+                    </>
+                  )}
+                </button>
+              </div>
+              <pre className="p-3.5 overflow-x-auto text-[11px] sm:text-xs font-mono text-cyan-200 leading-relaxed scrollbar-thin">
+                <code>{codeContent}</code>
+              </pre>
+            </div>
+          );
+        }
+
+        const lines = part.split('\n');
+        return (
+          <div key={pIdx} className="space-y-1.5">
+            {lines.map((line, lIdx) => {
+              const trimmed = line.trim();
+
+              if (!trimmed) {
+                return <div key={lIdx} className="h-1" />;
+              }
+
+              if (trimmed.startsWith('### ')) {
+                return (
+                  <h3 key={lIdx} className="text-sm font-bold text-white mt-3 mb-1 pt-1 pb-1 border-b border-white/10 flex items-center gap-1.5">
+                    {renderInlineFormatting(trimmed.slice(4))}
+                  </h3>
+                );
+              }
+
+              if (trimmed.startsWith('#### ')) {
+                return (
+                  <h4 key={lIdx} className="text-xs font-bold text-amber-300 mt-2.5 mb-1">
+                    {renderInlineFormatting(trimmed.slice(5))}
+                  </h4>
+                );
+              }
+
+              if (trimmed === '---') {
+                return <hr key={lIdx} className="border-white/10 my-3" />;
+              }
+
+              if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
+                return (
+                  <div key={lIdx} className="flex items-start gap-2 pl-1.5 my-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary-light mt-1.5 shrink-0" />
+                    <div className="flex-1 leading-relaxed">
+                      {renderInlineFormatting(trimmed.slice(2))}
+                    </div>
+                  </div>
+                );
+              }
+
+              const numMatch = trimmed.match(/^(\d+)\.\s+(.*)$/);
+              if (numMatch) {
+                return (
+                  <div key={lIdx} className="flex items-start gap-2 pl-1.5 my-1.5">
+                    <span className="px-1.5 py-0.2 rounded bg-primary/20 border border-primary/40 text-[10px] font-mono text-primary-light font-bold shrink-0 mt-0.5">
+                      {numMatch[1]}
+                    </span>
+                    <div className="flex-1 leading-relaxed">
+                      {renderInlineFormatting(numMatch[2])}
+                    </div>
+                  </div>
+                );
+              }
+
+              return (
+                <p key={lIdx} className="leading-relaxed">
+                  {renderInlineFormatting(line)}
+                </p>
+              );
+            })}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function renderInlineFormatting(text: string): React.ReactNode[] {
+  const tokens = text.split(/(\*\*.*?\*\*|`.*?`|\*.*?\*|\[.*?\]\(.*?\))/g);
+
+  return tokens.map((token, idx) => {
+    if (token.startsWith('**') && token.endsWith('**')) {
+      return (
+        <strong key={idx} className="text-white font-semibold">
+          {token.slice(2, -2)}
+        </strong>
+      );
+    }
+    if (token.startsWith('`') && token.endsWith('`')) {
+      return (
+        <code key={idx} className="px-1.5 py-0.5 rounded bg-white/10 text-amber-300 font-mono text-[11px] border border-white/10">
+          {token.slice(1, -1)}
+        </code>
+      );
+    }
+    if (token.startsWith('*') && token.endsWith('*')) {
+      return (
+        <em key={idx} className="text-cyan-300 italic">
+          {token.slice(1, -1)}
+        </em>
+      );
+    }
+    const linkMatch = token.match(/^\[(.*?)\]\((.*?)\)$/);
+    if (linkMatch) {
+      return (
+        <a
+          key={idx}
+          href={linkMatch[2]}
+          target={linkMatch[2].startsWith('http') ? '_blank' : '_self'}
+          rel="noreferrer"
+          className="text-cyan-400 hover:text-cyan-300 underline font-medium transition-colors"
+        >
+          {linkMatch[1]}
+        </a>
+      );
+    }
+    return token;
+  });
+}
+
 export default function AIAssistantModal({ isOpen, onClose }: AIAssistantModalProps) {
   const [activeModel, setActiveModel] = useState<AIModelType>('portfolio-rag');
   const [inputVal, setInputVal] = useState('');
@@ -201,66 +389,282 @@ export default function AIAssistantModal({ isOpen, onClose }: AIAssistantModalPr
       }
     }
 
-    // High-Fidelity Client Contextual Reasoning Engine
-    await new Promise(r => setTimeout(r, 650));
-    const q = userPrompt.toLowerCase();
+    // High-Fidelity Client Contextual Reasoning Engine with Normalization
+    await new Promise(r => setTimeout(r, 450));
+    const q = normalizeQuery(userPrompt);
 
+    // ────────────────────────────────────────────────────────────────────────
+    // MODEL 01: GEMINI-PORTFOLIO-RAG (Resume & Experience Intelligence)
+    // ────────────────────────────────────────────────────────────────────────
     if (activeModel === 'portfolio-rag') {
-      if (q.includes('hire') || q.includes('why') || q.includes('strength')) {
-        return `### 🌟 Why Ravindra Chavan is a Top-Tier Candidate:
+      // Specific: Shivchhatra Trekkers
+      if (hasAny(q, ['shivchhatra', 'trek', 'trekkers', 'dual cloud', 'disaster recovery', 'render cloud', 'upi qr'])) {
+        return `### 🏔️ Project Deep-Dive: Shivchhatra Trekkers
 
-1. **Enterprise Java 21 & Spring Boot 3 Specialization**:
-   - Rather than simple CRUD apps, Ravindra builds **production-grade distributed systems** with strict transaction isolation, pessimistic locking, and stateless JWT authentication.
-2. **Flagship Proven Projects**:
-   - **Shivchhatra Trekkers**: Built an enterprise **Dual-Cloud Disaster Recovery Engine** mirroring instances across Render with atomic bulk sync and offline vault backups, handling 600 req/min.
-   - **MultiVendor Marketplace**: Engineered concurrent 10-minute hold reservation daemons (\`@Scheduled\`) with pessimistic row locking to completely prevent inventory race conditions.
-3. **Full-Stack Competence**:
-   - Proficient in **React 19, TypeScript, Tailwind CSS 4**, and Vite, enabling him to deliver cohesive features from schema design all the way to customer-facing UIs.
-4. **Immediate Availability**:
-   - Location: Pune/Maharashtra (open to on-site & remote). You can reach him directly via WhatsApp at **+91 74476 61921** or **ravindrachavan265125@gmail.com**.`;
+**Shivchhatra Trekkers** is an enterprise outdoor expedition booking & disaster-resilient platform built by Ravindra Chavan.
+
+#### 🛠️ Tech Stack & Infrastructure:
+- **Backend**: Java 21 (LTS), Spring Boot 3.3.3, Spring Data JPA, Hibernate ORM
+- **Database**: H2 Persistent Storage Engine with atomic file journaling
+- **Deployment**: Dual Mirrored Instances on Render Cloud
+- **Payment & Gateway**: Custom UPI Dynamic QR code generator engine
+
+#### ⚡ Core Engineering Achievements:
+1. **Dual-Cloud Disaster Recovery Engine**:
+   - Built an active-standby replication pipeline across secondary Render nodes.
+   - Live expedition ledgers are serialized with cryptographic integrity checksums.
+   - Offline timestamped JSON backup snapshots generated on demand, guaranteeing zero data loss during cloud maintenance.
+2. **High-Concurrency Rate Limiting**:
+   - Engineered a 600 req/min token-bucket rate limiter to prevent bot scraping and booking collisions.
+3. **Dynamic UPI QR Engine**:
+   - Instant QR code generation with dynamic amount encoding and automated payment reconciliation.
+4. **Reliability & SLA**:
+   - **0% double-booking** over 1,000+ mock transactions; **99.98% uptime SLA**.
+
+👉 *You can inspect the full architecture on the [Projects Page](#/projects) or ask me to explain its database schema!*`;
       }
 
-      if (q.includes('security') || q.includes('jwt') || q.includes('auth')) {
-        return `### 🛡️ Ravindra's Spring Security & JWT Implementation:
+      // Specific: MultiVendor Marketplace
+      if (hasAny(q, ['multivendor', 'multi vendor', 'marketplace', 'ecommerce', 'e commerce', 'pessimistic lock', 'hold token', 'otp'])) {
+        return `### 🛒 Project Deep-Dive: MultiVendor Marketplace
 
-- **Stateless Authentication**: Configured \`SecurityFilterChain\` with \`SessionCreationPolicy.STATELESS\`, preventing session hijacking in microservices.
-- **Dual-Identifier 6-Digit OTP**: Engineered phone + email verification with timed expiration caches and BCrypt password hashing.
-- **Role-Based Access Control (RBAC)**: Enforced fine-grained endpoint authorizations (\`ADMIN\`, \`VENDOR\`, \`CUSTOMER\`) with custom JWT filter validation chains.`;
+**MultiVendor Marketplace** is a high-concurrency B2B/B2C multi-merchant e-commerce platform architected to eliminate flash-sale race conditions.
+
+#### 🛠️ Tech Stack:
+- **Backend**: Java 21, Spring Boot 3, Spring Security, Spring Data JPA, MySQL 8
+- **Frontend**: React 19, TypeScript, Tailwind CSS 4, Vite
+- **Security**: Stateless JWT Authentication, Dual-Identifier 6-Digit OTP, BCrypt
+
+#### ⚡ Core Engineering Achievements:
+1. **Pessimistic Row-Level Locking (\`PESSIMISTIC_WRITE\`)**:
+   - Eliminated negative inventory overselling when hundreds of customers check out the final stock simultaneously:
+\`\`\`java
+@Lock(LockModeType.PESSIMISTIC_WRITE)
+@Query("SELECT p FROM Product p WHERE p.id = :id")
+Optional<Product> findByIdForUpdate(@Param("id") Long id);
+\`\`\`
+2. **Automated 10-Minute Hold Reservation Daemon**:
+   - Created a temporary hold token upon entering checkout.
+   - Built an automated background sweeper (\`@Scheduled(fixedDelay = 60000)\`) that automatically evicts expired unpurchased items and returns stock to the public pool.
+3. **Role-Based Security (RBAC)**:
+   - Strict privilege separation across \`ADMIN\`, \`VENDOR\`, and \`CUSTOMER\` with customized JWT validation filters.
+
+👉 *Explore the live demo and repository links on the [Projects Page](#/projects)!*`;
       }
 
-      if (q.includes('multivendor') || q.includes('booking') || q.includes('lock')) {
-        return `### 🛒 MultiVendor Marketplace High-Concurrency Architecture:
+      // Specific: StudySync
+      if (hasAny(q, ['studysync', 'study sync', 'pomodoro', 'productivity', 'study app'])) {
+        return `### ⏱️ Project Deep-Dive: StudySync Student Suite
 
-- **Problem Solved**: Multiple buyers clicking 'Reserve' on the final unit of inventory simultaneously caused race conditions.
-- **Solution**:
-  - Implemented **Pessimistic Database Locking** using JPA:
-    \`\`\`java
-    @Lock(LockModeType.PESSIMISTIC_WRITE)
-    @Query("SELECT p FROM Product p WHERE p.id = :id")
-    Optional<Product> findByIdForUpdate(@Param("id") Long id);
-    \`\`\`
-  - Generated temporary 10-minute hold tokens.
-  - Built an automated \`@Scheduled(fixedDelay = 60000)\` sweeper daemon that releases expired unpurchased inventory back to the market pool.`;
+**StudySync** is a full-stack student productivity and time-management application designed for focused learning workflows.
+
+#### 🛠️ Tech Stack:
+- **Backend**: Java 21, Spring Boot 3, RESTful APIs, JPA
+- **Frontend**: React 19, TypeScript, Chart.js, Tailwind CSS
+- **Features**: Interactive Pomodoro timer, milestone boards, study session analytics
+
+#### ⚡ Core Engineering Highlights:
+1. **Pomodoro Deep-Work Engine**:
+   - Built a configurable work/break timer synchronized with browser state to maintain focus tracking across page reloads.
+2. **Data Visualizations & Analytics**:
+   - Integrated Chart.js to render daily, weekly, and monthly productivity velocity curves.
+3. **Task & Milestone Tracking**:
+   - Clean Kanban-style organization with category filtering and priority indicators.
+
+👉 *Check out StudySync on the [Projects Page](#/projects)!*`;
       }
 
-      return `### 📋 Ravindra Chavan Profile Overview:
-- **Role**: Associate Software Engineer & Full-Stack Java Developer
-- **Core Stack**: Java 21 LTS, Spring Boot 3.3.3, Spring Security JWT, MySQL 8, React 19, TypeScript, Docker
-- **Flagship Projects**: *Shivchhatra Trekkers* (Dual-Cloud DR), *MultiVendor* (Pessimistic Locking), *StudySync* (Productivity Analytics)
-- **Education**: M.Sc. in Computer Science (8.5 CGPA) & B.Sc. in Computer Science (8.4 CGPA)
-- **Contact**: +91 74476 61921 • ravindrachavan265125@gmail.com`;
+      // General Projects Overview (Matches: "tell mi about projects", "projects", "work", etc.)
+      if (hasAny(q, ['project', 'projects', 'work', 'built', 'portfolio', 'apps', 'showcase', 'flagship', 'what did you build', 'tell me about your project'])) {
+        return `### 🚀 Flagship Projects by Ravindra Chavan
+
+Ravindra has architected and delivered **3 major enterprise-grade software applications**, each solving complex production challenges:
+
+---
+
+#### 1. 🏔️ Shivchhatra Trekkers (Expedition Booking & Disaster-Resilient System)
+- **Tech Stack**: Java 21 LTS, Spring Boot 3.3.3, Spring Data JPA, H2 Persistent Storage, Render Cloud.
+- **Problem Solved**: High weekend booking spikes caused single-cloud downtime and duplicate seat reservations.
+- **Key Innovations**:
+  - **Dual-Cloud Disaster Recovery**: Automated live ledger replication across secondary Render instances with cryptographically signed payloads.
+  - **Zero Double-Booking Guarantee**: Dynamic batch slot reservation locks handling a **600 req/min** rate limiter.
+  - **Dynamic UPI QR Engine**: Instant QR code generation with dynamic amount encoding and automated payment reconciliation.
+- **Outcome**: 99.98% availability with zero transaction collisions across 1,000+ bookings.
+
+---
+
+#### 2. 🛒 MultiVendor Marketplace (High-Concurrency E-Commerce Platform)
+- **Tech Stack**: Java 21, Spring Boot 3, React 19, TypeScript, Tailwind CSS, MySQL 8, Spring Security JWT.
+- **Problem Solved**: Concurrent checkouts on limited inventory items triggered race conditions and overselling.
+- **Key Innovations**:
+  - **Pessimistic Row-Level Locking (\`PESSIMISTIC_WRITE\`)**: Row-level database locks using SQL \`SELECT ... FOR UPDATE\` during checkout.
+  - **Automated Hold Sweeper Daemon**: 10-minute hold token expiration daemon (\`@Scheduled\`) that safely returns abandoned stock back to the active catalog.
+  - **Dual-Identifier 6-Digit OTP Auth**: Phone & email verification with BCrypt hashing and timed expiration caches.
+- **Outcome**: 100% elimination of inventory overselling under flash-sale stress tests.
+
+---
+
+#### 3. ⏱️ StudySync (Student Productivity & Focus Platform)
+- **Tech Stack**: Spring Boot 3, React 19, Chart.js, RESTful microservices.
+- **Key Innovations**:
+  - Customizable **Pomodoro Deep Focus Timer** with browser session persistence.
+  - Visual **Productivity Dashboards** rendered with Chart.js displaying study velocity.
+  - Real-time study logs and task prioritization manager.
+
+---
+
+💡 *Would you like a deep dive into any specific project's database architecture or source code? Just ask!*`;
+      }
+
+      // Skills & Tech Stack
+      if (hasAny(q, ['skill', 'skills', 'tech stack', 'technologies', 'tools', 'backend', 'frontend', 'database', 'java', 'spring', 'react', 'mysql', 'docker'])) {
+        return `### 💻 Ravindra Chavan's Technical Skills & Stack:
+
+#### ☕ Backend & Core Engineering:
+- **Java 21 (LTS)**: Virtual Threads, Records, Pattern Matching, Stream API, Concurrency
+- **Spring Framework**: Spring Boot 3.3.3, Spring Data JPA, Spring Security, Hibernate ORM
+- **Architecture**: RESTful Microservices, Stateless JWT Auth, RBAC, Dual-Cloud Disaster Recovery
+- **Build & Package**: Maven, Gradle, Clean Architecture
+
+#### 🗄️ Databases & Storage:
+- **Relational Databases**: MySQL 8, PostgreSQL, H2 Persistent Engine
+- **Optimization**: Pessimistic/Optimistic Locking (\`SELECT FOR UPDATE\`), B-Tree Indexing, Connection Pooling (HikariCP), Query Execution Plans
+
+#### ⚛️ Frontend & UI Engineering:
+- **Languages & Frameworks**: React 19, TypeScript, JavaScript (ES6+), HTML5, CSS3
+- **Styling & Animations**: Tailwind CSS 4, Framer Motion, Three.js
+- **Tooling**: Vite, Single-Page Architecture (SPA), Responsive Mobile Design
+
+#### 🛠️ DevOps, Cloud & Testing:
+- **Cloud & Hosting**: Render, Vercel, Docker
+- **Testing & Tools**: JUnit 5, Mockito, Postman, Git & GitHub, Linux/Unix CLI
+
+👉 *View interactive proficiency gauges on the [Skills Page](#/skills)!*`;
+      }
+
+      // Experience & Career Journey
+      if (hasAny(q, ['experience', 'journey', 'career', 'work history', 'background', 'timeline', 'company', 'role'])) {
+        return `### 🧭 Ravindra Chavan's Career Journey & Experience:
+
+#### 💼 Associate Software Engineer & Full-Stack Java Developer
+- **Focus Area**: Designing scalable, production-grade microservices and reactive user interfaces.
+- **Distributed Reliability**: Architected dual-cloud active-standby disaster recovery with automated failover and offline air-gapped backups.
+- **High-Concurrency Engineering**: Implemented JPA pessimistic row locking and background cleanup sweeper daemons, handling 600 req/min rate limits.
+- **Security & Authorization**: Configured stateless Spring Security filter chains with JWT tokens, dual-identifier 6-digit OTP verification, and RBAC.
+
+#### 🎓 Academic Foundation:
+- **Master of Science (M.Sc.) in Computer Science** — 8.5 CGPA
+- **Bachelor of Science (B.Sc.) in Computer Science** — 8.4 CGPA
+
+👉 *Read the complete career milestones on the [Journey Page](#/journey)!*`;
+      }
+
+      // Why Hire Ravindra / Strengths
+      if (hasAny(q, ['hire', 'why hire', 'strength', 'strengths', 'why should', 'candidate', 'value', 'advantage'])) {
+        return `### 🌟 Why You Should Hire Ravindra Chavan:
+
+1. **Enterprise Java 21 & Spring Boot 3 Mastery**:
+   - Rather than basic tutorial apps, Ravindra builds **production-grade distributed systems** with strict transaction isolation, pessimistic locking, and stateless JWT authentication.
+2. **Proven Real-World Problem Solving**:
+   - Solved flash-sale overselling using database locks and sweeper daemons in *MultiVendor Marketplace*.
+   - Guaranteed 99.98% uptime using a mirrored dual-cloud topology in *Shivchhatra Trekkers*.
+3. **True Full-Stack Capability**:
+   - Seamlessly connects high-performance Java backends to modern **React 19 & TypeScript** frontends with Tailwind CSS.
+4. **Strong Computer Science Foundation**:
+   - Holds an M.Sc. in Computer Science with an **8.5 CGPA**, backed by solid knowledge of algorithms, concurrency, and database indexing.
+5. **Immediate Availability**:
+   - Based in Pune, Maharashtra. Ready for immediate joining (On-Site, Hybrid, or Remote). Reach out directly via WhatsApp at **+91 74476 61921**!`;
+      }
+
+      // Education & Academic Background
+      if (hasAny(q, ['education', 'degree', 'college', 'university', 'msc', 'bsc', 'marks', 'cgpa', 'grades', 'school'])) {
+        return `### 🎓 Education & Academic Credentials:
+
+#### 1. Master of Science (M.Sc.) in Computer Science
+- **Grade / Score**: **8.5 CGPA**
+- **Key Coursework**: Distributed Systems, Advanced Database Management (DBMS), Data Structures & Algorithms, Software Architecture, Network Security.
+
+#### 2. Bachelor of Science (B.Sc.) in Computer Science
+- **Grade / Score**: **8.4 CGPA**
+- **Key Coursework**: Object-Oriented Programming (Java/C++), Operating Systems, Web Development, Database Systems, Computer Networks.
+
+Ravindra consistently maintained distinction-level academic performance while building production software projects.`;
+      }
+
+      // Contact & Socials / Resume
+      if (hasAny(q, ['contact', 'email', 'phone', 'mobile', 'whatsapp', 'call', 'reach', 'number', 'address', 'location', 'pune', 'resume', 'cv', 'linkedin', 'github'])) {
+        return `### 📬 Contact & Connect with Ravindra Chavan:
+
+- **📱 WhatsApp / Phone**: **[+91 74476 61921](https://wa.me/917447661921?text=Hi%20Ravindra,%20I%20reviewed%20your%20portfolio!)** *(Instant direct response)*
+- **✉️ Email**: **[ravindrachavan265125@gmail.com](mailto:ravindrachavan265125@gmail.com)**
+- **📍 Location**: Pune, Maharashtra, India *(Open to Relocation & Remote Roles)*
+- **📄 Resume**: **[Download Resume PDF](/resume/Ravindra_Chavan_Resume.pdf)**
+- **💻 GitHub**: **[github.com/ravichavan9970](https://github.com/ravichavan9970)**
+- **💼 LinkedIn**: **[linkedin.com/in/ravindra-chavan](https://www.linkedin.com/in/ravindra-chavan-66779a243/)**
+
+Feel free to send a message on WhatsApp or email for interview scheduling!`;
+      }
+
+      // Security, JWT & Auth
+      if (hasAny(q, ['security', 'jwt', 'auth', 'authentication', 'authorization', 'otp', 'token', 'bcrypt', 'rbac'])) {
+        return `### 🛡️ Spring Security & JWT Implementation Architecture:
+
+In his enterprise backends, Ravindra implements industry-standard security practices:
+
+1. **Stateless Authentication**:
+   - Configures \`SecurityFilterChain\` with \`SessionCreationPolicy.STATELESS\`, preventing session fixation and CSRF vulnerabilities in microservices.
+2. **Dual-Identifier 6-Digit OTP Engine**:
+   - Integrated phone + email verification with timed expiration caches and BCrypt password hashing.
+3. **Role-Based Access Control (RBAC)**:
+   - Enforced fine-grained endpoint authorizations (\`ADMIN\`, \`VENDOR\`, \`CUSTOMER\`) with custom JWT filter validation chains.
+4. **Token Refresh & Revocation**:
+   - Short-lived access tokens coupled with secure token blacklisting upon logout.`;
+      }
+
+      // Greetings & Introductions
+      if (hasAny(q, ['hi', 'hello', 'hey', 'namaste', 'greetings', 'morning', 'evening', 'who are you', 'what can you do', 'help'])) {
+        return `👋 **Hello! I am Gemini-Portfolio-RAG**, your intelligent guide to Ravindra Chavan's engineering portfolio.
+
+I can answer any technical or professional questions about Ravindra:
+- 🚀 **Projects**: Ask *"Tell me about your projects"*, *"Explain Shivchhatra Trekkers"*, or *"How did you build MultiVendor?"*
+- 💻 **Tech Stack**: Ask *"What are your Java 21 and Spring Boot skills?"*
+- 🌟 **Hiring**: Ask *"Why should we hire Ravindra?"* or *"What is your experience?"*
+- 📬 **Contact**: Ask *"How do I contact Ravindra?"* or *"Where can I download his resume?"*
+
+What would you like to explore first?`;
+      }
+
+      // Default Fallback for Model 01
+      return `### 💡 Ravindra Chavan — Engineering Summary:
+
+Ravindra is an **Associate Software Engineer & Full-Stack Java Developer** specializing in high-concurrency systems, Spring Boot 3.3.3, Java 21, and React 19.
+
+#### 📌 Flagship Highlights:
+- **Dual-Cloud Disaster Recovery**: Mirrored Render nodes in *Shivchhatra Trekkers* with 99.98% uptime.
+- **Pessimistic Row-Level Locking**: Race-condition prevention in *MultiVendor Marketplace* via JPA \`SELECT ... FOR UPDATE\`.
+- **Full-Stack Proficiency**: React 19, TypeScript, Tailwind CSS, MySQL 8, Docker.
+- **Education**: M.Sc. in Computer Science (8.5 CGPA).
+
+👉 **Try asking me:**
+- *"Tell me about your projects"*
+- *"Explain pessimistic locking in MultiVendor"*
+- *"What is Ravindra's experience with Spring Boot?"*
+- *"How can I contact or hire Ravindra?"*`;
     }
 
+    // ────────────────────────────────────────────────────────────────────────
+    // MODEL 02: ARCH-DEEPSEEK-JAVA (System Architecture Co-Pilot)
+    // ────────────────────────────────────────────────────────────────────────
     if (activeModel === 'arch-copilot') {
-      if (q.includes('pessimistic') || q.includes('lock') || q.includes('race')) {
+      if (hasAny(q, ['pessimistic', 'optimistic', 'lock', 'locking', 'select for update', 'pessimistic write', 'isolation', 'concurrency'])) {
         return `### ⚡ Pessimistic vs Optimistic Locking in Spring Boot:
 
-#### 1. When to choose Pessimistic Locking:
+#### 1. When to Choose Pessimistic Locking:
 - **High contention scenarios**: When multiple transactions attempt to acquire the exact same row simultaneously (e.g., ticket booking, limited inventory flash sales).
-- **Mechanism**: Translates to SQL:
-  \`\`\`sql
-  SELECT stock FROM products WHERE id = 101 FOR UPDATE;
-  \`\`\`
+- **Mechanism**: Translates directly to SQL:
+\`\`\`sql
+SELECT stock FROM products WHERE id = 101 FOR UPDATE;
+\`\`\`
 - Other transactions block until the holding transaction commits or rolls back, guaranteeing zero over-allocation.
 
 #### 2. Clean Spring Data JPA Pattern:
@@ -268,7 +672,7 @@ export default function AIAssistantModal({ isOpen, onClose }: AIAssistantModalPr
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
     @Lock(LockModeType.PESSIMISTIC_WRITE)
-    @QueryHints({@QueryHint(name = "javax.persistence.lock.timeout", value = "3000")})
+    @QueryHints({@QueryHint(name = "jakarta.persistence.lock.timeout", value = "3000")})
     @Query("SELECT p FROM Product p WHERE p.id = :id")
     Optional<Product> findByIdWithLock(@Param("id") Long id);
 }
@@ -277,16 +681,16 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 #### 3. Automatic Cleanup Daemon:
 Pair with an automated background worker to evict orphaned holds:
 \`\`\`java
-@Scheduled(cron = "0 */1 * * * *")
+@Scheduled(fixedDelay = 60000)
 @Transactional
 public void releaseExpiredHolds() {
     LocalDateTime threshold = LocalDateTime.now().minusMinutes(10);
-    holdRepository.deleteExpiredReservations(threshold);
+    reservationRepository.deleteExpiredReservations(threshold);
 }
 \`\`\``;
       }
 
-      if (q.includes('disaster') || q.includes('recovery') || q.includes('render') || q.includes('dr')) {
+      if (hasAny(q, ['disaster recovery', 'dr', 'dual cloud', 'replication', 'failover', 'render', 'vault', 'backup'])) {
         return `### 🌐 Enterprise Dual-Cloud Disaster Recovery Engine:
 
 As implemented in **Shivchhatra Trekkers**:
@@ -301,32 +705,162 @@ As implemented in **Shivchhatra Trekkers**:
    - Offline timestamped JSON backup snapshots generated on demand, providing full disaster recovery even under total cloud outage.`;
       }
 
-      return `### 🏗️ Microservices & Architecture Best Practices:
-1. **Circuit Breakers (Resilience4j)**: Wrap external dependencies to prevent cascade failures.
-2. **Database Sharding & Read Replicas**: Separate high-throughput writes from analytic queries.
-3. **Stateless Auth (JWT)**: Keep authentication out of centralized session memory for horizontal scaling.`;
+      if (hasAny(q, ['rate limit', 'rate limiting', 'throttle', 'throttling', 'token bucket', 'leaky bucket', '600 req'])) {
+        return `### ⏱️ Designing a 600 Req/Min Rate Limiter in Spring Boot:
+
+#### 1. Algorithm Selection: Token Bucket vs Sliding Window
+- **Token Bucket**: Allows short bursts while strictly enforcing the average 10 req/second (600 req/min) rate.
+
+#### 2. Spring Boot Implementation via Interceptor / Filter:
+\`\`\`java
+@Component
+public class RateLimitFilter extends OncePerRequestFilter {
+    private final Map<String, Bucket> clientBuckets = new ConcurrentHashMap<>();
+
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
+        String clientIp = request.getRemoteAddr();
+        Bucket bucket = clientBuckets.computeIfAbsent(clientIp, k -> createNewBucket());
+
+        if (bucket.tryConsume(1)) {
+            filterChain.doFilter(request, response);
+        } else {
+            response.setStatus(HttpStatus.TOO_MANY_REQUESTS.value());
+            response.getWriter().write('{"error": "Rate limit exceeded (600 req/min)"}');
+        }
+    }
+}
+\`\`\``;
+      }
+
+      if (hasAny(q, ['project', 'projects', 'shivchhatra', 'multivendor', 'studysync'])) {
+        return `### 🏗️ Architectural Overview of Ravindra's Projects:
+
+1. **Shivchhatra Trekkers**:
+   - **Pattern**: Disaster-Resilient Microservice with Mirrored Active-Standby Topologies.
+   - **Key Components**: H2 Persistent Journaling, Dynamic UPI QR Generator, 600 req/min Throttler, Checksum Synchronizer.
+2. **MultiVendor Marketplace**:
+   - **Pattern**: High-Concurrency E-Commerce Engine with Pessimistic Row Locking.
+   - **Key Components**: MySQL 8 \`SELECT ... FOR UPDATE\`, 10-min Hold Token Sweeper, Stateless JWT RBAC Security Chain.
+3. **StudySync**:
+   - **Pattern**: Modular Productivity REST API with Client-Side Reactive State.
+   - **Key Components**: Session State Caching, Chart.js Metric Aggregator.`;
+      }
+
+      // Default Architecture Response
+      return `### 🏗️ Enterprise System Architecture & Microservices Best Practices:
+
+1. **Resilience & Circuit Breakers**: Use Resilience4j around external payment gateways and cloud APIs to prevent cascade failures.
+2. **Database Sharding & Read Replicas**: Separate high-throughput transactional writes from analytic queries using read replicas.
+3. **Stateless Security**: Enforce JWT authentication with Short TTLs and distributed refresh token revoking.
+4. **Concurrency Control**: Choose Pessimistic Locking for inventory reservation and Optimistic Locking (\`@Version\`) for low-contention master data.
+
+👉 *Ask me about: "Pessimistic vs Optimistic Locking", "Dual-cloud disaster recovery", or "How to handle flash sale traffic"!*`;
     }
 
-    // Code Auditor
-    return `### 🔍 Code Auditor Inspection Report:
+    // ────────────────────────────────────────────────────────────────────────
+    // MODEL 03: CODE-AUDITOR-AI (Java & Concurrency Code Reviewer)
+    // ────────────────────────────────────────────────────────────────────────
+    if (activeModel === 'code-auditor') {
+      if (hasAny(q, ['n+1', 'n + 1', 'jpa', 'hibernate', 'lazy', 'join fetch', 'entitygraph', 'query'])) {
+        return `### 🔍 JPA N+1 Query Defect Audit & Resolution:
 
-#### 1. Concurrency & Transactional Hazards Checked:
-- **Isolation Levels**: Ensure \`@Transactional(isolation = Isolation.READ_COMMITTED)\` or \`REPEATABLE_READ\` matches your locking strategy.
-- **Deadlock Mitigation**: Always acquire locks in a standardized order across concurrent services (e.g. acquire Lock A then Lock B consistently).
-
-#### 2. Performance & JPA N+1 Optimization:
+#### ❌ Problem (N+1 Query Trigger):
+Calling \`findAll()\` on an entity with \`@OneToMany\` or \`@ManyToOne\` triggers 1 query for the parent, then N queries for children:
 \`\`\`java
-// ❌ Potential N+1 hazard:
-List<Order> orders = orderRepository.findAll(); // triggers N additional queries for items
-
-// ✅ Optimized with JOIN FETCH:
-@Query("SELECT o FROM Order o JOIN FETCH o.items WHERE o.customer.id = :customerId")
-List<Order> findCustomerOrdersWithItems(@Param("customerId") Long customerId);
+// Triggers 1 + N SQL queries:
+List<Order> orders = orderRepository.findAll();
+for (Order o : orders) {
+    System.out.println(o.getItems().size()); // N queries!
+}
 \`\`\`
 
-#### 3. Security Recommendations:
-- Always sanitize inputs with Hibernate Bean Validation (\`@NotNull\`, \`@Size\`, \`@Pattern\`).
-- Enforce parameterized queries to avoid SQL Injection vulnerabilities.`;
+#### ✅ Solution 1: JOIN FETCH in JPQL
+\`\`\`java
+@Repository
+public interface OrderRepository extends JpaRepository<Order, Long> {
+    @Query("SELECT DISTINCT o FROM Order o JOIN FETCH o.items WHERE o.customer.id = :customerId")
+    List<Order> findCustomerOrdersWithItems(@Param("customerId") Long customerId);
+}
+\`\`\`
+
+#### ✅ Solution 2: @EntityGraph
+\`\`\`java
+@EntityGraph(attributePaths = {"items", "customer"})
+List<Order> findAll();
+\`\`\`
+**Result**: Reduces N+1 queries to a single efficient SQL JOIN.`;
+      }
+
+      if (hasAny(q, ['concurrency', 'race condition', 'thread', 'volatile', 'synchronized', 'reentrantlock', 'atomic'])) {
+        return `### 🔍 Concurrency & Race Condition Audit:
+
+#### ❌ Flawed Pattern (Non-Atomic Increment):
+\`\`\`java
+public class BookingCounter {
+    private int count = 0; // Race condition under concurrent threads!
+    public void increment() { count++; }
+}
+\`\`\`
+
+#### ✅ Fixed Pattern (Atomic Operations):
+\`\`\`java
+public class BookingCounter {
+    private final AtomicInteger count = new AtomicInteger(0);
+    public void increment() { count.incrementAndGet(); }
+}
+\`\`\`
+
+#### ✅ For Database-Level Race Conditions:
+Always use database-level pessimistic row locking (\`PESSIMISTIC_WRITE\`) inside an active \`@Transactional\` boundary so that concurrent web requests cannot over-allocate stock.`;
+      }
+
+      if (hasAny(q, ['deadlock', 'circular wait', 'lock order'])) {
+        return `### 🔍 Deadlock Prevention Audit:
+
+#### ❌ Deadlock Hazard (Inconsistent Lock Ordering):
+- Thread 1 acquires Lock A, waits for Lock B.
+- Thread 2 acquires Lock B, waits for Lock A.
+
+#### ✅ Best Practice Rules:
+1. **Consistent Lock Ordering**: Always acquire locks in the exact same lexicographical or numerical ID order:
+\`\`\`java
+Long firstId = Math.min(acc1.getId(), acc2.getId());
+Long secondId = Math.max(acc1.getId(), acc2.getId());
+\`\`\`
+2. **Lock Timeouts**: Never block indefinitely. Always specify a timeout:
+\`\`\`java
+@QueryHints({@QueryHint(name = "jakarta.persistence.lock.timeout", value = "2000")})
+\`\`\``;
+      }
+
+      if (hasAny(q, ['project', 'projects', 'review', 'shivchhatra', 'multivendor'])) {
+        return `### 🔍 Code Quality & Architecture Audit of Ravindra's Codebases:
+
+1. **MultiVendor Marketplace**:
+   - **Locking Hygiene**: Properly scoped \`@Transactional\` methods with \`PESSIMISTIC_WRITE\` ensure locks release immediately upon commit.
+   - **Sweeper Daemon**: Exception-handled \`@Scheduled\` background thread prevents daemon thread death.
+2. **Shivchhatra Trekkers**:
+   - **Idempotent Webhooks**: Payment verification checks transaction IDs before updating expedition booking states.
+   - **Rate Limiting**: Applied via Spring filters before hitting costly persistence layers.`;
+      }
+
+      // Default Code Auditor Response
+      return `### 🔍 Code-Auditor-AI Inspection Checklist:
+
+Paste any Java / Spring Boot / React code snippet, and I will audit it for:
+1. **Thread Safety & Race Conditions**: \`volatile\`, \`AtomicInteger\`, \`synchronized\`, and DB row locks.
+2. **JPA Query Performance**: N+1 queries, Cartesian products, and missing indexes.
+3. **Transaction Boundaries**: Proper \`@Transactional(rollbackFor = Exception.class)\` usage.
+4. **Security Vulnerabilities**: Injection prevention, CSRF, and safe JWT decoding.
+
+👉 *Try pasting a method or asking: "Audit a Spring Boot @Transactional method"!*`;
+    }
+
+    // Universal Fallback
+    return `### 📋 Assistant Response:
+I am here to help you evaluate **Ravindra Chavan's software engineering portfolio**. You can ask about his **Java 21 / Spring Boot 3 projects**, **system architecture**, or request a **code audit**!`;
   };
 
   const handleSendMessage = async (e?: React.FormEvent) => {
@@ -592,9 +1126,11 @@ List<Order> findCustomerOrdersWithItems(@Param("customerId") Long customerId);
                           : 'bg-white/[0.04] border border-white/10 text-text-main shadow-sm'
                       }`}
                     >
-                      <div className="prose prose-invert max-w-none text-left whitespace-pre-wrap">
-                        {msg.text}
-                      </div>
+                      {msg.sender === 'user' ? (
+                        <p className="whitespace-pre-wrap">{msg.text}</p>
+                      ) : (
+                        <FormattedMessage text={msg.text} />
+                      )}
                     </div>
                   </div>
                 </div>
