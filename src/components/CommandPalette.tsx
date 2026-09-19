@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  Search, X, Terminal, FileText, Home, User, Code2, 
+  Search, X, FileText, Home, User, Code2, 
   Briefcase, Compass, Mail, Sun, 
   Sparkles, Layers
 } from 'lucide-react';
@@ -11,7 +11,7 @@ import { FaWhatsapp, FaGithub, FaLinkedin } from 'react-icons/fa';
 interface CommandPaletteProps {
   isOpen: boolean;
   onClose: () => void;
-  onOpenTerminal: () => void;
+  onOpenAIModal: () => void;
 }
 
 interface CommandItem {
@@ -24,7 +24,7 @@ interface CommandItem {
   action: () => void;
 }
 
-export default function CommandPalette({ isOpen, onClose, onOpenTerminal }: CommandPaletteProps) {
+export default function CommandPalette({ isOpen, onClose, onOpenAIModal }: CommandPaletteProps) {
   const navigate = useNavigate();
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -143,17 +143,17 @@ export default function CommandPalette({ isOpen, onClose, onOpenTerminal }: Comm
       }
     },
 
-    // Developer Tools
+    // Developer Tools & AI
     {
-      id: 'dev-terminal',
+      id: 'dev-ai-assistant',
       category: 'Developer',
-      title: 'Open Developer Terminal',
-      subtitle: 'Interactive Unix CLI (help, skills, arch, stats, hire)',
-      icon: <Terminal size={16} className="text-emerald-400" />,
-      shortcut: '>_',
+      title: 'Real-Time AI Assistant (3 Models)',
+      subtitle: 'Gemini Portfolio RAG, System Arch Co-Pilot & Java Code Auditor',
+      icon: <Sparkles size={16} className="text-amber-400" />,
+      shortcut: '✨ AI',
       action: () => {
         onClose();
-        setTimeout(onOpenTerminal, 150);
+        setTimeout(onOpenAIModal, 150);
       }
     },
 

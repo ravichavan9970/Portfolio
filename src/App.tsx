@@ -6,7 +6,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import SplashScreen from './components/SplashScreen';
 import CommandPalette from './components/CommandPalette';
-import TerminalModal from './components/TerminalModal';
+import AIAssistantModal from './components/AIAssistantModal';
 
 // Page Imports
 import Home from './pages/Home';
@@ -37,9 +37,9 @@ function AppContent() {
     }
   });
 
-  // Global Command Palette & Terminal State
+  // Global Command Palette & Real-Time AI Assistant State
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
-  const [terminalOpen, setTerminalOpen] = useState(false);
+  const [aiModalOpen, setAiModalOpen] = useState(false);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -51,16 +51,16 @@ function AppContent() {
     };
 
     const handleOpenPalette = () => setCommandPaletteOpen(true);
-    const handleOpenTerminal = () => setTerminalOpen(true);
+    const handleOpenAIModal = () => setAiModalOpen(true);
 
     window.addEventListener('keydown', handleKeyDown);
     window.addEventListener('open-command-palette', handleOpenPalette);
-    window.addEventListener('open-terminal', handleOpenTerminal);
+    window.addEventListener('open-ai-modal', handleOpenAIModal);
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('open-command-palette', handleOpenPalette);
-      window.removeEventListener('open-terminal', handleOpenTerminal);
+      window.removeEventListener('open-ai-modal', handleOpenAIModal);
     };
   }, []);
 
@@ -101,7 +101,7 @@ function AppContent() {
           {/* Main Navigation */}
           <Navbar 
             onOpenCommandPalette={() => setCommandPaletteOpen(true)}
-            onOpenTerminal={() => setTerminalOpen(true)}
+            onOpenAIModal={() => setAiModalOpen(true)}
           />
           
           {/* Page Routing */}
@@ -125,12 +125,12 @@ function AppContent() {
           <CommandPalette
             isOpen={commandPaletteOpen}
             onClose={() => setCommandPaletteOpen(false)}
-            onOpenTerminal={() => setTerminalOpen(true)}
+            onOpenAIModal={() => setAiModalOpen(true)}
           />
 
-          <TerminalModal
-            isOpen={terminalOpen}
-            onClose={() => setTerminalOpen(false)}
+          <AIAssistantModal
+            isOpen={aiModalOpen}
+            onClose={() => setAiModalOpen(false)}
           />
         </motion.div>
       )}

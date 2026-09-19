@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Sun, Moon, Settings, Check, Lock, KeyRound, Eye, EyeOff, Search, Terminal } from 'lucide-react';
+import { Menu, X, Sun, Moon, Settings, Check, Lock, KeyRound, Eye, EyeOff, Search, Sparkles } from 'lucide-react';
 import Avatar from './Avatar';
 
 export interface AvailabilityOption {
@@ -54,11 +54,11 @@ const colorThemes: { name: AccentKey; label: string }[] = [
 
 interface NavbarProps {
   onOpenCommandPalette?: () => void;
-  onOpenTerminal?: () => void;
+  onOpenAIModal?: () => void;
 }
 
 // ─── Component ────────────────────────────────────────────────────────────────
-export default function Navbar({ onOpenCommandPalette, onOpenTerminal }: NavbarProps = {}) {
+export default function Navbar({ onOpenCommandPalette, onOpenAIModal }: NavbarProps = {}) {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -470,22 +470,26 @@ export default function Navbar({ onOpenCommandPalette, onOpenTerminal }: NavbarP
             </span>
           </button>
 
-          {/* Interactive Developer Terminal Trigger */}
+          {/* Real-Time AI Models Assistant Trigger */}
           <button
             type="button"
-            onClick={() => onOpenTerminal ? onOpenTerminal() : window.dispatchEvent(new Event('open-terminal'))}
-            aria-label="Developer Terminal (>_ CLI)"
-            title="Interactive CLI Terminal"
-            className="relative h-[38px] w-[38px] rounded-full cursor-pointer flex items-center justify-center border transition-all duration-300 hover:scale-105 active:scale-95 select-none z-50 pointer-events-auto shadow-sm"
+            onClick={() => onOpenAIModal ? onOpenAIModal() : window.dispatchEvent(new Event('open-ai-modal'))}
+            aria-label="Real-Time AI Multi-Model Co-Pilot"
+            title="Real-Time AI Multi-Model Co-Pilot (Resume, Architecture & Code Review)"
+            className="relative h-[38px] px-3.5 rounded-full cursor-pointer flex items-center gap-2 border transition-all duration-300 hover:scale-105 active:scale-95 select-none z-50 pointer-events-auto shadow-sm"
             style={{
-              borderColor: isDark ? 'rgba(255, 255, 255, 0.12)' : 'rgba(15, 23, 42, 0.12)',
+              borderColor: 'rgba(234, 179, 8, 0.35)',
               background:  isDark ? 'rgba(30, 41, 59, 0.85)' : 'rgba(255, 255, 255, 0.95)',
               backdropFilter: 'blur(12px)',
-              color:       isDark ? '#34D399' : '#059669',
-              boxShadow:   isDark ? '0 4px 14px rgba(0, 0, 0, 0.35)' : '0 2px 10px rgba(15, 23, 42, 0.06)',
+              color:       '#F59E0B',
+              boxShadow:   '0 2px 10px rgba(245, 158, 11, 0.15)',
             }}
           >
-            <Terminal size={15} />
+            <Sparkles size={14} className="text-amber-400 animate-pulse" />
+            <span className="text-[10px] font-mono font-bold tracking-wider text-white hidden sm:inline-block">AI MODELS</span>
+            <span className="text-[9px] font-mono px-1.5 py-0.2 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/30 font-bold">
+              3
+            </span>
           </button>
 
           {/* Desktop Theme Mode Toggle Button */}
@@ -604,21 +608,21 @@ export default function Navbar({ onOpenCommandPalette, onOpenTerminal }: NavbarP
             <Search size={15} />
           </button>
 
-          {/* Mobile Terminal Button */}
+          {/* Mobile AI Models Button */}
           <button
             type="button"
-            onClick={() => onOpenTerminal ? onOpenTerminal() : window.dispatchEvent(new Event('open-terminal'))}
-            aria-label="Developer Terminal"
-            title="Developer Terminal"
+            onClick={() => onOpenAIModal ? onOpenAIModal() : window.dispatchEvent(new Event('open-ai-modal'))}
+            aria-label="AI Models Assistant"
+            title="AI Models Assistant"
             className="relative h-[38px] w-[38px] rounded-full cursor-pointer flex items-center justify-center border transition-all duration-300 hover:scale-105 active:scale-95 select-none z-50 pointer-events-auto shadow-sm"
             style={{
-              borderColor: isDark ? 'rgba(255, 255, 255, 0.12)' : 'rgba(15, 23, 42, 0.12)',
+              borderColor: 'rgba(234, 179, 8, 0.35)',
               background:  isDark ? 'rgba(30, 41, 59, 0.85)' : 'rgba(255, 255, 255, 0.95)',
               backdropFilter: 'blur(12px)',
-              color:       isDark ? '#34D399' : '#059669',
+              color:       '#F59E0B',
             }}
           >
-            <Terminal size={15} />
+            <Sparkles size={15} className="text-amber-400 animate-pulse" />
           </button>
 
           {/* Mobile Theme Mode Toggle Button */}
