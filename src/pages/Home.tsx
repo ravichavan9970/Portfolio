@@ -303,11 +303,11 @@ export default function Home() {
               </div>
 
               {/* Framed Portrait with Hallmark Blueprint Border */}
-              <div className="relative w-full h-[240px] rounded-2xl overflow-hidden border border-white/10 bg-black/40 group">
+              <div className="relative w-full h-[280px] rounded-2xl overflow-hidden border border-white/10 bg-black/40 group shadow-lg">
                 <img 
                   src={profileAsset} 
                   alt="Ravindra Chavan" 
-                  className="w-full h-full object-cover object-top filter grayscale contrast-105 group-hover:filter-none transition-all duration-500"
+                  className="w-full h-full object-cover object-[center_35%] transition-all duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0b0f19] via-transparent to-transparent opacity-80" />
                 

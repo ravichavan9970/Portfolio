@@ -245,7 +245,7 @@ export default function AboutPage() {
                     <img 
                       src={profileImg} 
                       alt="Ravindra Chavan Profile" 
-                      className="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-110"
+                      className="w-full h-full object-cover object-[center_38%] transition-transform duration-700 hover:scale-110"
                       onError={(e) => {
                         e.currentTarget.src = ravindraChavanImg;
                       }}

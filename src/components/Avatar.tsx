@@ -56,7 +56,7 @@ export default function Avatar({ className = '', size = 'md' }: AvatarProps) {
       <img
         src={imgSrc}
         alt="Ravindra Chavan"
-        className="w-full h-full object-cover object-top"
+        className="w-full h-full object-cover object-[center_38%]"
         onLoad={() => setLoading(false)}
         onError={handleImageError}
         loading="lazy"
