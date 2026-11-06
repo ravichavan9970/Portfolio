@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Sun, Moon, Settings, Check, Lock, KeyRound, Eye, EyeOff, Search, Sparkles } from 'lucide-react';
+import { Menu, X, Sun, Moon, Settings, Check, Lock, KeyRound, Eye, EyeOff } from 'lucide-react';
 import Avatar from './Avatar';
 
 export interface AvailabilityOption {
@@ -58,13 +58,8 @@ const colorThemes: { name: AccentKey; label: string }[] = [
   { name: 'slate',   label: 'Slate'   },
 ];
 
-interface NavbarProps {
-  onOpenCommandPalette?: () => void;
-  onOpenAIModal?: () => void;
-}
-
 // ─── Component ────────────────────────────────────────────────────────────────
-export default function Navbar({ onOpenCommandPalette, onOpenAIModal }: NavbarProps = {}) {
+export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -454,50 +449,6 @@ export default function Navbar({ onOpenCommandPalette, onOpenAIModal }: NavbarPr
         {/* ── Utilities Section (Right - Desktop) ──────────────────────────── */}
         <div className="hidden lg:flex items-center gap-2.5 shrink-0 relative" ref={dropdownRef}>
 
-          {/* Quick Command Palette Trigger (Ctrl+K) */}
-          <button
-            type="button"
-            onClick={() => onOpenCommandPalette ? onOpenCommandPalette() : window.dispatchEvent(new Event('open-command-palette'))}
-            aria-label="Open Command Palette"
-            title="Command Palette (Ctrl + K)"
-            className="relative h-[38px] px-3 rounded-full cursor-pointer flex items-center gap-2 border transition-all duration-300 hover:scale-105 active:scale-95 select-none z-50 pointer-events-auto shadow-sm"
-            style={{
-              borderColor: isDark ? 'rgba(255, 255, 255, 0.12)' : 'rgba(15, 23, 42, 0.12)',
-              background:  isDark ? 'rgba(30, 41, 59, 0.85)' : 'rgba(255, 255, 255, 0.95)',
-              backdropFilter: 'blur(12px)',
-              color:       isDark ? '#F8FAFC' : '#0F172A',
-              boxShadow:   isDark ? '0 4px 14px rgba(0, 0, 0, 0.35)' : '0 2px 10px rgba(15, 23, 42, 0.06)',
-            }}
-          >
-            <Search size={14} className="text-primary-light" />
-            <span className="text-[10px] font-mono font-bold tracking-wider text-text-muted hidden xl:inline-block">SEARCH</span>
-            <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-white/10 text-primary-light border border-white/10 font-bold">
-              ⌘K
-            </span>
-          </button>
-
-          {/* Real-Time AI Models Assistant Trigger */}
-          <button
-            type="button"
-            onClick={() => onOpenAIModal ? onOpenAIModal() : window.dispatchEvent(new Event('open-ai-modal'))}
-            aria-label="Real-Time AI Multi-Model Co-Pilot"
-            title="Real-Time AI Multi-Model Co-Pilot (Resume, Architecture & Code Review)"
-            className="relative h-[38px] px-3.5 rounded-full cursor-pointer flex items-center gap-2 border transition-all duration-300 hover:scale-105 active:scale-95 select-none z-50 pointer-events-auto shadow-sm"
-            style={{
-              borderColor: 'rgba(234, 179, 8, 0.35)',
-              background:  isDark ? 'rgba(30, 41, 59, 0.85)' : 'rgba(255, 255, 255, 0.95)',
-              backdropFilter: 'blur(12px)',
-              color:       '#F59E0B',
-              boxShadow:   '0 2px 10px rgba(245, 158, 11, 0.15)',
-            }}
-          >
-            <Sparkles size={14} className="text-amber-400 animate-pulse" />
-            <span className="text-[10px] font-mono font-bold tracking-wider text-white hidden sm:inline-block">AI MODELS</span>
-            <span className="text-[9px] font-mono px-1.5 py-0.2 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/30 font-bold">
-              3
-            </span>
-          </button>
-
           {/* Desktop Theme Mode Toggle Button */}
           <button
             type="button"
@@ -597,40 +548,6 @@ export default function Navbar({ onOpenCommandPalette, onOpenAIModal }: NavbarPr
 
         {/* ── Mobile Controls (< 1024px) ────────────────────────────────────── */}
         <div className="flex lg:hidden items-center gap-1.5" ref={mobileDropdownRef}>
-          {/* Mobile Command Palette Button */}
-          <button
-            type="button"
-            onClick={() => onOpenCommandPalette ? onOpenCommandPalette() : window.dispatchEvent(new Event('open-command-palette'))}
-            aria-label="Search and Commands"
-            title="Search and Commands (Ctrl+K)"
-            className="relative h-[38px] w-[38px] rounded-full cursor-pointer flex items-center justify-center border transition-all duration-300 hover:scale-105 active:scale-95 select-none z-50 pointer-events-auto shadow-sm"
-            style={{
-              borderColor: isDark ? 'rgba(255, 255, 255, 0.12)' : 'rgba(15, 23, 42, 0.12)',
-              background:  isDark ? 'rgba(30, 41, 59, 0.85)' : 'rgba(255, 255, 255, 0.95)',
-              backdropFilter: 'blur(12px)',
-              color:       isDark ? '#F8FAFC' : '#0F172A',
-            }}
-          >
-            <Search size={15} />
-          </button>
-
-          {/* Mobile AI Models Button */}
-          <button
-            type="button"
-            onClick={() => onOpenAIModal ? onOpenAIModal() : window.dispatchEvent(new Event('open-ai-modal'))}
-            aria-label="AI Models Assistant"
-            title="AI Models Assistant"
-            className="relative h-[38px] w-[38px] rounded-full cursor-pointer flex items-center justify-center border transition-all duration-300 hover:scale-105 active:scale-95 select-none z-50 pointer-events-auto shadow-sm"
-            style={{
-              borderColor: 'rgba(234, 179, 8, 0.35)',
-              background:  isDark ? 'rgba(30, 41, 59, 0.85)' : 'rgba(255, 255, 255, 0.95)',
-              backdropFilter: 'blur(12px)',
-              color:       '#F59E0B',
-            }}
-          >
-            <Sparkles size={15} className="text-amber-400 animate-pulse" />
-          </button>
-
           {/* Mobile Theme Mode Toggle Button */}
           <button
             type="button"

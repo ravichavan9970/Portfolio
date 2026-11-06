@@ -5,8 +5,6 @@ import SEO from './components/SEO';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import SplashScreen from './components/SplashScreen';
-import CommandPalette from './components/CommandPalette';
-import AIAssistantModal from './components/AIAssistantModal';
 
 // Page Imports
 import Home from './pages/Home';
@@ -36,33 +34,6 @@ function AppContent() {
       return false;
     }
   });
-
-  // Global Command Palette & Real-Time AI Assistant State
-  const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
-  const [aiModalOpen, setAiModalOpen] = useState(false);
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      // Ctrl + K or Cmd + K toggles Command Palette
-      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
-        e.preventDefault();
-        setCommandPaletteOpen(prev => !prev);
-      }
-    };
-
-    const handleOpenPalette = () => setCommandPaletteOpen(true);
-    const handleOpenAIModal = () => setAiModalOpen(true);
-
-    window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('open-command-palette', handleOpenPalette);
-    window.addEventListener('open-ai-modal', handleOpenAIModal);
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-      window.removeEventListener('open-command-palette', handleOpenPalette);
-      window.removeEventListener('open-ai-modal', handleOpenAIModal);
-    };
-  }, []);
 
   useEffect(() => {
     const updateMouse = (e: MouseEvent) => {
@@ -99,10 +70,7 @@ function AppContent() {
           />
 
           {/* Main Navigation */}
-          <Navbar 
-            onOpenCommandPalette={() => setCommandPaletteOpen(true)}
-            onOpenAIModal={() => setAiModalOpen(true)}
-          />
+          <Navbar />
           
           {/* Page Routing */}
           <main className="flex-grow">
@@ -120,18 +88,6 @@ function AppContent() {
 
           {/* Footer Branding */}
           <Footer />
-
-          {/* Interactive Developer Overlays */}
-          <CommandPalette
-            isOpen={commandPaletteOpen}
-            onClose={() => setCommandPaletteOpen(false)}
-            onOpenAIModal={() => setAiModalOpen(true)}
-          />
-
-          <AIAssistantModal
-            isOpen={aiModalOpen}
-            onClose={() => setAiModalOpen(false)}
-          />
         </motion.div>
       )}
     </AnimatePresence>
