@@ -143,6 +143,19 @@ export default function CommandPalette({ isOpen, onClose, onOpenAIModal }: Comma
       }
     },
 
+    // Architecture Blueprint
+    {
+      id: 'act-architecture',
+      category: 'Developer',
+      title: 'System Architecture Blueprint Explorer',
+      subtitle: 'Inspect Dual-Cloud DR failover engine & Pessimistic Locking daemon',
+      icon: <Layers size={16} className="text-cyan-400" />,
+      shortcut: 'ARC',
+      action: () => {
+        window.dispatchEvent(new CustomEvent('open-architecture-modal', { detail: { tab: 'dual-cloud' } }));
+        onClose();
+      }
+    },
     // Developer Tools & AI
     {
       id: 'dev-ai-assistant',
@@ -212,6 +225,30 @@ export default function CommandPalette({ isOpen, onClose, onOpenAIModal }: Comma
       subtitle: 'Switch between Obsidian Dark and High-Contrast Light',
       icon: <Sun size={16} className="text-amber-400" />,
       action: toggleThemeMode
+    },
+    {
+      id: 'theme-cobalt',
+      category: 'Themes',
+      title: 'Theme: Cobalt Blueprint (Hallmark)',
+      subtitle: 'Technical editorial sapphire & sky cyan tones',
+      icon: <span className="w-3 h-3 rounded-full bg-[#0284C7] inline-block shadow-sm" />,
+      action: () => setThemeColor('cobalt')
+    },
+    {
+      id: 'theme-atelier',
+      category: 'Themes',
+      title: 'Theme: Atelier Craft (Hallmark)',
+      subtitle: 'Warm amber serif & artisanal craft tones',
+      icon: <span className="w-3 h-3 rounded-full bg-[#D97706] inline-block shadow-sm" />,
+      action: () => setThemeColor('atelier')
+    },
+    {
+      id: 'theme-obsidian',
+      category: 'Themes',
+      title: 'Theme: Obsidian Monolith (Hallmark)',
+      subtitle: 'High-contrast emerald slate & deep dark obsidian',
+      icon: <span className="w-3 h-3 rounded-full bg-[#10B981] inline-block shadow-sm" />,
+      action: () => setThemeColor('obsidian')
     },
     {
       id: 'theme-purple',

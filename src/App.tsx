@@ -162,6 +162,9 @@ export default function App() {
     // Set accent colors
     const savedColor = localStorage.getItem('theme-color') || 'purple';
     const themes = {
+      cobalt: { primary: '#0284C7', primaryHover: '#0369A1', primaryLight: '#38BDF8', secondary: '#06B6D4', secondaryHover: '#0891B2', secondaryLight: '#67E8F9' },
+      atelier: { primary: '#D97706', primaryHover: '#B45309', primaryLight: '#FBBF24', secondary: '#E11D48', secondaryHover: '#BE123C', secondaryLight: '#FB7185' },
+      obsidian: { primary: '#10B981', primaryHover: '#059669', primaryLight: '#34D399', secondary: '#06B6D4', secondaryHover: '#0891B2', secondaryLight: '#67E8F9' },
       purple: { primary: '#8B5CF6', primaryHover: '#7C3AED', primaryLight: '#A78BFA', secondary: '#EC4899', secondaryHover: '#DB2777', secondaryLight: '#F472B6' },
       blue: { primary: '#3B82F6', primaryHover: '#2563EB', primaryLight: '#60A5FA', secondary: '#06B6D4', secondaryHover: '#0891B2', secondaryLight: '#67E8F9' },
       emerald: { primary: '#10B981', primaryHover: '#059669', primaryLight: '#34D399', secondary: '#3B82F6', secondaryHover: '#2563EB', secondaryLight: '#60A5FA' },

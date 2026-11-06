@@ -31,7 +31,10 @@ const navLinks = [
 
 // ─── Centralized Accent Color Registry ────────────────────────────────────────
 const accentRegistry = {
-  purple:  { primary: '#8B5CF6', hover: '#7C3AED', light: '#A78BFA', glow: 'rgba(139,92,246,0.35)', glowSoft: 'rgba(124,58,237,0.15)', secondary: '#EC4899', secondaryHover: '#DB2777', secondaryLight: '#F472B6' },
+  cobalt:   { primary: '#0284C7', hover: '#0369A1', light: '#38BDF8', glow: 'rgba(2,132,199,0.35)',  glowSoft: 'rgba(3,105,161,0.15)', secondary: '#06B6D4', secondaryHover: '#0891B2', secondaryLight: '#67E8F9' },
+  atelier:  { primary: '#D97706', hover: '#B45309', light: '#FBBF24', glow: 'rgba(217,119,6,0.35)',  glowSoft: 'rgba(180,83,9,0.15)', secondary: '#E11D48', secondaryHover: '#BE123C', secondaryLight: '#FB7185' },
+  obsidian: { primary: '#10B981', hover: '#059669', light: '#34D399', glow: 'rgba(16,185,129,0.35)', glowSoft: 'rgba(5,150,105,0.15)', secondary: '#06B6D4', secondaryHover: '#0891B2', secondaryLight: '#67E8F9' },
+  purple:   { primary: '#8B5CF6', hover: '#7C3AED', light: '#A78BFA', glow: 'rgba(139,92,246,0.35)', glowSoft: 'rgba(124,58,237,0.15)', secondary: '#EC4899', secondaryHover: '#DB2777', secondaryLight: '#F472B6' },
   blue:    { primary: '#3B82F6', hover: '#2563EB', light: '#60A5FA', glow: 'rgba(59,130,246,0.35)',  glowSoft: 'rgba(37,99,235,0.15)',   secondary: '#06B6D4', secondaryHover: '#0891B2', secondaryLight: '#67E8F9' },
   emerald: { primary: '#10B981', hover: '#059669', light: '#34D399', glow: 'rgba(16,185,129,0.35)', glowSoft: 'rgba(5,150,105,0.15)',   secondary: '#3B82F6', secondaryHover: '#2563EB', secondaryLight: '#60A5FA' },
   orange:  { primary: '#F97316', hover: '#EA580C', light: '#FB923C', glow: 'rgba(249,115,22,0.35)', glowSoft: 'rgba(234,88,12,0.15)',   secondary: '#EF4444', secondaryHover: '#DC2626', secondaryLight: '#F87171' },
@@ -43,7 +46,10 @@ const accentRegistry = {
 type AccentKey = keyof typeof accentRegistry;
 
 const colorThemes: { name: AccentKey; label: string }[] = [
-  { name: 'purple',  label: 'Purple'  },
+  { name: 'cobalt',   label: 'Cobalt (Hallmark)'   },
+  { name: 'atelier',  label: 'Atelier (Hallmark)'  },
+  { name: 'obsidian', label: 'Obsidian (Hallmark)' },
+  { name: 'purple',   label: 'Purple'  },
   { name: 'blue',    label: 'Blue'    },
   { name: 'emerald', label: 'Emerald' },
   { name: 'orange',  label: 'Orange'  },
