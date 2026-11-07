@@ -303,19 +303,19 @@ export default function Home() {
               </div>
 
               {/* Framed Portrait with Hallmark Blueprint Border */}
-              <div className="relative w-full h-[280px] rounded-2xl overflow-hidden border border-white/10 bg-black/40 group shadow-lg">
+              <div className="relative w-full aspect-[4/5] sm:h-[460px] rounded-2xl overflow-hidden border border-white/10 bg-black/40 group shadow-lg">
                 <img 
                   src={profileAsset} 
                   alt="Ravindra Chavan" 
-                  className="w-full h-full object-cover object-[center_35%] transition-all duration-500 group-hover:scale-105"
+                  className="w-full h-full object-cover object-[center_22%] transition-all duration-500 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0b0f19] via-transparent to-transparent opacity-80" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0b0f19]/80 via-transparent to-transparent opacity-60" />
                 
-                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[11px] font-mono">
-                  <span className="px-2 py-0.5 rounded bg-black/70 border border-white/10 text-white">
+                <div className="absolute bottom-3.5 left-3.5 right-3.5 flex items-center justify-between text-[11px] font-mono z-10">
+                  <span className="px-2.5 py-1 rounded-lg bg-black/80 border border-white/15 text-white backdrop-blur-md shadow-md">
                     Ravindra Chavan, M.Sc.
                   </span>
-                  <span className="px-2 py-0.5 rounded bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 font-bold">
+                  <span className="px-2.5 py-1 rounded-lg bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 font-bold backdrop-blur-md shadow-md">
                     8.5 CGPA
                   </span>
                 </div>
