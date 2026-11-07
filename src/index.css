@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --color-primary: #06B6D4;
   --color-primary-hover: #0891B2;
@@ -43,11 +45,11 @@ html, body, div, section, article, header, nav, footer, button, a, input, textar
 :root:not(.dark) {
   --color-primary: #0891B2;
   --color-primary-hover: #0e7490;
-  --color-primary-light: #22d3ee;
+  --color-primary-light: #0284C7;
   
   --color-secondary: #7C3AED;
   --color-secondary-hover: #6D28D9;
-  --color-secondary-light: #8B5CF6;
+  --color-secondary-light: #6D28D9;
   
   --color-bg-darkest: #FAFBFD;
   --color-bg-dark: #F1F5F9;

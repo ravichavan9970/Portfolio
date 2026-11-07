@@ -183,11 +183,11 @@ export default function Home() {
             
             {/* Specimen Status Line */}
             <div className="flex items-center gap-2">
-              <span className="px-2.5 py-0.5 rounded bg-white/[0.04] border border-white/10 font-mono text-[10px] text-primary-light uppercase tracking-wider font-semibold flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="px-2.5 py-0.5 rounded bg-neutral-100 dark:bg-white/[0.04] border border-neutral-300 dark:border-white/10 font-mono text-[10px] text-cyan-700 dark:text-primary-light uppercase tracking-wider font-semibold flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                 <span>SPECIMEN: RC-2026 // SYSTEM ARCHITECT</span>
               </span>
-              <span className="text-[10px] font-mono text-text-muted hidden sm:inline-block">
+              <span className="text-[10px] font-mono text-neutral-600 dark:text-text-muted hidden sm:inline-block">
                 PUNE, IN · AVAILABLE FOR HIRE
               </span>
             </div>
@@ -198,36 +198,36 @@ export default function Home() {
                 Ravindra Chavan
               </h1>
               <div className="mt-2 flex items-center gap-2">
-                <span className="text-sm sm:text-base font-mono text-cyan-300 font-semibold">
+                <span className="text-sm sm:text-base font-mono text-cyan-700 dark:text-cyan-300 font-semibold">
                   Full-Stack Java Engineer
                 </span>
-                <span className="text-text-muted">·</span>
-                <AnimatedRole className="text-xs sm:text-sm font-mono text-text-muted" />
+                <span className="text-neutral-400 dark:text-text-muted">·</span>
+                <AnimatedRole className="text-xs sm:text-sm font-mono text-neutral-700 dark:text-text-muted" />
               </div>
             </div>
 
             {/* Substantive Engineering Statement (Anti-Slop) */}
-            <p className="text-xs sm:text-sm text-text-muted leading-relaxed max-w-xl font-sans">
+            <p className="text-xs sm:text-sm text-neutral-600 dark:text-text-muted leading-relaxed max-w-xl font-sans">
               Architecting high-concurrency enterprise services with <strong className="text-neutral-900 dark:text-white font-semibold">Java 21 LTS</strong>, <strong className="text-neutral-900 dark:text-white font-semibold">Spring Boot 3.3</strong>, and <strong className="text-neutral-900 dark:text-white font-semibold">React 19</strong>. Specialized in dual-cloud disaster recovery failovers, pessimistic database locking, and zero-downtime ledger synchronization.
             </p>
 
             {/* 4-Column Technical Specification Strip (Hallmark Blueprint) */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-0.5">
               <div className="p-2.5 rounded-xl bg-neutral-100/90 dark:bg-white/[0.02] border border-neutral-300 dark:border-white/[0.08] text-left shadow-sm dark:shadow-none">
-                <span className="text-[9px] font-mono uppercase tracking-wider text-neutral-500 dark:text-text-muted block font-semibold">Runtime</span>
+                <span className="text-[9px] font-mono uppercase tracking-wider text-neutral-600 dark:text-text-muted block font-semibold">Runtime</span>
                 <strong className="text-xs font-mono text-neutral-900 dark:text-white mt-0.5 block">Java 21 LTS</strong>
               </div>
               <div className="p-2.5 rounded-xl bg-neutral-100/90 dark:bg-white/[0.02] border border-neutral-300 dark:border-white/[0.08] text-left shadow-sm dark:shadow-none">
-                <span className="text-[9px] font-mono uppercase tracking-wider text-neutral-500 dark:text-text-muted block font-semibold">Framework</span>
+                <span className="text-[9px] font-mono uppercase tracking-wider text-neutral-600 dark:text-text-muted block font-semibold">Framework</span>
                 <strong className="text-xs font-mono text-neutral-900 dark:text-white mt-0.5 block">Spring Boot 3.3</strong>
               </div>
               <div className="p-2.5 rounded-xl bg-neutral-100/90 dark:bg-white/[0.02] border border-neutral-300 dark:border-white/[0.08] text-left shadow-sm dark:shadow-none">
-                <span className="text-[9px] font-mono uppercase tracking-wider text-neutral-500 dark:text-text-muted block font-semibold">Concurrency</span>
-                <strong className="text-xs font-mono text-emerald-400 mt-0.5 block">Pessimistic Lock</strong>
+                <span className="text-[9px] font-mono uppercase tracking-wider text-neutral-600 dark:text-text-muted block font-semibold">Concurrency</span>
+                <strong className="text-xs font-mono text-emerald-600 dark:text-emerald-400 mt-0.5 block">Pessimistic Lock</strong>
               </div>
               <div className="p-2.5 rounded-xl bg-neutral-100/90 dark:bg-white/[0.02] border border-neutral-300 dark:border-white/[0.08] text-left shadow-sm dark:shadow-none">
-                <span className="text-[9px] font-mono uppercase tracking-wider text-neutral-500 dark:text-text-muted block font-semibold">Topology</span>
-                <strong className="text-xs font-mono text-cyan-400 mt-0.5 block">Dual-Cloud DR</strong>
+                <span className="text-[9px] font-mono uppercase tracking-wider text-neutral-600 dark:text-text-muted block font-semibold">Topology</span>
+                <strong className="text-xs font-mono text-cyan-700 dark:text-cyan-400 mt-0.5 block">Dual-Cloud DR</strong>
               </div>
             </div>
 
@@ -249,7 +249,7 @@ export default function Home() {
                 }}
                 className="px-4 py-2.5 rounded-xl bg-white hover:bg-neutral-100 text-neutral-900 border border-neutral-300 dark:bg-white/[0.04] dark:hover:bg-white/[0.08] dark:text-white dark:border-white/10 hover:border-cyan-500/50 text-xs font-bold font-mono transition-all duration-200 flex items-center gap-2 cursor-pointer shadow-sm dark:shadow-none"
               >
-                <Layers size={14} className="text-cyan-400" />
+                <Layers size={14} className="text-cyan-600 dark:text-cyan-400" />
                 <span>Inspect Architecture</span>
               </button>
 

@@ -129,14 +129,16 @@ export default function App() {
       rose: { primary: '#F43F5E', primaryHover: '#E11D48', primaryLight: '#FB7185', secondary: '#8B5CF6', secondaryHover: '#7C3AED', secondaryLight: '#A78BFA' },
       slate: { primary: '#64748B', primaryHover: '#475569', primaryLight: '#94A3B8', secondary: '#334155', secondaryHover: '#1E293B', secondaryLight: '#64748B' },
     };
+    const savedMode = localStorage.getItem('portfolio-theme');
+    const isLight = savedMode === 'light';
     const activeObj = themes[savedColor as keyof typeof themes] || themes.purple;
     const root = document.documentElement;
     root.style.setProperty('--color-primary', activeObj.primary);
     root.style.setProperty('--color-primary-hover', activeObj.primaryHover);
-    root.style.setProperty('--color-primary-light', activeObj.primaryLight);
+    root.style.setProperty('--color-primary-light', isLight ? activeObj.primaryHover : activeObj.primaryLight);
     root.style.setProperty('--color-secondary', activeObj.secondary);
     root.style.setProperty('--color-secondary-hover', activeObj.secondaryHover);
-    root.style.setProperty('--color-secondary-light', activeObj.secondaryLight);
+    root.style.setProperty('--color-secondary-light', isLight ? activeObj.secondaryHover : activeObj.secondaryLight);
 
     return () => window.removeEventListener('themechange', syncTheme);
   }, []);

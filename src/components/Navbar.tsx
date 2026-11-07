@@ -178,14 +178,15 @@ export default function Navbar() {
 
   useEffect(() => {
     const root = document.documentElement;
+    const isLight = themeMode === 'light';
     root.style.setProperty('--color-primary',           accent.primary);
     root.style.setProperty('--color-primary-hover',     accent.hover);
-    root.style.setProperty('--color-primary-light',     accent.light);
+    root.style.setProperty('--color-primary-light',     isLight ? accent.hover : accent.light);
     root.style.setProperty('--color-secondary',         accent.secondary);
     root.style.setProperty('--color-secondary-hover',   accent.secondaryHover);
-    root.style.setProperty('--color-secondary-light',   accent.secondaryLight);
+    root.style.setProperty('--color-secondary-light',   isLight ? accent.secondaryHover : accent.secondaryLight);
     localStorage.setItem('theme-color', themeColor);
-  }, [themeColor, accent]);
+  }, [themeColor, accent, themeMode]);
 
   const toggleTheme = (e?: React.MouseEvent) => {
     if (e) {

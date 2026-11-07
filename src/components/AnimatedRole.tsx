@@ -78,7 +78,9 @@ export default function AnimatedRole({ className = "" }: AnimatedRoleProps) {
   }, [displayText, isDeleting, roleIndex]);
 
   const textStyle = {
-    background: "linear-gradient(90deg, #38BDF8 0%, #60A5FA 30%, #8B5CF6 65%, #EC4899 100%)",
+    background: isDarkMode 
+      ? "linear-gradient(90deg, #38BDF8 0%, #60A5FA 30%, #8B5CF6 65%, #EC4899 100%)"
+      : "linear-gradient(90deg, #0284C7 0%, #2563EB 30%, #7C3AED 65%, #DB2777 100%)",
     WebkitBackgroundClip: "text",
     WebkitTextFillColor: "transparent",
     backgroundClip: "text",
