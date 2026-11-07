@@ -182,7 +182,7 @@ export default function JourneyPage() {
         <div className="border-t border-neutral-200 dark:border-white/5 pt-16">
           <div className="max-w-4xl mx-auto">
             <motion.div
-              className="p-6 rounded-2xl glass-aurora border border-white/5 text-left shadow-sm"
+              className="p-6 rounded-2xl border border-neutral-300 dark:border-white/5 bg-white dark:bg-white/[0.02] text-left shadow-sm"
               initial={{ opacity: 0, scale: 0.98 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
@@ -190,7 +190,7 @@ export default function JourneyPage() {
             >
               <div className="flex flex-col sm:flex-row items-center justify-between gap-5">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-white/[0.02] border border-white/5 flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 rounded-full bg-neutral-100 dark:bg-white/[0.02] border border-neutral-300 dark:border-white/5 flex items-center justify-center flex-shrink-0">
                     <FaGithub size={24} className="text-text-title" />
                   </div>
                   <div>

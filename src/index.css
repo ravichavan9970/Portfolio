@@ -55,8 +55,8 @@ html, body, div, section, article, header, nav, footer, button, a, input, textar
   --color-bg-dark: #F1F5F9;
   --color-bg-card: rgba(255, 255, 255, 0.85);
   --color-bg-card-hover: rgba(241, 245, 249, 0.98);
-  --color-border-dark: #CBD5E1;
-  --color-border-light: #E2E8F0;
+  --color-border-dark: #94A3B8;
+  --color-border-light: #CBD5E1;
   
   --color-text-title: #090D16;
   --color-text-main: #1E293B;
@@ -64,7 +64,7 @@ html, body, div, section, article, header, nav, footer, button, a, input, textar
   
   --glass-bg: rgba(250, 251, 253, 0.85);
   --glass-card-bg: rgba(255, 255, 255, 0.9);
-  --glass-border: rgba(15, 23, 42, 0.12);
+  --glass-border: rgba(15, 23, 42, 0.2);
 }
 .dark {
   --color-bg-darkest: #050816;
@@ -263,8 +263,8 @@ html, body {
 }
 
 :root:not(.dark) .glass-navbar {
-  background: rgba(255, 255, 255, 0.85);
-  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid #CBD5E1;
   box-shadow: 
     0 10px 30px -10px rgba(15, 23, 42, 0.1), 
     0 1px 1px 0 rgba(255, 255, 255, 0.6) inset;

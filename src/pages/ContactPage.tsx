@@ -108,8 +108,7 @@ export default function ContactPage() {
           
           {/* LEFT: Metadata & Availability status */}
           <motion.div 
-            className="lg:col-span-5 flex flex-col justify-between p-8 rounded-[32px] border shadow-2xl relative overflow-hidden backdrop-blur-md"
-            style={{ backgroundColor: 'var(--color-bg-card)', borderColor: 'var(--color-border-dark)' }}
+            className="lg:col-span-5 flex flex-col justify-between p-8 rounded-[32px] border border-neutral-300 dark:border-white/10 bg-white dark:bg-[#0b0f19] shadow-xl relative overflow-hidden backdrop-blur-md"
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -141,9 +140,9 @@ export default function ContactPage() {
                       href={info.href}
                       target={info.href.startsWith('http') ? '_blank' : undefined}
                       rel={info.href.startsWith('http') ? 'noreferrer' : undefined}
-                      className="flex gap-4 p-3 rounded-xl bg-white/[0.02] border border-white/5 hover:border-white/15 hover:bg-white/[0.04] transition-all group"
+                      className="flex gap-4 p-3 rounded-xl bg-neutral-50 dark:bg-white/[0.02] border border-neutral-300 dark:border-white/5 hover:border-primary/50 hover:bg-neutral-100 dark:hover:bg-white/[0.04] transition-all group shadow-sm"
                     >
-                      <div className="p-2.5 rounded-lg bg-white/[0.05] border border-white/10 shrink-0 shadow-sm">
+                      <div className="p-2.5 rounded-lg bg-white dark:bg-white/[0.05] border border-neutral-300 dark:border-white/10 shrink-0 shadow-sm text-neutral-800 dark:text-white">
                         {info.icon}
                       </div>
                       <div className="min-w-0">
@@ -157,7 +156,7 @@ export default function ContactPage() {
             </div>
 
             {/* Social channels */}
-            <div className="pt-8 border-t border-white/10 text-left">
+            <div className="pt-8 border-t border-neutral-300 dark:border-white/10 text-left">
               <span className="text-[9px] font-bold text-text-muted font-mono uppercase block mb-3">Social Profiles</span>
               <div className="flex items-center gap-2.5">
                 <a
@@ -202,8 +201,7 @@ export default function ContactPage() {
 
           {/* RIGHT: Validated Form Center */}
           <motion.div 
-            className="lg:col-span-7 p-8 rounded-[32px] border shadow-2xl relative overflow-hidden backdrop-blur-md"
-            style={{ backgroundColor: 'var(--color-bg-card)', borderColor: 'var(--color-border-dark)' }}
+            className="lg:col-span-7 p-8 rounded-[32px] border border-neutral-300 dark:border-white/10 bg-white dark:bg-[#0b0f19] shadow-xl relative overflow-hidden backdrop-blur-md"
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -258,7 +256,7 @@ export default function ContactPage() {
             ) : (
               <form onSubmit={(e) => handleSubmit(e, 'email')} className="space-y-6 text-left">
                 <div className="flex flex-col gap-1.5">
-                  <label htmlFor="name" className="text-[10px] font-semibold text-text-muted uppercase tracking-[0.08em] font-mono">Full Name</label>
+                  <label htmlFor="name" className="text-[10px] font-bold text-neutral-700 dark:text-text-muted uppercase tracking-[0.08em] font-mono">Full Name</label>
                   <input
                     type="text"
                     id="name"
@@ -266,7 +264,7 @@ export default function ContactPage() {
                     value={formData.name}
                     onChange={handleInputChange}
                     placeholder="Enter your full name"
-                    className="w-full px-4.5 py-3 rounded-2xl bg-white/[0.04] border border-white/10 focus:border-primary focus:bg-white/[0.07] focus:shadow-[0_0_20px_rgba(139,92,246,0.25)] transition-all duration-200 outline-none text-sm text-text-title placeholder:text-text-muted/60"
+                    className="w-full px-4.5 py-3 rounded-2xl bg-neutral-50 dark:bg-white/[0.04] border border-neutral-300 dark:border-white/10 focus:border-primary focus:bg-white dark:focus:bg-white/[0.07] focus:shadow-[0_0_20px_rgba(139,92,246,0.25)] transition-all duration-200 outline-none text-sm text-neutral-900 dark:text-text-title placeholder:text-neutral-400 dark:placeholder:text-text-muted/60 shadow-sm"
                   />
                   {errors.name && (
                     <span className="text-[10px] font-bold font-mono text-red-500 flex items-center gap-1">
@@ -277,7 +275,7 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex flex-col gap-1.5">
-                  <label htmlFor="email" className="text-[10px] font-semibold text-text-muted uppercase tracking-[0.08em] font-mono">Email Address</label>
+                  <label htmlFor="email" className="text-[10px] font-bold text-neutral-700 dark:text-text-muted uppercase tracking-[0.08em] font-mono">Email Address</label>
                   <input
                     type="email"
                     id="email"
@@ -285,7 +283,7 @@ export default function ContactPage() {
                     value={formData.email}
                     onChange={handleInputChange}
                     placeholder="Enter your email address"
-                    className="w-full px-4.5 py-3 rounded-2xl bg-white/[0.04] border border-white/10 focus:border-primary focus:bg-white/[0.07] focus:shadow-[0_0_20px_rgba(139,92,246,0.25)] transition-all duration-200 outline-none text-sm text-text-title placeholder:text-text-muted/60"
+                    className="w-full px-4.5 py-3 rounded-2xl bg-neutral-50 dark:bg-white/[0.04] border border-neutral-300 dark:border-white/10 focus:border-primary focus:bg-white dark:focus:bg-white/[0.07] focus:shadow-[0_0_20px_rgba(139,92,246,0.25)] transition-all duration-200 outline-none text-sm text-neutral-900 dark:text-text-title placeholder:text-neutral-400 dark:placeholder:text-text-muted/60 shadow-sm"
                   />
                   {errors.email && (
                     <span className="text-[10px] font-bold font-mono text-red-500 flex items-center gap-1">
@@ -296,14 +294,14 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex flex-col gap-1.5">
-                  <label htmlFor="message" className="text-[10px] font-semibold text-text-muted uppercase tracking-[0.08em] font-mono">Your Message</label>
+                  <label htmlFor="message" className="text-[10px] font-bold text-neutral-700 dark:text-text-muted uppercase tracking-[0.08em] font-mono">Your Message</label>
                   <textarea
                     id="message"
                     name="message"
                     value={formData.message}
                     onChange={handleInputChange}
                     placeholder="Write your message here..."
-                    className="w-full px-4.5 py-3 rounded-2xl bg-white/[0.04] border border-white/10 focus:border-primary focus:bg-white/[0.07] focus:shadow-[0_0_20px_rgba(139,92,246,0.25)] transition-all duration-200 outline-none text-sm text-text-title placeholder:text-text-muted/60 resize-none min-h-[180px]"
+                    className="w-full px-4.5 py-3 rounded-2xl bg-neutral-50 dark:bg-white/[0.04] border border-neutral-300 dark:border-white/10 focus:border-primary focus:bg-white dark:focus:bg-white/[0.07] focus:shadow-[0_0_20px_rgba(139,92,246,0.25)] transition-all duration-200 outline-none text-sm text-neutral-900 dark:text-text-title placeholder:text-neutral-400 dark:placeholder:text-text-muted/60 resize-none min-h-[180px] shadow-sm"
                   />
                   {errors.message && (
                     <span className="text-[10px] font-bold font-mono text-red-500 flex items-center gap-1">

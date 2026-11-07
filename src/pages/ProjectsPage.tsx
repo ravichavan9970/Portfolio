@@ -251,7 +251,7 @@ export default function ProjectsPage() {
               </div>
 
               {/* Content box */}
-              <div className="glass-aurora rounded-2xl overflow-hidden border border-white/5 min-h-[350px] shadow-2xl shadow-orange-950/20">
+              <div className="glass-aurora rounded-2xl overflow-hidden border border-neutral-300 dark:border-white/5 min-h-[350px] shadow-2xl shadow-orange-950/20">
                 <AnimatePresence mode="wait">
                   
                   {/* 1. Public Portal UI */}
@@ -349,7 +349,7 @@ export default function ProjectsPage() {
                           <span className="text-[10px] font-mono font-bold text-emerald-400 block">1-Click Full Replication Engine</span>
                         </div>
                         
-                        <div className="space-y-1 pt-2 border-t border-white/5">
+                        <div className="space-y-1 pt-2 border-t border-neutral-200 dark:border-white/5">
                           <span className="text-[11px] font-bold text-amber-400 block">Dynamic UPI QR & 12-Digit UTR Bank Auditor</span>
                           <p className="text-[11px] text-text-muted leading-relaxed">
                             Engineered dynamic UPI merchant scanner generation with automated 12-digit UTR validation, receipt base64 storage, and live boarding pass polling.
@@ -373,7 +373,7 @@ export default function ProjectsPage() {
                         <Cloud size={14} className="text-amber-400" />
                         Shivchhatra Architecture Roadmap
                       </h5>
-                      <div className="relative border-l border-white/5 pl-6 space-y-4 text-left">
+                      <div className="relative border-l border-neutral-300 dark:border-white/5 pl-6 space-y-4 text-left">
                         {[
                           { title: "Spring Boot 3.3.3 & Java 21 LTS REST API", desc: "Persistent disk H2 JPA backend with atomic bulk sync endpoints and 600 req/min cellular rate limits." },
                           { title: "Live Boarding Pass & Expedition Polling (/track)", desc: "Real-time ticket status polling, printable boarding passes, and WhatsApp expedition lead routing." },
@@ -423,7 +423,7 @@ export default function ProjectsPage() {
               {/* Features list */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {multiVendorFeatures.map((feat, idx) => (
-                  <div key={idx} className="p-4 rounded-xl bg-white/[0.01] border border-white/5 flex gap-3 shadow-sm hover:border-primary/20 transition-all">
+                  <div key={idx} className="p-4 rounded-xl bg-white/[0.01] border border-neutral-300 dark:border-white/5 flex gap-3 shadow-sm hover:border-primary/20 transition-all">
                     <div className="p-2 h-fit rounded-lg bg-white dark:bg-bg-dark border border-neutral-300 dark:border-white/5 shrink-0 text-neutral-800 dark:text-white">
                       {feat.icon}
                     </div>
@@ -482,7 +482,7 @@ export default function ProjectsPage() {
               </div>
 
               {/* Content box */}
-              <div className="glass-aurora rounded-2xl overflow-hidden border border-white/5 min-h-[350px] shadow-2xl shadow-indigo-950/20">
+              <div className="glass-aurora rounded-2xl overflow-hidden border border-neutral-300 dark:border-white/5 min-h-[350px] shadow-2xl shadow-indigo-950/20">
                 <AnimatePresence mode="wait">
                   
                   {/* 1. Marketplace UI */}
@@ -580,7 +580,7 @@ export default function ProjectsPage() {
                           <span className="text-[10px] font-mono font-bold text-emerald-400 block">Relational Indexes</span>
                         </div>
                         
-                        <div className="space-y-1 pt-2 border-t border-white/5">
+                        <div className="space-y-1 pt-2 border-t border-neutral-200 dark:border-white/5">
                           <span className="text-[11px] font-bold text-primary-light block">Granular Role Enforcements</span>
                           <p className="text-[11px] text-text-muted leading-relaxed">
                             Implemented robust auth middleware checks via JWT claims on every endpoint.
@@ -604,7 +604,7 @@ export default function ProjectsPage() {
                         <Cloud size={14} className="text-primary-light" />
                         Architecture Roadmap
                       </h5>
-                      <div className="relative border-l border-white/5 pl-6 space-y-4 text-left">
+                      <div className="relative border-l border-neutral-300 dark:border-white/5 pl-6 space-y-4 text-left">
                         {[
                           { title: "Spring Boot 3 REST Controllers & DTOs", desc: "Clean controller-service-repository architecture with validation annotations." },
                           { title: "Pessimistic DB Locks & Reservation Daemons", desc: "Pessimistic locking to protect booking slots with 10-minute hold daemons." },
@@ -654,7 +654,7 @@ export default function ProjectsPage() {
               {/* Features list */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {studySyncFeatures.map((feat, idx) => (
-                  <div key={idx} className="p-4 rounded-xl bg-white/[0.01] border border-white/5 flex gap-3 shadow-sm hover:border-secondary/20 transition-all">
+                  <div key={idx} className="p-4 rounded-xl bg-white/[0.01] border border-neutral-300 dark:border-white/5 flex gap-3 shadow-sm hover:border-secondary/20 transition-all">
                     <div className="p-2 h-fit rounded-lg bg-white dark:bg-bg-dark border border-neutral-300 dark:border-white/5 shrink-0 text-neutral-800 dark:text-white">
                       {feat.icon}
                     </div>
@@ -713,7 +713,7 @@ export default function ProjectsPage() {
               </div>
 
               {/* Content box */}
-              <div className="glass-aurora rounded-2xl overflow-hidden border border-white/5 min-h-[350px] shadow-2xl shadow-indigo-950/20">
+              <div className="glass-aurora rounded-2xl overflow-hidden border border-neutral-300 dark:border-white/5 min-h-[350px] shadow-2xl shadow-indigo-950/20">
                 <AnimatePresence mode="wait">
                   
                   {/* 1. Student Workspace UI */}
@@ -811,7 +811,7 @@ export default function ProjectsPage() {
                           <span className="text-[10px] font-mono font-bold text-emerald-400 block">Web Workers & Hooks</span>
                         </div>
                         
-                        <div className="space-y-1 pt-2 border-t border-white/5">
+                        <div className="space-y-1 pt-2 border-t border-neutral-200 dark:border-white/5">
                           <span className="text-[11px] font-bold text-secondary-light block">Aggregated Productivity Metrics</span>
                           <p className="text-[11px] text-text-muted leading-relaxed">
                             Optimized MySQL queries and Chart.js datasets to calculate weekly focus time & completion trends.
@@ -835,7 +835,7 @@ export default function ProjectsPage() {
                         <Cloud size={14} className="text-secondary-light" />
                         Architecture Roadmap
                       </h5>
-                      <div className="relative border-l border-white/5 pl-6 space-y-4 text-left">
+                      <div className="relative border-l border-neutral-300 dark:border-white/5 pl-6 space-y-4 text-left">
                         {[
                           { title: "30+ RESTful APIs across 7 Modules", desc: "Clean controller-service-repository architecture covering Tasks, Notes, Planner & Analytics." },
                           { title: "Pomodoro Timer & Chart.js Integration", desc: "Interactive timer with Chart.js analytics for focus sessions and study streaks." },
@@ -860,7 +860,7 @@ export default function ProjectsPage() {
         {/* ======================================================== */}
         {/* PROJECT GRID WITH SEARCH AND FILTERS                     */}
         {/* ======================================================== */}
-        <div className="border-t border-white/5 pt-16 space-y-12">
+        <div className="border-t border-neutral-200 dark:border-white/5 pt-16 space-y-12">
           
           {/* Controls Bar */}
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 max-w-6xl mx-auto">
@@ -877,7 +877,7 @@ export default function ProjectsPage() {
                   className={`px-4.5 py-2 text-xs font-bold rounded-full transition-all duration-300 border cursor-pointer ${
                     activeProjectFilter === filter.id 
                       ? 'bg-gradient-to-r from-primary/20 to-secondary/20 border-primary/30 text-text-title shadow-sm font-extrabold'
-                      : 'border-white/5 text-text-muted hover:text-text-title hover:bg-white/5'
+                      : 'border-neutral-300 dark:border-white/5 text-text-muted hover:text-text-title hover:bg-neutral-100 dark:hover:bg-white/5'
                   }`}
                 >
                   {filter.label}
@@ -895,7 +895,7 @@ export default function ProjectsPage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search projects by technology, name, or keywords..."
-                className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-white/[0.02] border border-white/5 focus:border-primary/50 outline-none text-xs text-text-title transition-all duration-300 shadow-inner"
+                className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-neutral-50 dark:bg-white/[0.02] border border-neutral-300 dark:border-white/5 focus:border-primary/50 outline-none text-xs text-text-title transition-all duration-300 shadow-inner"
               />
             </div>
 
@@ -908,7 +908,7 @@ export default function ProjectsPage() {
                 <motion.div
                   key={project.title}
                   layout
-                  className="p-6 rounded-[24px] glass-aurora border border-white/5 flex flex-col justify-between shadow-md hover:shadow-[0_20px_40px_rgba(0,0,0,0.45)] hover:shadow-primary/5 hover:border-primary/40 text-left h-full group transition-all duration-300"
+                  className="p-6 rounded-[24px] bg-white dark:bg-white/[0.02] border border-neutral-300 dark:border-white/5 flex flex-col justify-between shadow-md hover:shadow-[0_20px_40px_rgba(0,0,0,0.45)] hover:shadow-primary/5 hover:border-primary/40 text-left h-full group transition-all duration-300"
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
@@ -954,7 +954,7 @@ export default function ProjectsPage() {
                   <div className="space-y-4 flex-grow">
                     <div className="flex flex-wrap gap-1">
                       {project.tech.map((tech) => (
-                        <span key={tech} className="px-2 py-0.5 rounded bg-white/[0.01] border border-white/5 text-text-muted text-[8px] font-bold font-mono">
+                        <span key={tech} className="px-2 py-0.5 rounded bg-neutral-100 dark:bg-white/[0.01] border border-neutral-300 dark:border-white/5 text-neutral-800 dark:text-text-muted text-[8px] font-bold font-mono">
                           {tech}
                         </span>
                       ))}
@@ -969,7 +969,7 @@ export default function ProjectsPage() {
                       </p>
                     </div>
 
-                    <div className="space-y-1.5 border-t border-white/5 pt-3">
+                    <div className="space-y-1.5 border-t border-neutral-200 dark:border-white/5 pt-3">
                       {project.features.slice(0, 2).map((feat, fidx) => (
                         <div key={fidx} className="flex items-center gap-1.5 text-[9px] text-text-muted font-bold font-mono">
                           <CheckCircle2 size={10} className="text-emerald-400" />
@@ -980,7 +980,7 @@ export default function ProjectsPage() {
                   </div>
 
                   {/* Actions Footer */}
-                  <div className="flex items-center justify-between border-t border-white/5 pt-4 mt-5 text-[9px] font-bold font-mono">
+                  <div className="flex items-center justify-between border-t border-neutral-200 dark:border-white/5 pt-4 mt-5 text-[9px] font-bold font-mono">
                     <div className="flex gap-2">
                       <a href={project.demo} target="_blank" rel="noreferrer" className="text-primary-light hover:text-primary transition-colors flex items-center gap-1">
                         Explore Live Demo

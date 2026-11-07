@@ -275,7 +275,7 @@ export default function AboutPage() {
                   }}
                 >
                   <motion.div
-                    className="p-2 px-3 rounded-xl bg-bg-card backdrop-blur-md border border-white/10 shadow-xl flex items-center gap-1.5 cursor-default hover:border-primary/50 transition-colors"
+                    className="p-2 px-3 rounded-xl bg-white dark:bg-bg-card backdrop-blur-md border border-neutral-300 dark:border-white/10 shadow-xl flex items-center gap-1.5 cursor-default hover:border-primary/50 transition-colors"
                     whileHover={{
                       scale: 1.1,
                       boxShadow: `0 0 20px ${badge.glow}`,
@@ -374,7 +374,7 @@ export default function AboutPage() {
                 { year: "June 2026", title: "Java Full Stack Development Trainee", desc: "Naresh i Technologies, Hyderabad. Intensive practical training in Java 21, Spring Boot 3, Spring Security JWT, Microservices, Hibernate/JPA, MySQL, and React." }
               ].map((step, sidx) => (
                 <div key={sidx} className="relative pl-10">
-                  <div className="absolute left-0 top-1.5 w-8 h-8 rounded-full bg-bg-darkest border border-white/10 flex items-center justify-center text-[10px] font-bold text-text-title shadow-lg z-10">
+                  <div className="absolute left-0 top-1.5 w-8 h-8 rounded-full bg-bg-darkest border border-neutral-300 dark:border-white/10 flex items-center justify-center text-[10px] font-bold text-text-title shadow-lg z-10">
                     <span className="w-2 h-2 rounded-full bg-gradient-to-r from-primary to-secondary" />
                   </div>
                   <div className="p-5 rounded-2xl bg-neutral-50 dark:bg-white/[0.02] border border-neutral-200 dark:border-white/5 hover:border-primary/20 transition-colors">

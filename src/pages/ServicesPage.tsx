@@ -92,7 +92,7 @@ export default function ServicesPage() {
           {services.map((serv, idx) => (
             <motion.div
               key={idx}
-              className="p-7.5 rounded-[28px] glass-aurora border border-white/5 flex flex-col justify-between shadow-2xl relative hover:border-primary/20 text-left group"
+              className="p-7.5 rounded-[28px] glass-aurora border border-neutral-300 dark:border-white/5 bg-white dark:bg-white/[0.02] flex flex-col justify-between shadow-2xl relative hover:border-primary/20 text-left group"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -101,7 +101,7 @@ export default function ServicesPage() {
             >
               <div className="space-y-6">
                 {/* Visual Icon */}
-                <div className="p-3 w-fit rounded-xl bg-bg-dark border border-white/5 text-primary group-hover:border-primary/20 transition-all">
+                <div className="p-3 w-fit rounded-xl bg-white dark:bg-bg-dark border border-neutral-300 dark:border-white/5 text-primary group-hover:border-primary/20 transition-all">
                   {serv.icon}
                 </div>
 
@@ -115,7 +115,7 @@ export default function ServicesPage() {
                 </div>
 
                 {/* Deliverables checklist */}
-                <div className="border-t border-white/5 pt-4 space-y-2">
+                <div className="border-t border-neutral-200 dark:border-white/5 pt-4 space-y-2">
                   <span className="text-[9px] font-mono font-bold text-text-muted uppercase tracking-wider block">Key Deliverables:</span>
                   <div className="space-y-1.5">
                     {serv.deliverables.map((del, dIdx) => (
@@ -129,9 +129,9 @@ export default function ServicesPage() {
               </div>
 
               {/* Tech Stack Footer */}
-              <div className="border-t border-white/5 pt-5 mt-6 flex flex-wrap gap-1">
+              <div className="border-t border-neutral-200 dark:border-white/5 pt-5 mt-6 flex flex-wrap gap-1">
                 {serv.techStack.map((tech) => (
-                  <span key={tech} className="px-2 py-0.5 rounded bg-white/[0.01] border border-white/5 text-text-muted text-[8px] font-bold font-mono">
+                  <span key={tech} className="px-2 py-0.5 rounded bg-neutral-100 dark:bg-white/[0.01] border border-neutral-300 dark:border-white/5 text-text-muted text-[8px] font-bold font-mono">
                     {tech}
                   </span>
                 ))}
@@ -142,9 +142,9 @@ export default function ServicesPage() {
         </div>
 
         {/* CTA section */}
-        <div className="border-t border-white/5 pt-16">
+        <div className="border-t border-neutral-200 dark:border-white/5 pt-16">
           <motion.div
-            className="p-10 rounded-[32px] glass-aurora border border-white/5 max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl hover:border-primary/20 text-left"
+            className="p-10 rounded-[32px] bg-white dark:bg-white/[0.02] border border-neutral-300 dark:border-white/5 max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl hover:border-primary/20 text-left"
             initial={{ opacity: 0, scale: 0.98 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}

@@ -266,7 +266,7 @@ export default function Home() {
 
           {/* RIGHT SIDE: The Engineering Dossier & Telemetry */}
           <div className="lg:col-span-5 flex flex-col items-center justify-center relative">
-            <div className="relative w-full max-w-[330px] xl:max-w-[350px] rounded-2xl p-3.5 bg-[#0b0f19] border border-white/10 shadow-2xl space-y-2.5">
+            <div className="relative w-full max-w-[330px] xl:max-w-[350px] rounded-2xl p-3.5 bg-[#0b0f19] border border-neutral-400 dark:border-white/10 shadow-2xl space-y-2.5">
               
               {/* Dossier Header Tag */}
               <div className="flex items-center justify-between text-[10px] font-mono text-text-muted border-b border-neutral-200 dark:border-white/[0.08] pb-2">

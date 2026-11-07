@@ -332,7 +332,7 @@ export default function Navbar() {
       </div>
 
       {/* Accent Color Section */}
-      <div className="border-t border-white/10 pt-3">
+      <div className="border-t border-neutral-200 dark:border-white/10 pt-3">
         <p className="text-[10px] uppercase tracking-widest font-bold font-mono mb-2"
            style={{ color: isDark ? '#94A3B8' : '#64748B' }}>
           Accent Color
@@ -744,7 +744,7 @@ export default function Navbar() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
               transition={{ duration: 0.2 }}
-              className="relative w-full max-w-sm p-6 rounded-3xl bg-[#0F172A] border border-white/15 shadow-2xl text-left z-10"
+              className="relative w-full max-w-sm p-6 rounded-3xl bg-white dark:bg-[#0F172A] border border-neutral-300 dark:border-white/15 shadow-2xl text-left z-10"
               style={{
                 boxShadow: '0 25px 60px rgba(0,0,0,0.6), 0 0 30px rgba(139,92,246,0.2)'
               }}
@@ -783,7 +783,7 @@ export default function Navbar() {
                       onChange={(e) => setAdminUsernameInput(e.target.value)}
                       placeholder="Enter Admin Username"
                       required
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.03] border border-white/10 focus:border-primary focus:outline-none text-xs text-text-title font-mono"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-white/[0.03] border border-neutral-300 dark:border-white/10 focus:border-primary text-neutral-900 dark:text-white focus:outline-none text-xs text-text-title font-mono"
                     />
                   </div>
                 </div>
@@ -797,7 +797,7 @@ export default function Navbar() {
                       onChange={(e) => setAdminPasswordInput(e.target.value)}
                       placeholder="Enter Admin Password"
                       required
-                      className="w-full px-3.5 py-2.5 pr-10 rounded-xl bg-white/[0.03] border border-white/10 focus:border-primary focus:outline-none text-xs text-text-title font-mono"
+                      className="w-full px-3.5 py-2.5 pr-10 rounded-xl bg-neutral-50 dark:bg-white/[0.03] border border-neutral-300 dark:border-white/10 focus:border-primary text-neutral-900 dark:text-white focus:outline-none text-xs text-text-title font-mono"
                     />
                     <button
                       type="button"

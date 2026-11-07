@@ -66,7 +66,7 @@ export default function CertificationsPage() {
           {certifications.map((cert, idx) => (
             <motion.div
               key={idx}
-              className="p-7 rounded-[28px] glass-aurora border border-white/5 flex flex-col justify-between shadow-2xl relative hover:border-primary/20 text-left group"
+              className="p-7 rounded-[28px] glass-aurora border border-neutral-300 dark:border-white/5 bg-white dark:bg-white/[0.02] flex flex-col justify-between shadow-2xl relative hover:border-primary/20 text-left group"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -74,7 +74,7 @@ export default function CertificationsPage() {
               whileHover={{ y: -4 }}
             >
               {/* Badge Visual Indicator */}
-              <div className="absolute top-6 right-6 p-2 rounded-xl bg-white/[0.02] border border-white/5 text-primary-light group-hover:border-primary/20 transition-all">
+              <div className="absolute top-6 right-6 p-2 rounded-xl bg-neutral-100 dark:bg-white/[0.02] border border-neutral-300 dark:border-white/5 text-primary-light group-hover:border-primary/20 transition-all">
                 <ShieldCheck size={18} />
               </div>
 
@@ -95,11 +95,11 @@ export default function CertificationsPage() {
                 </div>
 
                 {/* Skills Visual badging */}
-                <div className="border-t border-white/5 pt-4 space-y-2.5">
+                <div className="border-t border-neutral-200 dark:border-white/5 pt-4 space-y-2.5">
                   <span className="text-[9px] font-mono font-bold text-text-muted uppercase tracking-wider block">Acquired Competencies:</span>
                   <div className="flex flex-wrap gap-1.5">
                     {cert.skillsGained.map((skill) => (
-                      <div key={skill} className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/[0.01] border border-white/5 text-text-muted text-[9px] font-bold font-mono">
+                      <div key={skill} className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-neutral-100 dark:bg-white/[0.01] border border-neutral-300 dark:border-white/5 text-text-muted text-[9px] font-bold font-mono">
                         <CheckCircle2 size={10} className="text-emerald-400 shrink-0" />
                         <span>{skill}</span>
                       </div>
@@ -108,7 +108,7 @@ export default function CertificationsPage() {
                 </div>
               </div>
 
-              <div className="border-t border-white/5 pt-5 mt-6 flex justify-between items-center text-[10px] font-bold font-mono">
+              <div className="border-t border-neutral-200 dark:border-white/5 pt-5 mt-6 flex justify-between items-center text-[10px] font-bold font-mono">
                 <a
                   href={cert.verificationLink}
                   target="_blank"
