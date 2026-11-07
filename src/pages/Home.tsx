@@ -194,7 +194,7 @@ export default function Home() {
 
             {/* Authoritative Headline in Space Grotesk */}
             <div>
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold font-display tracking-tight text-white leading-none">
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold font-display tracking-tight text-neutral-900 dark:text-white leading-none">
                 Ravindra Chavan
               </h1>
               <div className="mt-2 flex items-center gap-2">
@@ -208,25 +208,25 @@ export default function Home() {
 
             {/* Substantive Engineering Statement (Anti-Slop) */}
             <p className="text-xs sm:text-sm text-text-muted leading-relaxed max-w-xl font-sans">
-              Architecting high-concurrency enterprise services with <strong className="text-white font-semibold">Java 21 LTS</strong>, <strong className="text-white font-semibold">Spring Boot 3.3</strong>, and <strong className="text-white font-semibold">React 19</strong>. Specialized in dual-cloud disaster recovery failovers, pessimistic database locking, and zero-downtime ledger synchronization.
+              Architecting high-concurrency enterprise services with <strong className="text-neutral-900 dark:text-white font-semibold">Java 21 LTS</strong>, <strong className="text-neutral-900 dark:text-white font-semibold">Spring Boot 3.3</strong>, and <strong className="text-neutral-900 dark:text-white font-semibold">React 19</strong>. Specialized in dual-cloud disaster recovery failovers, pessimistic database locking, and zero-downtime ledger synchronization.
             </p>
 
             {/* 4-Column Technical Specification Strip (Hallmark Blueprint) */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-0.5">
-              <div className="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.08] text-left">
-                <span className="text-[9px] font-mono uppercase tracking-wider text-text-muted block">Runtime</span>
-                <strong className="text-xs font-mono text-white mt-0.5 block">Java 21 LTS</strong>
+              <div className="p-2.5 rounded-xl bg-neutral-100/90 dark:bg-white/[0.02] border border-neutral-300 dark:border-white/[0.08] text-left shadow-sm dark:shadow-none">
+                <span className="text-[9px] font-mono uppercase tracking-wider text-neutral-500 dark:text-text-muted block font-semibold">Runtime</span>
+                <strong className="text-xs font-mono text-neutral-900 dark:text-white mt-0.5 block">Java 21 LTS</strong>
               </div>
-              <div className="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.08] text-left">
-                <span className="text-[9px] font-mono uppercase tracking-wider text-text-muted block">Framework</span>
-                <strong className="text-xs font-mono text-white mt-0.5 block">Spring Boot 3.3</strong>
+              <div className="p-2.5 rounded-xl bg-neutral-100/90 dark:bg-white/[0.02] border border-neutral-300 dark:border-white/[0.08] text-left shadow-sm dark:shadow-none">
+                <span className="text-[9px] font-mono uppercase tracking-wider text-neutral-500 dark:text-text-muted block font-semibold">Framework</span>
+                <strong className="text-xs font-mono text-neutral-900 dark:text-white mt-0.5 block">Spring Boot 3.3</strong>
               </div>
-              <div className="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.08] text-left">
-                <span className="text-[9px] font-mono uppercase tracking-wider text-text-muted block">Concurrency</span>
+              <div className="p-2.5 rounded-xl bg-neutral-100/90 dark:bg-white/[0.02] border border-neutral-300 dark:border-white/[0.08] text-left shadow-sm dark:shadow-none">
+                <span className="text-[9px] font-mono uppercase tracking-wider text-neutral-500 dark:text-text-muted block font-semibold">Concurrency</span>
                 <strong className="text-xs font-mono text-emerald-400 mt-0.5 block">Pessimistic Lock</strong>
               </div>
-              <div className="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.08] text-left">
-                <span className="text-[9px] font-mono uppercase tracking-wider text-text-muted block">Topology</span>
+              <div className="p-2.5 rounded-xl bg-neutral-100/90 dark:bg-white/[0.02] border border-neutral-300 dark:border-white/[0.08] text-left shadow-sm dark:shadow-none">
+                <span className="text-[9px] font-mono uppercase tracking-wider text-neutral-500 dark:text-text-muted block font-semibold">Topology</span>
                 <strong className="text-xs font-mono text-cyan-400 mt-0.5 block">Dual-Cloud DR</strong>
               </div>
             </div>
@@ -235,7 +235,7 @@ export default function Home() {
             <div className="flex flex-wrap gap-3 pt-1">
               <a
                 href="#projects"
-                className="px-5 py-2.5 rounded-xl bg-white text-black font-bold text-xs hover:bg-neutral-200 transition-all duration-200 flex items-center gap-2 cursor-pointer shadow-md"
+                className="px-5 py-2.5 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white dark:bg-white dark:hover:bg-neutral-200 dark:text-black font-bold text-xs transition-all duration-200 flex items-center gap-2 cursor-pointer shadow-md"
               >
                 <span>Explore Flagship Work</span>
                 <ArrowRight size={14} />
@@ -247,7 +247,7 @@ export default function Home() {
                   setArchitectureDefaultTab('dual-cloud');
                   setArchitectureModalOpen(true);
                 }}
-                className="px-4 py-2.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-white border border-white/10 hover:border-cyan-500/50 text-xs font-bold font-mono transition-all duration-200 flex items-center gap-2 cursor-pointer"
+                className="px-4 py-2.5 rounded-xl bg-white hover:bg-neutral-100 text-neutral-900 border border-neutral-300 dark:bg-white/[0.04] dark:hover:bg-white/[0.08] dark:text-white dark:border-white/10 hover:border-cyan-500/50 text-xs font-bold font-mono transition-all duration-200 flex items-center gap-2 cursor-pointer shadow-sm dark:shadow-none"
               >
                 <Layers size={14} className="text-cyan-400" />
                 <span>Inspect Architecture</span>
@@ -257,7 +257,7 @@ export default function Home() {
                 href="/resume/Ravindra_Chavan_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-4 py-2.5 rounded-xl bg-white/[0.02] hover:bg-white/[0.06] text-text-muted hover:text-white border border-white/[0.08] text-xs font-bold font-mono transition-all duration-200 flex items-center gap-2 cursor-pointer"
+                className="px-4 py-2.5 rounded-xl bg-white hover:bg-neutral-100 text-neutral-700 hover:text-neutral-900 border border-neutral-300 dark:bg-white/[0.02] dark:hover:bg-white/[0.06] dark:text-text-muted dark:hover:text-white dark:border-white/[0.08] text-xs font-bold font-mono transition-all duration-200 flex items-center gap-2 cursor-pointer shadow-sm dark:shadow-none"
               >
                 <span>Resume (PDF)</span>
               </a>
@@ -341,7 +341,7 @@ export default function Home() {
               <span className="font-mono text-xs uppercase tracking-wider text-primary-light font-bold">
                 // ARCHITECTURAL DOSSIER //
               </span>
-              <h2 className="text-3xl sm:text-4xl font-bold font-display text-white mt-1">
+              <h2 className="text-3xl sm:text-4xl font-bold font-display text-neutral-900 dark:text-white mt-1">
                 Flagship Enterprise Projects
               </h2>
             </div>
@@ -351,8 +351,8 @@ export default function Home() {
                 onClick={() => setActiveProjectFilter('All')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-mono transition cursor-pointer ${
                   activeProjectFilter === 'All'
-                    ? 'bg-white text-black font-bold'
-                    : 'bg-white/[0.04] text-text-muted hover:text-white border border-white/[0.08]'
+                    ? 'bg-neutral-900 text-white dark:bg-white dark:text-black font-bold'
+                    : 'bg-neutral-100 text-neutral-600 hover:text-neutral-900 border border-neutral-300 dark:bg-white/[0.04] dark:text-text-muted dark:hover:text-white dark:border-white/[0.08]'
                 }`}
               >
                 All (3)
@@ -362,8 +362,8 @@ export default function Home() {
                 onClick={() => setActiveProjectFilter('Full Stack')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-mono transition cursor-pointer ${
                   activeProjectFilter === 'Full Stack'
-                    ? 'bg-white text-black font-bold'
-                    : 'bg-white/[0.04] text-text-muted hover:text-white border border-white/[0.08]'
+                    ? 'bg-neutral-900 text-white dark:bg-white dark:text-black font-bold'
+                    : 'bg-neutral-100 text-neutral-600 hover:text-neutral-900 border border-neutral-300 dark:bg-white/[0.04] dark:text-text-muted dark:hover:text-white dark:border-white/[0.08]'
                 }`}
               >
                 Full Stack
@@ -376,7 +376,7 @@ export default function Home() {
             {filteredProjects.map((project, idx) => (
               <div
                 key={idx}
-                className="rounded-3xl border border-white/10 bg-[#0b0f19] overflow-hidden grid grid-cols-1 lg:grid-cols-12 gap-8 p-6 md:p-8 hover:border-white/20 transition-all duration-300"
+                className="rounded-3xl border border-neutral-200 dark:border-white/10 bg-white dark:bg-[#0b0f19] overflow-hidden grid grid-cols-1 lg:grid-cols-12 gap-8 p-6 md:p-8 hover:border-neutral-300 dark:hover:border-white/20 shadow-sm dark:shadow-2xl transition-all duration-300"
               >
                 {/* Left: Project Details & Architectural Solution */}
                 <div className="lg:col-span-7 flex flex-col justify-between text-left space-y-5">
@@ -390,7 +390,7 @@ export default function Home() {
                       </span>
                     </div>
 
-                    <h3 className="text-xl sm:text-2xl font-bold font-display text-white">
+                    <h3 className="text-xl sm:text-2xl font-bold font-display text-neutral-900 dark:text-white">
                       {project.title}
                     </h3>
 
@@ -400,7 +400,7 @@ export default function Home() {
                   </div>
 
                   {/* Problem vs Solution Comparison Box */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06] text-xs font-sans">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-white/[0.02] border border-neutral-200 dark:border-white/[0.06] text-xs font-sans">
                     <div className="space-y-1">
                       <span className="text-[10px] font-mono uppercase text-rose-400 font-bold block">
                         Problem Statement:
@@ -424,7 +424,7 @@ export default function Home() {
                     {project.tech.map((t) => (
                       <span
                         key={t}
-                        className="px-2.5 py-1 rounded bg-white/[0.03] border border-white/[0.08] text-[10px] font-mono text-text-muted"
+                        className="px-2.5 py-1 rounded bg-neutral-100 dark:bg-white/[0.03] border border-neutral-200 dark:border-white/[0.08] text-[10px] font-mono text-neutral-700 dark:text-text-muted"
                       >
                         {t}
                       </span>
@@ -438,7 +438,7 @@ export default function Home() {
                         href={project.link}
                         target="_blank"
                         rel="noreferrer"
-                        className="px-4 py-2.5 rounded-xl bg-white text-black font-bold text-xs flex items-center gap-2 hover:bg-neutral-200 transition cursor-pointer"
+                        className="px-4 py-2.5 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white dark:bg-white dark:text-black dark:hover:bg-neutral-200 font-bold text-xs flex items-center gap-2 transition cursor-pointer shadow-sm"
                       >
                         <span>Live Application</span>
                         <ExternalLink size={13} />
@@ -448,7 +448,7 @@ export default function Home() {
                       href={project.repo}
                       target="_blank"
                       rel="noreferrer"
-                      className="px-4 py-2.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-white border border-white/10 text-xs font-mono font-bold flex items-center gap-2 transition cursor-pointer"
+                      className="px-4 py-2.5 rounded-xl bg-neutral-100 hover:bg-neutral-200 text-neutral-900 border border-neutral-300 dark:bg-white/[0.04] dark:hover:bg-white/[0.08] dark:text-white dark:border-white/10 text-xs font-mono font-bold flex items-center gap-2 transition cursor-pointer shadow-sm"
                     >
                       <FaGithub size={14} />
                       <span>Source Code</span>
@@ -498,112 +498,112 @@ export default function Home() {
             <span className="font-mono text-xs uppercase tracking-wider text-primary-light font-bold">
               // ARCHITECTURAL CAPABILITIES //
             </span>
-            <h2 className="text-3xl sm:text-4xl font-bold font-display text-white mt-1">
+            <h2 className="text-3xl sm:text-4xl font-bold font-display text-neutral-900 dark:text-white mt-1">
               Core Tech Stack & Engineering Discipline
             </h2>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {/* Card 1: Backend */}
-            <div className="p-5 rounded-2xl bg-[#0b0f19] border border-white/10 space-y-4">
+            <div className="p-5 rounded-2xl bg-white dark:bg-[#0b0f19] border border-neutral-200 dark:border-white/10 shadow-sm dark:shadow-none space-y-4">
               <div className="flex items-center justify-between">
-                <span className="font-bold text-white text-sm">Backend & Concurrency</span>
+                <span className="font-bold text-neutral-900 dark:text-white text-sm">Backend & Concurrency</span>
                 <Server size={18} className="text-primary-light" />
               </div>
               <ul className="space-y-2 text-xs text-text-muted font-mono">
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
-                  <strong className="text-white">Java 21 (LTS)</strong> · Virtual Threads
+                  <strong className="text-neutral-900 dark:text-white">Java 21 (LTS)</strong> · Virtual Threads
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
-                  <strong className="text-white">Spring Boot 3.3.3</strong> · Microservices
+                  <strong className="text-neutral-900 dark:text-white">Spring Boot 3.3.3</strong> · Microservices
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
-                  <strong className="text-white">Spring Data JPA</strong> · Hibernate
+                  <strong className="text-neutral-900 dark:text-white">Spring Data JPA</strong> · Hibernate
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
-                  <strong className="text-white">Spring Security</strong> · JWT Stateless
+                  <strong className="text-neutral-900 dark:text-white">Spring Security</strong> · JWT Stateless
                 </li>
               </ul>
             </div>
 
             {/* Card 2: Persistence */}
-            <div className="p-5 rounded-2xl bg-[#0b0f19] border border-white/10 space-y-4">
+            <div className="p-5 rounded-2xl bg-white dark:bg-[#0b0f19] border border-neutral-200 dark:border-white/10 shadow-sm dark:shadow-none space-y-4">
               <div className="flex items-center justify-between">
-                <span className="font-bold text-white text-sm">Persistence & Locking</span>
+                <span className="font-bold text-neutral-900 dark:text-white text-sm">Persistence & Locking</span>
                 <Database size={18} className="text-emerald-400" />
               </div>
               <ul className="space-y-2 text-xs text-text-muted font-mono">
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                  <strong className="text-white">MySQL 8.0</strong> · Query Optimization
+                  <strong className="text-neutral-900 dark:text-white">MySQL 8.0</strong> · Query Optimization
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                  <strong className="text-white">Pessimistic Locking</strong> · Row-Level
+                  <strong className="text-neutral-900 dark:text-white">Pessimistic Locking</strong> · Row-Level
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                  <strong className="text-white">H2 Disk DB</strong> · Persistent Journal
+                  <strong className="text-neutral-900 dark:text-white">H2 Disk DB</strong> · Persistent Journal
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                  <strong className="text-white">HikariCP</strong> · Pool Tuning
+                  <strong className="text-neutral-900 dark:text-white">HikariCP</strong> · Pool Tuning
                 </li>
               </ul>
             </div>
 
             {/* Card 3: Frontend */}
-            <div className="p-5 rounded-2xl bg-[#0b0f19] border border-white/10 space-y-4">
+            <div className="p-5 rounded-2xl bg-white dark:bg-[#0b0f19] border border-neutral-200 dark:border-white/10 shadow-sm dark:shadow-none space-y-4">
               <div className="flex items-center justify-between">
-                <span className="font-bold text-white text-sm">Modern Reactive UI</span>
+                <span className="font-bold text-neutral-900 dark:text-white text-sm">Modern Reactive UI</span>
                 <Smartphone size={18} className="text-purple-400" />
               </div>
               <ul className="space-y-2 text-xs text-text-muted font-mono">
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-purple-400" />
-                  <strong className="text-white">React 19</strong> · Vite Single Page
+                  <strong className="text-neutral-900 dark:text-white">React 19</strong> · Vite Single Page
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-purple-400" />
-                  <strong className="text-white">TypeScript</strong> · Type Safe
+                  <strong className="text-neutral-900 dark:text-white">TypeScript</strong> · Type Safe
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-purple-400" />
-                  <strong className="text-white">Tailwind CSS 4</strong> · OKLCH Colors
+                  <strong className="text-neutral-900 dark:text-white">Tailwind CSS 4</strong> · OKLCH Colors
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-purple-400" />
-                  <strong className="text-white">Framer Motion</strong> · Kinetic Flow
+                  <strong className="text-neutral-900 dark:text-white">Framer Motion</strong> · Kinetic Flow
                 </li>
               </ul>
             </div>
 
             {/* Card 4: DevOps */}
-            <div className="p-5 rounded-2xl bg-[#0b0f19] border border-white/10 space-y-4">
+            <div className="p-5 rounded-2xl bg-white dark:bg-[#0b0f19] border border-neutral-200 dark:border-white/10 shadow-sm dark:shadow-none space-y-4">
               <div className="flex items-center justify-between">
-                <span className="font-bold text-white text-sm">Cloud & Reliability</span>
+                <span className="font-bold text-neutral-900 dark:text-white text-sm">Cloud & Reliability</span>
                 <Cpu size={18} className="text-amber-400" />
               </div>
               <ul className="space-y-2 text-xs text-text-muted font-mono">
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-                  <strong className="text-white">Dual-Cloud Failover</strong> · Render
+                  <strong className="text-neutral-900 dark:text-white">Dual-Cloud Failover</strong> · Render
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-                  <strong className="text-white">Docker & Compose</strong> · Isolated
+                  <strong className="text-neutral-900 dark:text-white">Docker & Compose</strong> · Isolated
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-                  <strong className="text-white">JUnit 5 / Mockito</strong> · Test Suites
+                  <strong className="text-neutral-900 dark:text-white">JUnit 5 / Mockito</strong> · Test Suites
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-                  <strong className="text-white">Swagger / OpenAPI</strong> · Contracts
+                  <strong className="text-neutral-900 dark:text-white">Swagger / OpenAPI</strong> · Contracts
                 </li>
               </ul>
             </div>
@@ -620,7 +620,7 @@ export default function Home() {
             <span className="font-mono text-xs uppercase tracking-wider text-primary-light font-bold">
               // CHRONOLOGY //
             </span>
-            <h2 className="text-3xl sm:text-4xl font-bold font-display text-white mt-1">
+            <h2 className="text-3xl sm:text-4xl font-bold font-display text-neutral-900 dark:text-white mt-1">
               Education & Engineering Milestones
             </h2>
           </div>
@@ -629,13 +629,13 @@ export default function Home() {
             {milestones.map((m, idx) => (
               <div
                 key={idx}
-                className="p-6 rounded-2xl bg-[#0b0f19] border border-white/10 space-y-3 flex flex-col justify-between"
+                className="p-6 rounded-2xl bg-white dark:bg-[#0b0f19] border border-neutral-200 dark:border-white/10 shadow-sm dark:shadow-none space-y-3 flex flex-col justify-between"
               >
                 <div className="space-y-2">
                   <span className="text-xs font-mono text-cyan-400 font-bold">
                     {m.step}
                   </span>
-                  <h3 className="text-base font-bold text-white font-display">
+                  <h3 className="text-base font-bold text-neutral-900 dark:text-white font-display">
                     {m.title}
                   </h3>
                   <p className="text-[11px] font-mono text-amber-300">
@@ -648,7 +648,7 @@ export default function Home() {
 
                 <div className="flex flex-wrap gap-1.5 pt-2">
                   {m.tech.map((t) => (
-                    <span key={t} className="px-2 py-0.5 rounded bg-white/[0.03] border border-white/[0.06] text-[10px] font-mono text-text-muted">
+                    <span key={t} className="px-2 py-0.5 rounded bg-neutral-100 dark:bg-white/[0.03] border border-neutral-200 dark:border-white/[0.06] text-[10px] font-mono text-neutral-700 dark:text-text-muted">
                       {t}
                     </span>
                   ))}
@@ -669,7 +669,7 @@ export default function Home() {
               <span className="font-mono text-xs uppercase tracking-wider text-primary-light font-bold">
                 // GET IN TOUCH //
               </span>
-              <h2 className="text-3xl sm:text-4xl font-bold font-display text-white mt-1">
+              <h2 className="text-3xl sm:text-4xl font-bold font-display text-neutral-900 dark:text-white mt-1">
                 Initiate Conversation
               </h2>
             </div>
@@ -679,15 +679,15 @@ export default function Home() {
             </p>
 
             <div className="space-y-3 text-xs font-mono">
-              <div className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/10">
+              <div className="flex items-center gap-3 p-3 rounded-xl bg-white dark:bg-white/[0.02] border border-neutral-200 dark:border-white/10 shadow-sm dark:shadow-none">
                 <Mail size={16} className="text-cyan-400 shrink-0" />
-                <span className="text-white select-all">ravindrachavan265125@gmail.com</span>
+                <span className="text-neutral-900 dark:text-white select-all font-semibold">ravindrachavan265125@gmail.com</span>
               </div>
-              <div className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/10">
+              <div className="flex items-center gap-3 p-3 rounded-xl bg-white dark:bg-white/[0.02] border border-neutral-200 dark:border-white/10 shadow-sm dark:shadow-none">
                 <FaWhatsapp size={16} className="text-emerald-400 shrink-0" />
-                <span className="text-white select-all">+91 74476 61921 (WhatsApp Direct)</span>
+                <span className="text-neutral-900 dark:text-white select-all font-semibold">+91 74476 61921 (WhatsApp Direct)</span>
               </div>
-              <div className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/10">
+              <div className="flex items-center gap-3 p-3 rounded-xl bg-white dark:bg-white/[0.02] border border-neutral-200 dark:border-white/10 shadow-sm dark:shadow-none">
                 <Compass size={16} className="text-purple-400 shrink-0" />
                 <span className="text-text-muted">Pune, Maharashtra, India (Open to Relocation & Remote)</span>
               </div>
@@ -695,7 +695,7 @@ export default function Home() {
           </div>
 
           <div className="lg:col-span-7">
-            <div className="p-8 rounded-3xl bg-[#0b0f19] border border-white/10 shadow-2xl">
+            <div className="p-8 rounded-3xl bg-white dark:bg-[#0b0f19] border border-neutral-200 dark:border-white/10 shadow-lg dark:shadow-2xl">
               <AnimatePresence mode="wait">
                 {!submitSuccess ? (
                   <form onSubmit={(e) => handleContactSubmit(e, 'email')} className="space-y-4">
@@ -710,7 +710,7 @@ export default function Home() {
                         value={formState.name}
                         onChange={(e) => setFormState({ ...formState, name: e.target.value })}
                         placeholder="e.g. John Doe / Engineering Manager"
-                        className="w-full px-4 py-3 rounded-xl bg-black/50 border border-white/10 text-white placeholder-text-muted/50 text-xs focus:outline-none focus:border-cyan-400 font-sans"
+                        className="w-full px-4 py-3 rounded-xl bg-neutral-50 dark:bg-black/50 border border-neutral-300 dark:border-white/10 text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-text-muted/50 text-xs focus:outline-none focus:border-cyan-500 font-sans"
                       />
                     </div>
 
@@ -725,7 +725,7 @@ export default function Home() {
                         value={formState.email}
                         onChange={(e) => setFormState({ ...formState, email: e.target.value })}
                         placeholder="e.g. john@company.com"
-                        className="w-full px-4 py-3 rounded-xl bg-black/50 border border-white/10 text-white placeholder-text-muted/50 text-xs focus:outline-none focus:border-cyan-400 font-sans"
+                        className="w-full px-4 py-3 rounded-xl bg-neutral-50 dark:bg-black/50 border border-neutral-300 dark:border-white/10 text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-text-muted/50 text-xs focus:outline-none focus:border-cyan-500 font-sans"
                       />
                     </div>
 
@@ -740,7 +740,7 @@ export default function Home() {
                         value={formState.message}
                         onChange={(e) => setFormState({ ...formState, message: e.target.value })}
                         placeholder="Discuss role opportunity, architecture question, or project inquiry..."
-                        className="w-full px-4 py-3 rounded-xl bg-black/50 border border-white/10 text-white placeholder-text-muted/50 text-xs focus:outline-none focus:border-cyan-400 font-sans resize-none"
+                        className="w-full px-4 py-3 rounded-xl bg-neutral-50 dark:bg-black/50 border border-neutral-300 dark:border-white/10 text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-text-muted/50 text-xs focus:outline-none focus:border-cyan-500 font-sans resize-none"
                       />
                     </div>
 
@@ -777,14 +777,14 @@ export default function Home() {
                     <div className="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center mx-auto">
                       <CheckCircle2 size={24} />
                     </div>
-                    <h3 className="text-base font-bold text-white">Message Prepared Successfully</h3>
+                    <h3 className="text-base font-bold text-neutral-900 dark:text-white">Message Prepared Successfully</h3>
                     <p className="text-xs text-text-muted">
                       Your message has been initiated. You can re-open or send another message anytime.
                     </p>
                     <button
                       type="button"
                       onClick={() => setSubmitSuccess(false)}
-                      className="px-4 py-2 rounded-xl border border-white/10 text-xs text-white hover:bg-white/5 transition cursor-pointer"
+                      className="px-4 py-2 rounded-xl border border-neutral-300 dark:border-white/10 text-xs text-neutral-900 dark:text-white hover:bg-neutral-100 dark:hover:bg-white/5 transition cursor-pointer"
                     >
                       Send Another Message
                     </button>

@@ -69,7 +69,7 @@ export default function SkillsPage() {
         { name: "JUnit 5 & Mockito", level: 88, icon: <Sparkles className="text-red-400" /> },
         { name: "OpenAPI / Swagger", level: 90, icon: <SiSwagger className="text-[#85EA2D]" /> },
         { name: "Postman", level: 92, icon: <SiPostman className="text-[#FF6C37]" /> },
-        { name: "Git & GitHub", level: 90, icon: <FaGithub className="text-white" /> },
+        { name: "Git & GitHub", level: 90, icon: <FaGithub className="text-neutral-900 dark:text-white" /> },
       ]
     }
   ];

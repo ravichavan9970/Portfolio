@@ -35,7 +35,7 @@ export default function Footer() {
 
   return (
     <motion.footer 
-      className="w-full bg-[#0b0f19] border-t border-white/10 relative overflow-hidden pt-16 pb-8 z-10"
+      className="w-full bg-neutral-100/90 dark:bg-[#0b0f19] border-t border-neutral-200 dark:border-white/10 relative overflow-hidden pt-16 pb-8 z-10"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
@@ -46,12 +46,12 @@ export default function Footer() {
         {/* ======================================================== */}
         {/* TOP SECTION: Large Engineering CTA Banner                */}
         {/* ======================================================== */}
-        <div className="p-8 md:p-10 rounded-3xl bg-white/[0.02] border border-white/10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl text-left">
+        <div className="p-8 md:p-10 rounded-3xl bg-white dark:bg-white/[0.02] border border-neutral-200 dark:border-white/10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm dark:shadow-xl text-left">
           <div className="space-y-2 max-w-xl">
             <span className="font-mono text-[10px] uppercase tracking-wider text-primary-light font-bold">
               // RECRUITER & CLIENT ACCESS //
             </span>
-            <h3 className="text-2xl sm:text-3xl font-bold font-display text-white tracking-tight">
+            <h3 className="text-2xl sm:text-3xl font-bold font-display text-neutral-900 dark:text-white tracking-tight">
               Ready to Build High-Concurrency Systems?
             </h3>
             <p className="text-xs sm:text-sm text-text-muted leading-relaxed font-sans">
@@ -63,7 +63,7 @@ export default function Footer() {
             <button
               type="button"
               onClick={() => navigate('/contact')}
-              className="px-5 py-3 rounded-xl bg-white text-black font-bold text-xs hover:bg-neutral-200 transition cursor-pointer"
+              className="px-5 py-3 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white dark:bg-white dark:hover:bg-neutral-200 dark:text-black font-bold text-xs transition cursor-pointer shadow-md"
             >
               Initiate Contact
             </button>
@@ -71,7 +71,7 @@ export default function Footer() {
               href="/resume/Ravindra_Chavan_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-5 py-3 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-white border border-white/10 text-xs font-mono font-bold transition cursor-pointer"
+              className="px-5 py-3 rounded-xl bg-neutral-100 hover:bg-neutral-200 text-neutral-900 border border-neutral-300 dark:bg-white/[0.04] dark:hover:bg-white/[0.08] dark:text-white dark:border-white/10 text-xs font-mono font-bold transition cursor-pointer shadow-sm"
             >
               Resume (PDF)
             </a>
@@ -86,7 +86,7 @@ export default function Footer() {
           {/* Column 1: Profile Description */}
           <div className="lg:col-span-5 space-y-3">
             <div>
-              <h4 className="font-bold text-base font-display text-white">
+              <h4 className="font-bold text-base font-display text-neutral-900 dark:text-white">
                 Ravindra Chavan
               </h4>
               <span className="text-[11px] font-mono text-cyan-400 block mt-0.5">
