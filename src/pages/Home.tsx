@@ -14,32 +14,7 @@ import studySyncAsset from '../assets/StudySync (1).png';
 import shivchhatraAsset from '../assets/shivchhatra-1.png';
 import profileAsset from '../assets/profile.jpg';
 
-// Social Dock
-const SocialDock = () => {
-  const socials = [
-    { icon: <Mail size={16} />, url: "https://mail.google.com/mail/?view=cm&fs=1&to=ravindrachavan265125@gmail.com", label: "Email via Gmail", color: "hover:text-cyan-400" },
-    { icon: <FaGithub size={16} />, url: "https://github.com/ravichavan9970", label: "GitHub", color: "hover:text-white" },
-    { icon: <FaLinkedin size={16} />, url: "https://www.linkedin.com/in/ravindra-chavan-4ba744250/", label: "LinkedIn", color: "hover:text-blue-400" },
-    { icon: <FaInstagram size={16} />, url: "https://www.instagram.com/ravi_chavan_2002?igsh=MTBsd2dnN2N0bjlyOA==", label: "Instagram", color: "hover:text-pink-400" },
-  ];
 
-  return (
-    <div className="flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/[0.03] border border-white/10 shadow-lg w-fit mx-auto backdrop-blur-md">
-      {socials.map((social, idx) => (
-        <a
-          key={idx}
-          href={social.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={`text-text-muted transition-colors ${social.color} p-2 rounded-xl hover:bg-white/5 flex items-center justify-center cursor-pointer`}
-          title={social.label}
-        >
-          {social.icon}
-        </a>
-      ))}
-    </div>
-  );
-};
 
 export default function Home() {
   const [activeProjectFilter, setActiveProjectFilter] = useState<'All' | 'Full Stack' | 'React'>('All');
@@ -200,67 +175,67 @@ export default function Home() {
       transition={{ duration: 0.5 }}
     >
       {/* ── 1. HALLMARK HERO: TECHNICAL BLUEPRINT MACROSTRUCTURE ───────── */}
-      <section id="hero" className="relative min-h-[calc(100vh-80px)] flex items-center justify-center py-12 md:py-16 overflow-hidden z-10 border-b border-white/[0.08]">
-        <div className="max-w-[1280px] mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      <section id="hero" className="relative min-h-[calc(100vh-80px)] lg:h-[calc(100vh-80px)] flex items-center justify-center py-6 lg:py-0 overflow-hidden z-10 border-b border-white/[0.08]">
+        <div className="max-w-[1280px] mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           {/* LEFT SIDE: Architectural Specimen & Positioning */}
-          <div className="lg:col-span-7 flex flex-col justify-center text-left space-y-6">
+          <div className="lg:col-span-7 flex flex-col justify-center text-left space-y-3.5 sm:space-y-4">
             
             {/* Specimen Status Line */}
             <div className="flex items-center gap-2">
-              <span className="px-2.5 py-1 rounded bg-white/[0.04] border border-white/10 font-mono text-[11px] text-primary-light uppercase tracking-wider font-semibold flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="px-2.5 py-0.5 rounded bg-white/[0.04] border border-white/10 font-mono text-[10px] text-primary-light uppercase tracking-wider font-semibold flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                 <span>SPECIMEN: RC-2026 // SYSTEM ARCHITECT</span>
               </span>
-              <span className="text-[11px] font-mono text-text-muted hidden sm:inline-block">
+              <span className="text-[10px] font-mono text-text-muted hidden sm:inline-block">
                 PUNE, IN · AVAILABLE FOR HIRE
               </span>
             </div>
 
             {/* Authoritative Headline in Space Grotesk */}
             <div>
-              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold font-display tracking-tight text-white leading-none">
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold font-display tracking-tight text-white leading-none">
                 Ravindra Chavan
               </h1>
-              <div className="mt-3 flex items-center gap-2">
-                <span className="text-lg sm:text-xl font-mono text-cyan-300 font-semibold">
+              <div className="mt-2 flex items-center gap-2">
+                <span className="text-sm sm:text-base font-mono text-cyan-300 font-semibold">
                   Full-Stack Java Engineer
                 </span>
                 <span className="text-text-muted">·</span>
-                <AnimatedRole className="text-sm sm:text-base font-mono text-text-muted" />
+                <AnimatedRole className="text-xs sm:text-sm font-mono text-text-muted" />
               </div>
             </div>
 
             {/* Substantive Engineering Statement (Anti-Slop) */}
-            <p className="text-sm sm:text-base text-text-muted leading-relaxed max-w-2xl font-sans">
+            <p className="text-xs sm:text-sm text-text-muted leading-relaxed max-w-xl font-sans">
               Architecting high-concurrency enterprise services with <strong className="text-white font-semibold">Java 21 LTS</strong>, <strong className="text-white font-semibold">Spring Boot 3.3</strong>, and <strong className="text-white font-semibold">React 19</strong>. Specialized in dual-cloud disaster recovery failovers, pessimistic database locking, and zero-downtime ledger synchronization.
             </p>
 
             {/* 4-Column Technical Specification Strip (Hallmark Blueprint) */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-1">
-              <div className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.08] text-left">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-text-muted block">Runtime</span>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-0.5">
+              <div className="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.08] text-left">
+                <span className="text-[9px] font-mono uppercase tracking-wider text-text-muted block">Runtime</span>
                 <strong className="text-xs font-mono text-white mt-0.5 block">Java 21 LTS</strong>
               </div>
-              <div className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.08] text-left">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-text-muted block">Framework</span>
-                <strong className="text-xs font-mono text-white mt-0.5 block">Spring Boot 3.3.3</strong>
+              <div className="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.08] text-left">
+                <span className="text-[9px] font-mono uppercase tracking-wider text-text-muted block">Framework</span>
+                <strong className="text-xs font-mono text-white mt-0.5 block">Spring Boot 3.3</strong>
               </div>
-              <div className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.08] text-left">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-text-muted block">Concurrency</span>
+              <div className="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.08] text-left">
+                <span className="text-[9px] font-mono uppercase tracking-wider text-text-muted block">Concurrency</span>
                 <strong className="text-xs font-mono text-emerald-400 mt-0.5 block">Pessimistic Lock</strong>
               </div>
-              <div className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.08] text-left">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-text-muted block">Topology</span>
+              <div className="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.08] text-left">
+                <span className="text-[9px] font-mono uppercase tracking-wider text-text-muted block">Topology</span>
                 <strong className="text-xs font-mono text-cyan-400 mt-0.5 block">Dual-Cloud DR</strong>
               </div>
             </div>
 
             {/* Action Controls */}
-            <div className="flex flex-wrap gap-3.5 pt-2">
+            <div className="flex flex-wrap gap-3 pt-1">
               <a
                 href="#projects"
-                className="px-6 py-3.5 rounded-xl bg-white text-black font-bold text-xs hover:bg-neutral-200 transition-all duration-200 flex items-center gap-2 cursor-pointer shadow-md"
+                className="px-5 py-2.5 rounded-xl bg-white text-black font-bold text-xs hover:bg-neutral-200 transition-all duration-200 flex items-center gap-2 cursor-pointer shadow-md"
               >
                 <span>Explore Flagship Work</span>
                 <ArrowRight size={14} />
@@ -272,7 +247,7 @@ export default function Home() {
                   setArchitectureDefaultTab('dual-cloud');
                   setArchitectureModalOpen(true);
                 }}
-                className="px-5 py-3.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-white border border-white/10 hover:border-cyan-500/50 text-xs font-bold font-mono transition-all duration-200 flex items-center gap-2 cursor-pointer"
+                className="px-4 py-2.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-white border border-white/10 hover:border-cyan-500/50 text-xs font-bold font-mono transition-all duration-200 flex items-center gap-2 cursor-pointer"
               >
                 <Layers size={14} className="text-cyan-400" />
                 <span>Inspect Architecture</span>
@@ -282,7 +257,7 @@ export default function Home() {
                 href="/resume/Ravindra_Chavan_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-5 py-3.5 rounded-xl bg-white/[0.02] hover:bg-white/[0.06] text-text-muted hover:text-white border border-white/[0.08] text-xs font-bold font-mono transition-all duration-200 flex items-center gap-2 cursor-pointer"
+                className="px-4 py-2.5 rounded-xl bg-white/[0.02] hover:bg-white/[0.06] text-text-muted hover:text-white border border-white/[0.08] text-xs font-bold font-mono transition-all duration-200 flex items-center gap-2 cursor-pointer"
               >
                 <span>Resume (PDF)</span>
               </a>
@@ -291,67 +266,70 @@ export default function Home() {
 
           {/* RIGHT SIDE: The Engineering Dossier & Telemetry */}
           <div className="lg:col-span-5 flex flex-col items-center justify-center relative">
-            <div className="relative w-full max-w-[420px] rounded-3xl p-5 bg-[#0b0f19] border border-white/10 shadow-2xl space-y-4">
+            <div className="relative w-full max-w-[330px] xl:max-w-[350px] rounded-2xl p-3.5 bg-[#0b0f19] border border-white/10 shadow-2xl space-y-2.5">
               
               {/* Dossier Header Tag */}
-              <div className="flex items-center justify-between text-[11px] font-mono text-text-muted border-b border-white/[0.08] pb-3">
+              <div className="flex items-center justify-between text-[10px] font-mono text-text-muted border-b border-white/[0.08] pb-2">
                 <span className="flex items-center gap-1.5 text-white font-semibold">
-                  <Terminal size={13} className="text-primary-light" />
+                  <Terminal size={12} className="text-primary-light" />
                   RC_DOSSIER.json
                 </span>
                 <span>GEO: 18.5204° N, 73.8567° E</span>
               </div>
 
               {/* Framed Portrait with Hallmark Blueprint Border */}
-              <div className="relative w-full aspect-[4/5] sm:h-[460px] rounded-2xl overflow-hidden border border-white/10 bg-black/40 group shadow-lg">
+              <div className="relative w-full h-[270px] sm:h-[285px] rounded-xl overflow-hidden border border-white/10 bg-black/40 group shadow-lg">
                 <img 
                   src={profileAsset} 
                   alt="Ravindra Chavan" 
-                  className="w-full h-full object-cover object-[center_22%] transition-all duration-500 group-hover:scale-105"
+                  className="w-full h-full object-cover object-[center_26%] transition-all duration-500 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0b0f19]/80 via-transparent to-transparent opacity-60" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0b0f19]/85 via-transparent to-transparent opacity-60" />
                 
-                <div className="absolute bottom-3.5 left-3.5 right-3.5 flex items-center justify-between text-[11px] font-mono z-10">
-                  <span className="px-2.5 py-1 rounded-lg bg-black/80 border border-white/15 text-white backdrop-blur-md shadow-md">
+                <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between text-[10px] font-mono z-10">
+                  <span className="px-2 py-0.5 rounded-md bg-black/80 border border-white/15 text-white backdrop-blur-md shadow-md">
                     Ravindra Chavan, M.Sc.
                   </span>
-                  <span className="px-2.5 py-1 rounded-lg bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 font-bold backdrop-blur-md shadow-md">
+                  <span className="px-2 py-0.5 rounded-md bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 font-bold backdrop-blur-md shadow-md">
                     8.5 CGPA
                   </span>
                 </div>
               </div>
 
               {/* Live Telemetry Card */}
-              <div className="p-3.5 rounded-xl bg-black/50 border border-white/[0.08] space-y-2 text-xs font-mono">
-                <div className="flex items-center justify-between text-[11px]">
-                  <span className="text-text-muted">Failover Engine:</span>
-                  <span className="text-cyan-300 font-semibold">Render Active-Standby</span>
+              <div className="grid grid-cols-2 gap-2 p-2 rounded-xl bg-black/50 border border-white/[0.08] text-[10px] font-mono">
+                <div>
+                  <span className="text-text-muted block text-[8px] uppercase">SLA Uptime</span>
+                  <span className="text-emerald-400 font-bold">99.98% Guaranteed</span>
                 </div>
-                <div className="flex items-center justify-between text-[11px]">
-                  <span className="text-text-muted">Availability SLA:</span>
-                  <span className="text-emerald-400 font-semibold">99.98% Guaranteed</span>
-                </div>
-                <div className="flex items-center justify-between text-[11px]">
-                  <span className="text-text-muted">Concurrency Guard:</span>
-                  <span className="text-amber-300 font-semibold">PESSIMISTIC_WRITE</span>
-                </div>
-                <div className="flex items-center justify-between text-[11px]">
-                  <span className="text-text-muted">Direct Contact:</span>
-                  <a href="https://wa.me/917447661921" target="_blank" rel="noreferrer" className="text-white hover:text-emerald-400 underline">
-                    +91 74476 61921
-                  </a>
+                <div>
+                  <span className="text-text-muted block text-[8px] uppercase">Topology</span>
+                  <span className="text-cyan-300 font-bold">Dual-Cloud DR</span>
                 </div>
               </div>
 
-              {/* Social Dock */}
-              <div className="pt-1">
-                <SocialDock />
+              {/* Compact Social Dock */}
+              <div className="flex items-center justify-center gap-2 pt-0.5">
+                <a href="https://github.com/ravichavan9970" target="_blank" rel="noreferrer" className="p-1.5 rounded-lg bg-white/[0.03] hover:bg-white/10 text-text-muted hover:text-white border border-white/5 transition cursor-pointer" title="GitHub">
+                  <FaGithub size={13} />
+                </a>
+                <a href="https://www.linkedin.com/in/ravindra-chavan-4ba744250/" target="_blank" rel="noreferrer" className="p-1.5 rounded-lg bg-white/[0.03] hover:bg-white/10 text-text-muted hover:text-blue-400 border border-white/5 transition cursor-pointer" title="LinkedIn">
+                  <FaLinkedin size={13} />
+                </a>
+                <a href="https://wa.me/917447661921" target="_blank" rel="noreferrer" className="p-1.5 rounded-lg bg-white/[0.03] hover:bg-white/10 text-text-muted hover:text-emerald-400 border border-white/5 transition cursor-pointer" title="WhatsApp">
+                  <FaWhatsapp size={13} />
+                </a>
+                <a href="https://www.instagram.com/ravi_chavan_2002?igsh=MTBsd2dnN2N0bjlyOA==" target="_blank" rel="noreferrer" className="p-1.5 rounded-lg bg-white/[0.03] hover:bg-white/10 text-text-muted hover:text-pink-400 border border-white/5 transition cursor-pointer" title="Instagram">
+                  <FaInstagram size={13} />
+                </a>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=ravindrachavan265125@gmail.com" target="_blank" rel="noreferrer" className="p-1.5 rounded-lg bg-white/[0.03] hover:bg-white/10 text-text-muted hover:text-cyan-400 border border-white/5 transition cursor-pointer" title="Email via Gmail">
+                  <Mail size={13} />
+                </a>
               </div>
             </div>
           </div>
 
-        </div>
-      </section>
+        </div></section>
 
       {/* ── 2. FLAGSHIP PROJECTS: JOB-DRIVEN ARCHITECTURAL CASE STUDIES ── */}
       <section id="projects" className="py-20 md:py-28 relative z-10 max-w-[1280px] mx-auto px-6 border-b border-white/[0.08]">
