@@ -282,7 +282,7 @@ export default function Home() {
                 <img 
                   src={profileAsset} 
                   alt="Ravindra Chavan" 
-                  className="w-full h-full object-cover object-[center_26%] transition-all duration-500 group-hover:scale-105"
+                  className="w-full h-full object-cover object-[center_38%] transition-all duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0b0f19]/85 via-transparent to-transparent opacity-60" />
                 
