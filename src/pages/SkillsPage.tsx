@@ -112,7 +112,7 @@ export default function SkillsPage() {
           {categories.map((category, idx) => (
             <motion.div
               key={idx}
-              className="group flex flex-col justify-between p-6 rounded-2xl glass-aurora border border-white/5 text-left transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] hover:border-primary/40"
+              className="group flex flex-col justify-between p-6 rounded-2xl bg-white dark:bg-white/[0.02] border border-neutral-200 dark:border-white/5 text-left shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] hover:border-primary/40"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -122,7 +122,7 @@ export default function SkillsPage() {
               <div className="flex flex-col gap-5 w-full">
                 {/* Category Header */}
                 <div className="flex items-center gap-2.5 pb-3.5 border-b border-white/5">
-                  <div className={`p-2 rounded-lg bg-white/[0.02] border border-white/5 text-primary-light`}>
+                  <div className={`p-2 rounded-lg bg-neutral-100 dark:bg-white/[0.02] border border-neutral-200 dark:border-white/5 text-primary-hover dark:text-primary-light`}>
                     {category.icon}
                   </div>
                   <h4 className="text-xs font-bold text-text-title font-display uppercase tracking-wider">
@@ -142,7 +142,7 @@ export default function SkillsPage() {
                         <span className="text-[10px] text-primary-light">{skill.level}%</span>
                       </div>
                       {/* Bar container */}
-                      <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden">
+                      <div className="w-full h-1 bg-neutral-200 dark:bg-white/5 rounded-full overflow-hidden">
                         <motion.div
                           className="h-full bg-gradient-to-r from-primary to-secondary rounded-full"
                           initial={{ width: 0 }}
@@ -157,7 +157,7 @@ export default function SkillsPage() {
               </div>
 
               {/* Footer Badge - Pushed to bottom */}
-              <div className="mt-6 pt-4 border-t border-white/5">
+              <div className="mt-6 pt-4 border-t border-neutral-200 dark:border-white/5">
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary/10 border border-primary/20 text-[9px] font-mono font-bold text-primary-light uppercase tracking-wider">
                   ✓ Verified Stack
                 </span>
@@ -167,7 +167,7 @@ export default function SkillsPage() {
         </div>
 
         {/* Real Project Usage */}
-        <div className="border-t border-white/5 pt-16">
+        <div className="border-t border-neutral-200 dark:border-white/5 pt-16">
           <div className="max-w-4xl mx-auto space-y-10">
             <div className="text-center max-w-xl mx-auto">
               <h3 className="text-xl font-bold font-display text-text-title flex items-center justify-center gap-2">
@@ -183,14 +183,14 @@ export default function SkillsPage() {
               {projectUsage.map((item, idx) => (
                 <motion.div
                   key={idx}
-                  className="p-5.5 rounded-2xl glass-aurora border border-white/5 text-left space-y-3 hover:border-primary/20 shadow-sm"
+                  className="p-5.5 rounded-2xl bg-white dark:bg-white/[0.02] border border-neutral-200 dark:border-white/5 text-left shadow-sm space-y-3 hover:border-primary/20 shadow-sm"
                   initial={{ opacity: 0, scale: 0.95 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: idx * 0.08 }}
                 >
                   <div className="flex justify-between items-center">
-                    <span className="text-xs font-bold text-text-title font-mono bg-white/[0.02] border border-white/5 px-2.5 py-0.5 rounded">
+                    <span className="text-xs font-bold text-neutral-900 dark:text-text-title font-mono bg-neutral-100 dark:bg-white/[0.02] border border-neutral-300 dark:border-white/5 px-2.5 py-0.5 rounded">
                       {item.tech}
                     </span>
                     <span className="text-[10px] text-primary-light font-mono font-bold">{item.project}</span>

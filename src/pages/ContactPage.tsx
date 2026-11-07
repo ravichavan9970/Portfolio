@@ -123,7 +123,7 @@ export default function ContactPage() {
                   <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500"></span>
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold text-emerald-400 font-display">Career Availability Status</h4>
+                  <h4 className="text-xs font-bold text-emerald-600 dark:text-emerald-400 font-display">Career Availability Status</h4>
                   <p className="text-[10px] text-text-muted mt-1 leading-normal font-medium">
                     Open to Associate Software Engineer, Java Full-Stack, and Spring Boot backend engineering roles in Pune and across India.
                   </p>
@@ -164,7 +164,7 @@ export default function ContactPage() {
                   href="https://github.com/ravichavan9970"
                   target="_blank"
                   rel="noreferrer"
-                  className="p-3 rounded-xl bg-white/[0.03] hover:bg-white/10 border border-white/10 hover:border-primary/30 text-text-muted hover:text-white transition-all duration-300"
+                  className="p-3 rounded-xl bg-neutral-100 hover:bg-neutral-200 dark:bg-white/[0.03] dark:hover:bg-white/10 border border-neutral-300 dark:border-white/10 text-neutral-700 hover:text-neutral-900 dark:text-text-muted dark:hover:text-white transition-all duration-300"
                   title="GitHub"
                 >
                   <FaGithub size={16} />
@@ -173,7 +173,7 @@ export default function ContactPage() {
                   href="https://www.linkedin.com/in/ravindra-chavan-4ba744250/"
                   target="_blank"
                   rel="noreferrer"
-                  className="p-3 rounded-xl bg-white/[0.03] hover:bg-white/10 border border-white/10 hover:border-primary/30 text-text-muted hover:text-[#3B82F6] transition-all duration-300"
+                  className="p-3 rounded-xl bg-neutral-100 hover:bg-neutral-200 dark:bg-white/[0.03] dark:hover:bg-white/10 border border-neutral-300 dark:border-white/10 text-neutral-700 hover:text-blue-600 dark:text-text-muted dark:hover:text-[#3B82F6] transition-all duration-300"
                   title="LinkedIn"
                 >
                   <FaLinkedin size={16} />
@@ -182,7 +182,7 @@ export default function ContactPage() {
                   href="https://www.instagram.com/ravi_chavan_2002?igsh=MTBsd2dnN2N0bjlyOA=="
                   target="_blank"
                   rel="noreferrer"
-                  className="p-3 rounded-xl bg-white/[0.03] hover:bg-white/10 border border-white/10 hover:border-primary/30 text-text-muted hover:text-[#EC4899] transition-all duration-300"
+                  className="p-3 rounded-xl bg-neutral-100 hover:bg-neutral-200 dark:bg-white/[0.03] dark:hover:bg-white/10 border border-neutral-300 dark:border-white/10 text-neutral-700 hover:text-pink-600 dark:text-text-muted dark:hover:text-[#EC4899] transition-all duration-300"
                   title="Instagram"
                 >
                   <FaInstagram size={16} />
@@ -191,7 +191,7 @@ export default function ContactPage() {
                   href="https://wa.me/917447661921"
                   target="_blank"
                   rel="noreferrer"
-                  className="p-3 rounded-xl bg-white/[0.03] hover:bg-white/10 border border-white/10 hover:border-primary/30 text-text-muted hover:text-emerald-400 transition-all duration-300"
+                  className="p-3 rounded-xl bg-neutral-100 hover:bg-neutral-200 dark:bg-white/[0.03] dark:hover:bg-white/10 border border-neutral-300 dark:border-white/10 text-neutral-700 hover:text-emerald-600 dark:text-text-muted dark:hover:text-emerald-400 transition-all duration-300"
                   title="WhatsApp"
                 >
                   <FaWhatsapp size={16} />

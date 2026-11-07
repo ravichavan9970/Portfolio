@@ -53,18 +53,18 @@ html, body, div, section, article, header, nav, footer, button, a, input, textar
   
   --color-bg-darkest: #FAFBFD;
   --color-bg-dark: #F1F5F9;
-  --color-bg-card: rgba(255, 255, 255, 0.7);
-  --color-bg-card-hover: rgba(241, 245, 249, 0.95);
-  --color-border-dark: #E2E8F0;
-  --color-border-light: #F1F5F9;
+  --color-bg-card: rgba(255, 255, 255, 0.85);
+  --color-bg-card-hover: rgba(241, 245, 249, 0.98);
+  --color-border-dark: #CBD5E1;
+  --color-border-light: #E2E8F0;
   
-  --color-text-title: #0F172A;
-  --color-text-main: #334155;
-  --color-text-muted: #64748B;
+  --color-text-title: #090D16;
+  --color-text-main: #1E293B;
+  --color-text-muted: #475569;
   
-  --glass-bg: rgba(250, 251, 253, 0.75);
-  --glass-card-bg: rgba(255, 255, 255, 0.65);
-  --glass-border: rgba(15, 23, 42, 0.07);
+  --glass-bg: rgba(250, 251, 253, 0.85);
+  --glass-card-bg: rgba(255, 255, 255, 0.9);
+  --glass-border: rgba(15, 23, 42, 0.12);
 }
 .dark {
   --color-bg-darkest: #050816;

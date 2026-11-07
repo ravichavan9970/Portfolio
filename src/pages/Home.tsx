@@ -175,7 +175,7 @@ export default function Home() {
       transition={{ duration: 0.5 }}
     >
       {/* ── 1. HALLMARK HERO: TECHNICAL BLUEPRINT MACROSTRUCTURE ───────── */}
-      <section id="hero" className="relative min-h-[calc(100vh-80px)] lg:h-[calc(100vh-80px)] flex items-center justify-center py-6 lg:py-0 overflow-hidden z-10 border-b border-white/[0.08]">
+      <section id="hero" className="relative min-h-[calc(100vh-80px)] lg:h-[calc(100vh-80px)] flex items-center justify-center py-6 lg:py-0 overflow-hidden z-10 border-b border-neutral-200 dark:border-white/[0.08]">
         <div className="max-w-[1280px] mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           {/* LEFT SIDE: Architectural Specimen & Positioning */}
@@ -269,7 +269,7 @@ export default function Home() {
             <div className="relative w-full max-w-[330px] xl:max-w-[350px] rounded-2xl p-3.5 bg-[#0b0f19] border border-white/10 shadow-2xl space-y-2.5">
               
               {/* Dossier Header Tag */}
-              <div className="flex items-center justify-between text-[10px] font-mono text-text-muted border-b border-white/[0.08] pb-2">
+              <div className="flex items-center justify-between text-[10px] font-mono text-text-muted border-b border-neutral-200 dark:border-white/[0.08] pb-2">
                 <span className="flex items-center gap-1.5 text-white font-semibold">
                   <Terminal size={12} className="text-primary-light" />
                   RC_DOSSIER.json
@@ -332,11 +332,11 @@ export default function Home() {
         </div></section>
 
       {/* ── 2. FLAGSHIP PROJECTS: JOB-DRIVEN ARCHITECTURAL CASE STUDIES ── */}
-      <section id="projects" className="py-20 md:py-28 relative z-10 max-w-[1280px] mx-auto px-6 border-b border-white/[0.08]">
+      <section id="projects" className="py-20 md:py-28 relative z-10 max-w-[1280px] mx-auto px-6 border-b border-neutral-200 dark:border-white/[0.08]">
         <div className="space-y-12">
           
           {/* Section Header */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 text-left border-b border-white/[0.08] pb-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 text-left border-b border-neutral-200 dark:border-white/[0.08] pb-6">
             <div>
               <span className="font-mono text-xs uppercase tracking-wider text-primary-light font-bold">
                 // ARCHITECTURAL DOSSIER //
@@ -382,7 +382,7 @@ export default function Home() {
                 <div className="lg:col-span-7 flex flex-col justify-between text-left space-y-5">
                   <div className="space-y-3">
                     <div className="flex items-center gap-2.5">
-                      <span className="text-[10px] font-mono px-2.5 py-0.5 rounded bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 font-bold">
+                      <span className="text-[10px] font-mono px-2.5 py-0.5 rounded bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border border-cyan-500/20 font-bold">
                         {project.status}
                       </span>
                       <span className="text-xs font-mono text-text-muted">
@@ -402,7 +402,7 @@ export default function Home() {
                   {/* Problem vs Solution Comparison Box */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-white/[0.02] border border-neutral-200 dark:border-white/[0.06] text-xs font-sans">
                     <div className="space-y-1">
-                      <span className="text-[10px] font-mono uppercase text-rose-400 font-bold block">
+                      <span className="text-[10px] font-mono uppercase text-rose-600 dark:text-rose-400 font-bold block">
                         Problem Statement:
                       </span>
                       <p className="text-text-muted text-[11px] leading-relaxed">
@@ -410,7 +410,7 @@ export default function Home() {
                       </p>
                     </div>
                     <div className="space-y-1">
-                      <span className="text-[10px] font-mono uppercase text-emerald-400 font-bold block">
+                      <span className="text-[10px] font-mono uppercase text-emerald-600 dark:text-emerald-400 font-bold block">
                         Engineering Solution:
                       </span>
                       <p className="text-text-muted text-[11px] leading-relaxed">
@@ -459,7 +459,7 @@ export default function Home() {
                         setArchitectureDefaultTab(project.archTab);
                         setArchitectureModalOpen(true);
                       }}
-                      className="px-4 py-2.5 rounded-xl bg-primary/10 hover:bg-primary/20 text-primary-light border border-primary/30 text-xs font-mono font-bold flex items-center gap-1.5 transition cursor-pointer"
+                      className="px-4 py-2.5 rounded-xl bg-cyan-100/70 hover:bg-cyan-200/80 text-cyan-800 border border-cyan-300 dark:bg-primary/10 dark:hover:bg-primary/20 dark:text-primary-light dark:border-primary/30 text-xs font-mono font-bold flex items-center gap-1.5 transition cursor-pointer shadow-sm dark:shadow-none"
                     >
                       <Layers size={13} />
                       <span>View Blueprint</span>
@@ -491,10 +491,10 @@ export default function Home() {
       </section>
 
       {/* ── 3. SKILLS & ARCHITECTURAL STACK ───────────────────────────── */}
-      <section id="skills" className="py-20 max-w-[1280px] mx-auto px-6 border-b border-white/[0.08]">
+      <section id="skills" className="py-20 max-w-[1280px] mx-auto px-6 border-b border-neutral-200 dark:border-white/[0.08]">
         <div className="space-y-10 text-left">
           
-          <div className="border-b border-white/[0.08] pb-6">
+          <div className="border-b border-neutral-200 dark:border-white/[0.08] pb-6">
             <span className="font-mono text-xs uppercase tracking-wider text-primary-light font-bold">
               // ARCHITECTURAL CAPABILITIES //
             </span>
@@ -613,10 +613,10 @@ export default function Home() {
       </section>
 
       {/* ── 4. CHRONOLOGICAL MILESTONES (HALLMARK DOSSIER TIMELINE) ─────── */}
-      <section id="journey" className="py-20 max-w-[1280px] mx-auto px-6 border-b border-white/[0.08]">
+      <section id="journey" className="py-20 max-w-[1280px] mx-auto px-6 border-b border-neutral-200 dark:border-white/[0.08]">
         <div className="space-y-10 text-left">
           
-          <div className="border-b border-white/[0.08] pb-6">
+          <div className="border-b border-neutral-200 dark:border-white/[0.08] pb-6">
             <span className="font-mono text-xs uppercase tracking-wider text-primary-light font-bold">
               // CHRONOLOGY //
             </span>

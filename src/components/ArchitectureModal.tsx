@@ -95,22 +95,22 @@ public interface ProductHoldRepository extends JpaRepository<ProductHold, Long> 
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 15 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="relative w-full max-w-4xl max-h-[90vh] rounded-3xl overflow-hidden border border-white/15 shadow-[0_25px_80px_rgba(0,0,0,0.85)] z-10 flex flex-col bg-[#0b0f19] text-text-main"
+            className="relative w-full max-w-4xl max-h-[90vh] rounded-3xl overflow-hidden border border-neutral-300 dark:border-white/15 shadow-[0_25px_80px_rgba(0,0,0,0.35)] dark:shadow-[0_25px_80px_rgba(0,0,0,0.85)] z-10 flex flex-col bg-white dark:bg-[#0b0f19] text-neutral-900 dark:text-text-main"
           >
             {/* Header Bar */}
-            <div className="px-6 py-4 bg-white/[0.03] border-b border-white/10 flex items-center justify-between select-none">
+            <div className="px-6 py-4 bg-neutral-50 dark:bg-white/[0.03] border-b border-neutral-200 dark:border-white/10 flex items-center justify-between select-none">
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-xl bg-primary/15 text-primary-light border border-primary/30">
+                <div className="p-2 rounded-xl bg-primary/15 text-primary-hover dark:text-primary-light border border-primary/30">
                   <Layers size={18} />
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
-                    <h3 className="text-base font-bold text-white font-display">System Architecture Blueprint</h3>
-                    <span className="px-2 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-[10px] font-mono font-bold">
+                    <h3 className="text-base font-bold text-neutral-900 dark:text-white font-display">System Architecture Blueprint</h3>
+                    <span className="px-2 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-[10px] font-mono font-bold">
                       VERIFIED PRODUCTION
                     </span>
                   </div>
-                  <p className="text-[11px] text-text-muted">
+                  <p className="text-[11px] text-neutral-600 dark:text-text-muted">
                     Engineered by Ravindra Chavan · Java 21 LTS & Spring Boot 3.3.3
                   </p>
                 </div>
@@ -119,24 +119,24 @@ public interface ProductHoldRepository extends JpaRepository<ProductHold, Long> 
               <button
                 type="button"
                 onClick={onClose}
-                className="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-text-muted hover:text-white border border-white/10 transition cursor-pointer"
+                className="p-2 rounded-xl bg-neutral-100 hover:bg-neutral-200 text-neutral-700 hover:text-neutral-900 dark:bg-white/5 dark:hover:bg-white/10 dark:text-text-muted dark:hover:text-white border border-neutral-300 dark:border-white/10 transition cursor-pointer"
               >
                 <X size={16} />
               </button>
             </div>
 
             {/* Tab Selector */}
-            <div className="p-2 bg-black/40 border-b border-white/10 grid grid-cols-2 gap-2 text-xs">
+            <div className="p-2 bg-neutral-100 dark:bg-black/40 border-b border-neutral-200 dark:border-white/10 grid grid-cols-2 gap-2 text-xs">
               <button
                 type="button"
                 onClick={() => setActiveTab('dual-cloud')}
                 className={`py-2.5 px-4 rounded-xl border flex items-center justify-center gap-2 font-mono transition cursor-pointer ${
                   activeTab === 'dual-cloud'
-                    ? 'bg-primary/20 border-primary text-white shadow-sm font-bold'
-                    : 'bg-white/[0.02] border-white/5 text-text-muted hover:text-white'
+                    ? 'bg-white text-neutral-900 border-neutral-300 dark:bg-primary/20 dark:border-primary dark:text-white shadow-sm font-bold'
+                    : 'bg-neutral-200/50 text-neutral-600 border-transparent dark:bg-white/[0.02] dark:border-white/5 dark:text-text-muted dark:hover:text-white font-medium'
                 }`}
               >
-                <Server size={14} className={activeTab === 'dual-cloud' ? 'text-primary-light' : ''} />
+                <Server size={14} className={activeTab === 'dual-cloud' ? 'text-primary-hover dark:text-primary-light' : ''} />
                 <span>01: Dual-Cloud DR Engine</span>
               </button>
               <button
@@ -144,31 +144,31 @@ public interface ProductHoldRepository extends JpaRepository<ProductHold, Long> 
                 onClick={() => setActiveTab('pessimistic-lock')}
                 className={`py-2.5 px-4 rounded-xl border flex items-center justify-center gap-2 font-mono transition cursor-pointer ${
                   activeTab === 'pessimistic-lock'
-                    ? 'bg-emerald-500/20 border-emerald-500 text-white shadow-sm font-bold'
-                    : 'bg-white/[0.02] border-white/5 text-text-muted hover:text-white'
+                    ? 'bg-white text-neutral-900 border-neutral-300 dark:bg-emerald-500/20 dark:border-emerald-500 dark:text-white shadow-sm font-bold'
+                    : 'bg-neutral-200/50 text-neutral-600 border-transparent dark:bg-white/[0.02] dark:border-white/5 dark:text-text-muted dark:hover:text-white font-medium'
                 }`}
               >
-                <Database size={14} className={activeTab === 'pessimistic-lock' ? 'text-emerald-400' : ''} />
+                <Database size={14} className={activeTab === 'pessimistic-lock' ? 'text-emerald-600 dark:text-emerald-400' : ''} />
                 <span>02: Pessimistic Locking Daemon</span>
               </button>
             </div>
 
             {/* Content Area */}
-            <div className="flex-1 overflow-y-auto p-6 space-y-6 scrollbar-thin scrollbar-thumb-white/10 text-left">
+            <div className="flex-1 overflow-y-auto p-6 space-y-6 scrollbar-thin scrollbar-thumb-neutral-300 dark:scrollbar-thumb-white/10 text-left">
               {activeTab === 'dual-cloud' ? (
                 <div className="space-y-6">
                   {/* Summary Box */}
-                  <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 space-y-2">
+                  <div className="p-4 rounded-2xl bg-neutral-50 dark:bg-white/[0.03] border border-neutral-200 dark:border-white/10 space-y-2">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-mono uppercase tracking-wider text-primary-light font-bold">
+                      <span className="text-xs font-mono uppercase tracking-wider text-cyan-700 dark:text-primary-light font-bold">
                         Implementation: Shivchhatra Trekkers
                       </span>
-                      <span className="text-[10px] font-mono text-emerald-400 bg-emerald-400/10 px-2 py-0.5 rounded border border-emerald-400/20">
+                      <span className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20 font-bold">
                         SLA: 99.98% Uptime
                       </span>
                     </div>
-                    <h4 className="text-sm font-bold text-white">Active-Standby Mirrored Disaster Recovery Across Render</h4>
-                    <p className="text-xs text-text-muted leading-relaxed">
+                    <h4 className="text-sm font-bold text-neutral-900 dark:text-white">Active-Standby Mirrored Disaster Recovery Across Render</h4>
+                    <p className="text-xs text-neutral-700 dark:text-text-muted leading-relaxed">
                       To prevent expedition booking loss during cloud outages, the platform runs a mirrored dual-instance topology. The Primary Render node serializes delta ledger updates and cryptographically streams them to a hot secondary replica with automated failover routing.
                     </p>
                   </div>
@@ -197,22 +197,22 @@ public interface ProductHoldRepository extends JpaRepository<ProductHold, Long> 
 
                   {/* Key Metrics */}
                   <div className="grid grid-cols-3 gap-3">
-                    <div className="p-3 rounded-xl bg-white/[0.02] border border-white/5 text-center">
-                      <div className="text-base font-bold text-white font-mono">600 req/min</div>
-                      <div className="text-[10px] text-text-muted">Token-Bucket Rate Limiter</div>
+                    <div className="p-3 rounded-xl bg-neutral-50 dark:bg-white/[0.02] border border-neutral-200 dark:border-white/5 text-center">
+                      <div className="text-base font-bold text-neutral-900 dark:text-white font-mono">600 req/min</div>
+                      <div className="text-[10px] text-neutral-600 dark:text-text-muted">Token-Bucket Rate Limiter</div>
                     </div>
-                    <div className="p-3 rounded-xl bg-white/[0.02] border border-white/5 text-center">
-                      <div className="text-base font-bold text-emerald-400 font-mono">0.00%</div>
-                      <div className="text-[10px] text-text-muted">Data Loss on Outage</div>
+                    <div className="p-3 rounded-xl bg-neutral-50 dark:bg-white/[0.02] border border-neutral-200 dark:border-white/5 text-center">
+                      <div className="text-base font-bold text-emerald-600 dark:text-emerald-400 font-mono">0.00%</div>
+                      <div className="text-[10px] text-neutral-600 dark:text-text-muted">Data Loss on Outage</div>
                     </div>
-                    <div className="p-3 rounded-xl bg-white/[0.02] border border-white/5 text-center">
-                      <div className="text-base font-bold text-cyan-400 font-mono">&lt;45 ms</div>
-                      <div className="text-[10px] text-text-muted">P99 Replication Lag</div>
+                    <div className="p-3 rounded-xl bg-neutral-50 dark:bg-white/[0.02] border border-neutral-200 dark:border-white/5 text-center">
+                      <div className="text-base font-bold text-cyan-700 dark:text-cyan-400 font-mono">&lt;45 ms</div>
+                      <div className="text-[10px] text-neutral-600 dark:text-text-muted">P99 Replication Lag</div>
                     </div>
                   </div>
 
                   {/* Code Snippet */}
-                  <div className="rounded-xl overflow-hidden border border-white/10 bg-black/70">
+                  <div className="rounded-xl overflow-hidden border border-neutral-700 dark:border-white/10 bg-black/85">
                     <div className="px-4 py-2 bg-white/[0.04] border-b border-white/10 flex items-center justify-between text-xs font-mono">
                       <span className="text-amber-400 uppercase font-bold">DisasterRecoverySyncService.java</span>
                       <button
@@ -241,38 +241,38 @@ public interface ProductHoldRepository extends JpaRepository<ProductHold, Long> 
               ) : (
                 <div className="space-y-6">
                   {/* Summary Box */}
-                  <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 space-y-2">
+                  <div className="p-4 rounded-2xl bg-neutral-50 dark:bg-white/[0.03] border border-neutral-200 dark:border-white/10 space-y-2">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold">
+                      <span className="text-xs font-mono uppercase tracking-wider text-emerald-600 dark:text-emerald-400 font-bold">
                         Implementation: MultiVendor Marketplace
                       </span>
-                      <span className="text-[10px] font-mono text-emerald-400 bg-emerald-400/10 px-2 py-0.5 rounded border border-emerald-400/20">
+                      <span className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20 font-bold">
                         Race Condition: 0% Collisions
                       </span>
                     </div>
-                    <h4 className="text-sm font-bold text-white">Pessimistic Row-Level Locking & Automated 10-Minute Hold Sweeper</h4>
-                    <p className="text-xs text-text-muted leading-relaxed">
-                      In high-volume flash-sales, multiple buyers attempt to reserve the final inventory item simultaneously. By implementing JPA <code className="text-amber-300">PESSIMISTIC_WRITE</code> (SQL <code className="text-amber-300">SELECT ... FOR UPDATE</code>), concurrent transactions block safely. An automated <code className="text-cyan-300">@Scheduled</code> sweeper daemon reclaims abandoned holds after 10 minutes.
+                    <h4 className="text-sm font-bold text-neutral-900 dark:text-white">Pessimistic Row-Level Locking & Automated 10-Minute Hold Sweeper</h4>
+                    <p className="text-xs text-neutral-700 dark:text-text-muted leading-relaxed">
+                      In high-volume flash-sales, multiple buyers attempt to reserve the final inventory item simultaneously. By implementing JPA <code className="text-amber-700 dark:text-amber-300 font-bold">PESSIMISTIC_WRITE</code> (SQL <code className="text-amber-700 dark:text-amber-300 font-bold">SELECT ... FOR UPDATE</code>), concurrent transactions block safely. An automated <code className="text-cyan-700 dark:text-cyan-300 font-bold">@Scheduled</code> sweeper daemon reclaims abandoned holds after 10 minutes.
                     </p>
                   </div>
 
                   {/* Flow Diagram */}
-                  <div className="p-4 rounded-2xl bg-black/60 border border-white/10 space-y-2 text-xs font-mono">
-                    <span className="text-[10px] uppercase tracking-wider text-text-muted">Transaction Execution Pipeline</span>
+                  <div className="p-4 rounded-2xl bg-neutral-900 text-slate-100 border border-neutral-700 dark:border-white/10 space-y-2 text-xs font-mono">
+                    <span className="text-[10px] uppercase tracking-wider text-slate-400">Transaction Execution Pipeline</span>
                     <div className="space-y-2 text-[11px] leading-relaxed">
-                      <div className="p-2 rounded bg-white/[0.02] border border-white/5 flex items-center gap-2">
+                      <div className="p-2 rounded bg-white/[0.04] border border-white/5 flex items-center gap-2">
                         <span className="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-[10px]">1</span>
                         <span>Customer initiates checkout → Acquires exclusive row lock with 3000ms timeout hint.</span>
                       </div>
-                      <div className="p-2 rounded bg-white/[0.02] border border-white/5 flex items-center gap-2">
+                      <div className="p-2 rounded bg-white/[0.04] border border-white/5 flex items-center gap-2">
                         <span className="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-[10px]">2</span>
                         <span>Generates 10-minute hold reservation token; decrements visible available stock atomically.</span>
                       </div>
-                      <div className="p-2 rounded bg-white/[0.02] border border-white/5 flex items-center gap-2">
+                      <div className="p-2 rounded bg-white/[0.04] border border-white/5 flex items-center gap-2">
                         <span className="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-[10px]">3</span>
                         <span>If customer completes OTP payment → Order confirmed, inventory committed permanently.</span>
                       </div>
-                      <div className="p-2 rounded bg-white/[0.02] border border-white/5 flex items-center gap-2">
+                      <div className="p-2 rounded bg-white/[0.04] border border-white/5 flex items-center gap-2">
                         <span className="w-5 h-5 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-[10px]">4</span>
                         <span>If abandoned → Sweeper daemon (<code className="text-amber-300">@Scheduled(fixedDelay = 60000)</code>) reclaims stock back to market pool.</span>
                       </div>
@@ -280,7 +280,7 @@ public interface ProductHoldRepository extends JpaRepository<ProductHold, Long> 
                   </div>
 
                   {/* Code Snippet */}
-                  <div className="rounded-xl overflow-hidden border border-white/10 bg-black/70">
+                  <div className="rounded-xl overflow-hidden border border-neutral-700 dark:border-white/10 bg-black/85">
                     <div className="px-4 py-2 bg-white/[0.04] border-b border-white/10 flex items-center justify-between text-xs font-mono">
                       <span className="text-amber-400 uppercase font-bold">ProductHoldRepository.java</span>
                       <button
@@ -310,15 +310,15 @@ public interface ProductHoldRepository extends JpaRepository<ProductHold, Long> 
             </div>
 
             {/* Footer Bar */}
-            <div className="px-6 py-3.5 bg-black/40 border-t border-white/10 flex items-center justify-between text-xs text-text-muted">
+            <div className="px-6 py-3.5 bg-neutral-100 dark:bg-black/40 border-t border-neutral-200 dark:border-white/10 flex items-center justify-between text-xs text-neutral-600 dark:text-text-muted">
               <span className="text-[11px] font-mono flex items-center gap-1.5">
-                <ShieldCheck size={14} className="text-emerald-400" />
+                <ShieldCheck size={14} className="text-emerald-600 dark:text-emerald-400" />
                 Zero-Downtime Guarantee · Thread-Safe Execution
               </span>
               <a
                 href="#/projects"
                 onClick={onClose}
-                className="flex items-center gap-1 text-primary-light hover:text-white font-medium transition cursor-pointer"
+                className="flex items-center gap-1 text-cyan-700 dark:text-primary-light hover:text-neutral-900 dark:hover:text-white font-medium transition cursor-pointer"
               >
                 <span>View Full Projects Showcase</span>
                 <ExternalLink size={12} />

@@ -122,7 +122,7 @@ export default function JourneyPage() {
                     className={`w-full p-5 rounded-2xl border transition-all duration-300 text-left ${
                       isHighlight 
                         ? 'bg-gradient-to-br from-primary/10 via-secondary/5 to-transparent border-primary/40 shadow-[0_0_20px_rgba(139,92,246,0.1)]'
-                        : 'bg-white/[0.01] border border-white/5 hover:border-primary/20 hover:bg-white/[0.02]'
+                        : 'bg-white dark:bg-white/[0.01] border border-neutral-200 dark:border-white/5 hover:border-primary/40 shadow-sm'
                     }`}
                     initial={{ opacity: 0, y: 15 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -134,7 +134,7 @@ export default function JourneyPage() {
                         {step.step}
                       </span>
                       {step.badge && (
-                        <span className="text-[9px] font-mono font-extrabold text-emerald-400 bg-emerald-400/10 border border-emerald-400/25 px-2 py-0.5 rounded">
+                        <span className="text-[9px] font-mono font-extrabold text-emerald-700 dark:text-emerald-400 bg-emerald-500/10 border border-emerald-500/25 px-2 py-0.5 rounded">
                           {step.badge}
                         </span>
                       )}
@@ -144,7 +144,7 @@ export default function JourneyPage() {
                       {step.title}
                     </h3>
                     {step.subtitle && !step.badge && (
-                      <h4 className="text-[10px] font-bold text-secondary-light font-mono mb-2 uppercase tracking-wide">
+                      <h4 className="text-[10px] font-bold text-secondary-hover dark:text-secondary-light font-mono mb-2 uppercase tracking-wide">
                         {step.subtitle}
                       </h4>
                     )}
@@ -167,7 +167,7 @@ export default function JourneyPage() {
                     {step.tech && step.tech.length > 0 && (
                       <div className="flex flex-wrap gap-1 pt-1">
                         {step.tech.map((t) => (
-                          <span key={t} className="px-2 py-0.5 rounded bg-white/[0.02] border border-white/5 text-[9px] text-text-muted font-mono font-bold">{t}</span>
+                          <span key={t} className="px-2 py-0.5 rounded bg-neutral-100 dark:bg-white/[0.02] border border-neutral-300 dark:border-white/5 text-[9px] text-neutral-800 dark:text-text-muted font-mono font-bold">{t}</span>
                         ))}
                       </div>
                     )}
@@ -179,7 +179,7 @@ export default function JourneyPage() {
         </div>
 
         {/* GitHub Profile Link */}
-        <div className="border-t border-white/5 pt-16">
+        <div className="border-t border-neutral-200 dark:border-white/5 pt-16">
           <div className="max-w-4xl mx-auto">
             <motion.div
               className="p-6 rounded-2xl glass-aurora border border-white/5 text-left shadow-sm"
@@ -196,7 +196,7 @@ export default function JourneyPage() {
                   <div>
                     <span className="text-sm font-bold text-text-title block font-display">@ravichavan9970</span>
                     <span className="text-[10px] text-text-muted font-mono block mt-0.5">github.com/ravichavan9970</span>
-                    <span className="text-[10px] text-emerald-400 font-mono block mt-1 font-bold">View real repositories and contributions on GitHub ↗</span>
+                    <span className="text-[10px] text-emerald-700 dark:text-emerald-400 font-mono block mt-1 font-bold">View real repositories and contributions on GitHub ↗</span>
                   </div>
                 </div>
                 <a

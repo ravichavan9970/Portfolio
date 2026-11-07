@@ -158,9 +158,9 @@ export default function ProjectsPage() {
         {/* ======================================================== */}
         {/* SPOTLIGHT 1: SHIVCHHATRA TREKKERS                         */}
         {/* ======================================================== */}
-        <div className="space-y-10 max-w-6xl mx-auto border-b border-white/10 pb-20">
+        <div className="space-y-10 max-w-6xl mx-auto border-b border-neutral-200 dark:border-white/10 pb-20">
           <div className="text-left border-l-4 border-amber-500 pl-4">
-            <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-amber-400">Flagship Project Spotlight 01</span>
+            <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-amber-600 dark:text-amber-400">Flagship Project Spotlight 01</span>
             <h3 className="text-2xl md:text-3xl font-bold font-display text-text-title mt-1">{shivchhatra.title}</h3>
           </div>
 
@@ -170,7 +170,7 @@ export default function ProjectsPage() {
               <div>
                 <div className="flex flex-wrap gap-1.5 mb-4">
                   {shivchhatra.tech.map((tech) => (
-                    <span key={tech} className="px-2 py-0.5 rounded bg-white/[0.02] border border-white/5 text-text-muted text-[10px] font-bold font-mono">
+                    <span key={tech} className="px-2 py-0.5 rounded bg-neutral-100 dark:bg-white/[0.02] border border-neutral-300 dark:border-white/5 text-neutral-800 dark:text-text-muted text-[10px] font-bold font-mono">
                       {tech}
                     </span>
                   ))}
@@ -183,8 +183,8 @@ export default function ProjectsPage() {
               {/* Features list */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {shivchhatraFeatures.map((feat, idx) => (
-                  <div key={idx} className="p-4 rounded-xl bg-white/[0.01] border border-white/5 flex gap-3 shadow-sm hover:border-amber-500/20 transition-all">
-                    <div className="p-2 h-fit rounded-lg bg-bg-dark border border-white/5 shrink-0">
+                  <div key={idx} className="p-4 rounded-xl bg-neutral-50 dark:bg-white/[0.01] border border-neutral-200 dark:border-white/5 flex gap-3 shadow-sm hover:border-amber-500/40 transition-all">
+                    <div className="p-2 h-fit rounded-lg bg-white dark:bg-bg-dark border border-neutral-300 dark:border-white/5 shrink-0 text-neutral-800 dark:text-white">
                       {feat.icon}
                     </div>
                     <div>
@@ -208,7 +208,7 @@ export default function ProjectsPage() {
                   href={shivchhatra.demo}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 text-xs font-bold border border-amber-500/30 hover:scale-105 active:scale-95 transition-all duration-300"
+                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-800 text-xs font-bold border border-amber-300 dark:bg-amber-500/10 dark:hover:bg-amber-500/20 dark:text-amber-300 dark:border-amber-500/30 hover:scale-105 active:scale-95 transition-all duration-300"
                 >
                   <Globe size={12} />
                   Live Website
@@ -217,7 +217,7 @@ export default function ProjectsPage() {
                   href={shivchhatra.github}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/[0.02] hover:bg-white/5 text-text-title text-xs font-bold border border-white/5 hover:scale-105 active:scale-95 transition-all duration-300"
+                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-neutral-100 hover:bg-neutral-200 text-neutral-900 text-xs font-bold border border-neutral-300 dark:bg-white/[0.02] dark:hover:bg-white/5 dark:text-text-title dark:border-white/5 hover:scale-105 active:scale-95 transition-all duration-300"
                 >
                   <FaGithub size={12} />
                   Code Repository
@@ -228,7 +228,7 @@ export default function ProjectsPage() {
             {/* Right Interactive panel */}
             <div className="lg:col-span-7">
               {/* Tab Selector */}
-              <div className="flex flex-wrap items-center gap-1.5 mb-5 border-b border-white/5 pb-2">
+              <div className="flex flex-wrap items-center gap-1.5 mb-5 border-b border-neutral-200 dark:border-white/5 pb-2">
                 {[
                   { id: 'preview', label: 'Trekker Public Portal', icon: <Layers size={12} /> },
                   { id: 'architecture', label: 'Operations Command Hub', icon: <Database size={12} /> },
@@ -337,7 +337,7 @@ export default function ProjectsPage() {
                       exit={{ opacity: 0, y: -10 }}
                       className="p-6 text-left space-y-6"
                     >
-                      <h5 className="text-sm font-bold text-text-title uppercase tracking-widest border-b border-white/5 pb-2">
+                      <h5 className="text-sm font-bold text-text-title uppercase tracking-widest border-b border-neutral-200 dark:border-white/5 pb-2">
                         DISASTER RECOVERY & ARCHITECTURE RESOLUTIONS
                       </h5>
                       <div className="space-y-4">
@@ -398,7 +398,7 @@ export default function ProjectsPage() {
         {/* ======================================================== */}
         {/* SPOTLIGHT 2: MULTIVENDOR MARKETPLACE                     */}
         {/* ======================================================== */}
-        <div className="space-y-10 max-w-6xl mx-auto border-b border-white/10 pb-20">
+        <div className="space-y-10 max-w-6xl mx-auto border-b border-neutral-200 dark:border-white/10 pb-20">
           <div className="text-left border-l-4 border-primary pl-4">
             <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-primary">Flagship Project Spotlight 02</span>
             <h3 className="text-2xl md:text-3xl font-bold font-display text-text-title mt-1">{multiVendor.title}</h3>
@@ -410,7 +410,7 @@ export default function ProjectsPage() {
               <div>
                 <div className="flex flex-wrap gap-1.5 mb-4">
                   {multiVendor.tech.map((tech) => (
-                    <span key={tech} className="px-2 py-0.5 rounded bg-white/[0.02] border border-white/5 text-text-muted text-[10px] font-bold font-mono">
+                    <span key={tech} className="px-2 py-0.5 rounded bg-neutral-100 dark:bg-white/[0.02] border border-neutral-300 dark:border-white/5 text-neutral-800 dark:text-text-muted text-[10px] font-bold font-mono">
                       {tech}
                     </span>
                   ))}
@@ -424,7 +424,7 @@ export default function ProjectsPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {multiVendorFeatures.map((feat, idx) => (
                   <div key={idx} className="p-4 rounded-xl bg-white/[0.01] border border-white/5 flex gap-3 shadow-sm hover:border-primary/20 transition-all">
-                    <div className="p-2 h-fit rounded-lg bg-bg-dark border border-white/5 shrink-0">
+                    <div className="p-2 h-fit rounded-lg bg-white dark:bg-bg-dark border border-neutral-300 dark:border-white/5 shrink-0 text-neutral-800 dark:text-white">
                       {feat.icon}
                     </div>
                     <div>
@@ -448,7 +448,7 @@ export default function ProjectsPage() {
                   href={multiVendor.github}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/[0.02] hover:bg-white/5 text-text-title text-xs font-bold border border-white/5 hover:scale-105 active:scale-95 transition-all duration-300"
+                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-neutral-100 hover:bg-neutral-200 text-neutral-900 text-xs font-bold border border-neutral-300 dark:bg-white/[0.02] dark:hover:bg-white/5 dark:text-text-title dark:border-white/5 hover:scale-105 active:scale-95 transition-all duration-300"
                 >
                   <FaGithub size={12} />
                   Code Repository
@@ -459,7 +459,7 @@ export default function ProjectsPage() {
             {/* Right Interactive panel */}
             <div className="lg:col-span-7">
               {/* Tab Selector */}
-              <div className="flex flex-wrap items-center gap-1.5 mb-5 border-b border-white/5 pb-2">
+              <div className="flex flex-wrap items-center gap-1.5 mb-5 border-b border-neutral-200 dark:border-white/5 pb-2">
                 {[
                   { id: 'preview', label: 'Marketplace UI', icon: <Layers size={12} /> },
                   { id: 'architecture', label: 'Vendor Hub UI', icon: <Database size={12} /> },
@@ -568,7 +568,7 @@ export default function ProjectsPage() {
                       exit={{ opacity: 0, y: -10 }}
                       className="p-6 text-left space-y-6"
                     >
-                      <h5 className="text-sm font-bold text-text-title uppercase tracking-widest border-b border-white/5 pb-2">
+                      <h5 className="text-sm font-bold text-text-title uppercase tracking-widest border-b border-neutral-200 dark:border-white/5 pb-2">
                         ENGINEERING RESOLUTIONS
                       </h5>
                       <div className="space-y-4">
@@ -641,7 +641,7 @@ export default function ProjectsPage() {
               <div>
                 <div className="flex flex-wrap gap-1.5 mb-4">
                   {studySync.tech.map((tech) => (
-                    <span key={tech} className="px-2 py-0.5 rounded bg-white/[0.02] border border-white/5 text-text-muted text-[10px] font-bold font-mono">
+                    <span key={tech} className="px-2 py-0.5 rounded bg-neutral-100 dark:bg-white/[0.02] border border-neutral-300 dark:border-white/5 text-neutral-800 dark:text-text-muted text-[10px] font-bold font-mono">
                       {tech}
                     </span>
                   ))}
@@ -655,7 +655,7 @@ export default function ProjectsPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {studySyncFeatures.map((feat, idx) => (
                   <div key={idx} className="p-4 rounded-xl bg-white/[0.01] border border-white/5 flex gap-3 shadow-sm hover:border-secondary/20 transition-all">
-                    <div className="p-2 h-fit rounded-lg bg-bg-dark border border-white/5 shrink-0">
+                    <div className="p-2 h-fit rounded-lg bg-white dark:bg-bg-dark border border-neutral-300 dark:border-white/5 shrink-0 text-neutral-800 dark:text-white">
                       {feat.icon}
                     </div>
                     <div>
@@ -679,7 +679,7 @@ export default function ProjectsPage() {
                   href={studySync.github}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/[0.02] hover:bg-white/5 text-text-title text-xs font-bold border border-white/5 hover:scale-105 active:scale-95 transition-all duration-300"
+                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-neutral-100 hover:bg-neutral-200 text-neutral-900 text-xs font-bold border border-neutral-300 dark:bg-white/[0.02] dark:hover:bg-white/5 dark:text-text-title dark:border-white/5 hover:scale-105 active:scale-95 transition-all duration-300"
                 >
                   <FaGithub size={12} />
                   Code Repository
@@ -690,7 +690,7 @@ export default function ProjectsPage() {
             {/* Right Interactive panel */}
             <div className="lg:col-span-7">
               {/* Tab Selector */}
-              <div className="flex flex-wrap items-center gap-1.5 mb-5 border-b border-white/5 pb-2">
+              <div className="flex flex-wrap items-center gap-1.5 mb-5 border-b border-neutral-200 dark:border-white/5 pb-2">
                 {[
                   { id: 'preview', label: 'Student Workspace UI', icon: <Layers size={12} /> },
                   { id: 'architecture', label: 'Pomodoro Focus UI', icon: <Database size={12} /> },
@@ -799,7 +799,7 @@ export default function ProjectsPage() {
                       exit={{ opacity: 0, y: -10 }}
                       className="p-6 text-left space-y-6"
                     >
-                      <h5 className="text-sm font-bold text-text-title uppercase tracking-widest border-b border-white/5 pb-2">
+                      <h5 className="text-sm font-bold text-text-title uppercase tracking-widest border-b border-neutral-200 dark:border-white/5 pb-2">
                         ENGINEERING RESOLUTIONS
                       </h5>
                       <div className="space-y-4">

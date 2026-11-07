@@ -44,22 +44,22 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.92, y: 20 }}
           transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full max-w-4xl max-h-[90vh] bg-[#0F172A] border border-white/15 rounded-[28px] shadow-2xl overflow-y-auto z-10 text-left my-auto"
+          className="relative w-full max-w-4xl max-h-[90vh] bg-white dark:bg-[#0F172A] border border-neutral-200 dark:border-white/15 rounded-[28px] shadow-2xl overflow-y-auto z-10 text-left my-auto text-neutral-900 dark:text-slate-100"
           style={{
-            boxShadow: '0 25px 80px rgba(0, 0, 0, 0.7), 0 0 40px rgba(139, 92, 246, 0.2)'
+            boxShadow: '0 25px 80px rgba(0, 0, 0, 0.25), 0 0 40px rgba(139, 92, 246, 0.15)'
           }}
         >
           {/* Top Sticky Header */}
-          <div className="sticky top-0 z-30 flex items-center justify-between px-6 py-4 bg-[#0F172A]/90 backdrop-blur-xl border-b border-white/10">
+          <div className="sticky top-0 z-30 flex items-center justify-between px-6 py-4 bg-white/95 dark:bg-[#0F172A]/90 backdrop-blur-xl border-b border-neutral-200 dark:border-white/10">
             <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
-              <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-emerald-400">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping" />
+              <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-emerald-600 dark:text-emerald-400">
                 {project.status || 'Production Ready'}
               </span>
             </div>
             <button
               onClick={onClose}
-              className="p-2 rounded-full bg-white/5 hover:bg-white/15 text-text-title transition-all duration-200 cursor-pointer border border-white/10 hover:rotate-90"
+              className="p-2 rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-800 dark:bg-white/5 dark:hover:bg-white/15 dark:text-white transition-all duration-200 cursor-pointer border border-neutral-300 dark:border-white/10 hover:rotate-90"
               aria-label="Close modal"
             >
               <X size={18} />
@@ -68,12 +68,12 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
 
           <div className="p-6 md:p-8 space-y-8">
             {/* Browser Screenshot Showcase */}
-            <div className="rounded-2xl overflow-hidden border border-white/10 bg-slate-950 shadow-2xl">
-              <div className="flex items-center gap-1.5 px-4 py-2.5 bg-slate-900 border-b border-white/10">
+            <div className="rounded-2xl overflow-hidden border border-neutral-200 dark:border-white/10 bg-neutral-100 dark:bg-slate-950 shadow-2xl">
+              <div className="flex items-center gap-1.5 px-4 py-2.5 bg-neutral-200/70 dark:bg-slate-900 border-b border-neutral-300 dark:border-white/10">
                 <span className="w-2.5 h-2.5 rounded-full bg-rose-500" />
                 <span className="w-2.5 h-2.5 rounded-full bg-amber-500" />
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
-                <div className="ml-3 px-3 py-0.5 rounded bg-black/40 text-[10px] font-mono text-slate-400 border border-white/5 truncate max-w-xs">
+                <div className="ml-3 px-3 py-0.5 rounded bg-white dark:bg-black/40 text-[10px] font-mono text-neutral-700 dark:text-slate-400 border border-neutral-300 dark:border-white/5 truncate max-w-xs font-semibold">
                   https://{project.title.toLowerCase().replace(/[^a-z0-9]/g, '')}.dev
                 </div>
               </div>
@@ -88,11 +88,11 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
 
             {/* Title & Tagline */}
             <div>
-              <h2 className="text-2xl md:text-4xl font-bold font-display text-text-title tracking-tight leading-tight">
+              <h2 className="text-2xl md:text-4xl font-bold font-display text-neutral-900 dark:text-text-title tracking-tight leading-tight">
                 {project.title}
               </h2>
               {project.tagline && (
-                <p className="text-xs md:text-sm font-mono font-bold text-primary-light mt-1.5">
+                <p className="text-xs md:text-sm font-mono font-bold text-cyan-700 dark:text-primary-light mt-1.5">
                   {project.tagline}
                 </p>
               )}
@@ -100,14 +100,14 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
 
             {/* Tech Stack Chips */}
             <div className="space-y-2">
-              <h4 className="text-[10px] font-mono uppercase font-bold text-text-muted tracking-widest">
+              <h4 className="text-[10px] font-mono uppercase font-bold text-neutral-600 dark:text-text-muted tracking-widest">
                 Technologies & Tools
               </h4>
               <div className="flex flex-wrap gap-2">
                 {project.tech.map((t) => (
                   <span
                     key={t}
-                    className="px-3 py-1 rounded-xl bg-primary/10 border border-primary/25 text-primary-light text-xs font-mono font-bold shadow-sm"
+                    className="px-3 py-1 rounded-xl bg-neutral-100 dark:bg-primary/10 border border-neutral-300 dark:border-primary/25 text-neutral-800 dark:text-primary-light text-xs font-mono font-bold shadow-sm"
                   >
                     {t}
                   </span>
@@ -116,30 +116,30 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             </div>
 
             {/* Description / Case Study Details */}
-            <div className="space-y-3 bg-white/[0.02] border border-white/5 p-5 md:p-6 rounded-2xl">
-              <h4 className="text-sm font-bold font-display text-text-title flex items-center gap-2">
+            <div className="space-y-3 bg-neutral-50 dark:bg-white/[0.02] border border-neutral-200 dark:border-white/5 p-5 md:p-6 rounded-2xl">
+              <h4 className="text-sm font-bold font-display text-neutral-900 dark:text-text-title flex items-center gap-2">
                 <Server size={16} className="text-primary" />
                 Engineering & Architecture Overview
               </h4>
-              <p className="text-xs md:text-sm text-text-muted leading-relaxed font-normal">
+              <p className="text-xs md:text-sm text-neutral-700 dark:text-text-muted leading-relaxed font-normal">
                 {project.longDesc || project.desc}
               </p>
             </div>
 
             {/* Key Features Matrix */}
             <div className="space-y-3">
-              <h4 className="text-sm font-bold font-display text-text-title flex items-center gap-2">
-                <Shield size={16} className="text-emerald-400" />
+              <h4 className="text-sm font-bold font-display text-neutral-900 dark:text-text-title flex items-center gap-2">
+                <Shield size={16} className="text-emerald-600 dark:text-emerald-400" />
                 Key Technical Highlights & Modules
               </h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {project.features.map((feat, idx) => (
                   <div
                     key={idx}
-                    className="p-3.5 rounded-xl bg-white/[0.02] border border-white/5 flex items-start gap-3 hover:border-primary/20 transition-all"
+                    className="p-3.5 rounded-xl bg-neutral-50 dark:bg-white/[0.02] border border-neutral-200 dark:border-white/5 flex items-start gap-3 hover:border-primary/40 transition-all"
                   >
-                    <CheckCircle2 size={16} className="text-emerald-400 mt-0.5 shrink-0" />
-                    <span className="text-xs font-mono font-bold text-text-title leading-snug">
+                    <CheckCircle2 size={16} className="text-emerald-600 dark:text-emerald-400 mt-0.5 shrink-0" />
+                    <span className="text-xs font-mono font-bold text-neutral-800 dark:text-text-title leading-snug">
                       {feat}
                     </span>
                   </div>
@@ -150,11 +150,11 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             {/* Secondary Screenshot Preview if available */}
             {project.image2 && (
               <div className="space-y-3">
-                <h4 className="text-sm font-bold font-display text-text-title flex items-center gap-2">
+                <h4 className="text-sm font-bold font-display text-neutral-900 dark:text-text-title flex items-center gap-2">
                   <Database size={16} className="text-secondary" />
                   Secondary Interface View
                 </h4>
-                <div className="rounded-2xl overflow-hidden border border-white/10 shadow-xl max-h-[350px]">
+                <div className="rounded-2xl overflow-hidden border border-neutral-200 dark:border-white/10 shadow-xl max-h-[350px]">
                   <img
                     src={project.image2}
                     alt={`${project.title} secondary view`}
@@ -165,12 +165,12 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             )}
 
             {/* Action Buttons */}
-            <div className="flex flex-wrap gap-4 pt-4 border-t border-white/10">
+            <div className="flex flex-wrap gap-4 pt-4 border-t border-neutral-200 dark:border-white/10">
               <a
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-primary to-secondary text-white text-xs font-bold shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer"
+                className="flex items-center gap-2 px-6 py-3 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white dark:bg-gradient-to-r dark:from-primary dark:to-secondary text-xs font-bold shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer"
               >
                 <ExternalLink size={14} />
                 Explore Live Demo / Repository
@@ -179,7 +179,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                 href={project.repo}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-6 py-3 rounded-xl bg-white/[0.03] hover:bg-white/10 text-text-title border border-white/10 hover:border-primary/30 text-xs font-bold active:scale-95 transition-all duration-300 cursor-pointer"
+                className="flex items-center gap-2 px-6 py-3 rounded-xl bg-neutral-100 hover:bg-neutral-200 text-neutral-900 border border-neutral-300 dark:bg-white/[0.03] dark:hover:bg-white/10 dark:text-white dark:border-white/10 text-xs font-bold active:scale-95 transition-all duration-300 cursor-pointer"
               >
                 <FaGithub size={14} />
                 GitHub Code Repository

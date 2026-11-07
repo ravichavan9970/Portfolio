@@ -164,11 +164,11 @@ export default function AboutPage() {
 
             {/* Quick Contact & Details */}
             <div className="flex flex-wrap gap-4 pt-2 text-xs font-mono text-text-muted">
-              <div className="flex items-center gap-2 bg-white/[0.02] border border-white/5 px-3.5 py-2 rounded-xl">
+              <div className="flex items-center gap-2 bg-neutral-100 dark:bg-white/[0.02] border border-neutral-300 dark:border-white/5 px-3.5 py-2 rounded-xl text-neutral-800 dark:text-text-muted font-medium">
                 <MapPin size={14} className="text-secondary" />
                 <span>Pune, Maharashtra, India</span>
               </div>
-              <div className="flex items-center gap-2 bg-white/[0.02] border border-white/5 px-3.5 py-2 rounded-xl">
+              <div className="flex items-center gap-2 bg-neutral-100 dark:bg-white/[0.02] border border-neutral-300 dark:border-white/5 px-3.5 py-2 rounded-xl text-neutral-800 dark:text-text-muted font-medium">
                 <Mail size={14} className="text-primary" />
                 <a href="mailto:ravindrachavan265125@gmail.com" className="hover:text-text-title transition-colors">
                   ravindrachavan265125@gmail.com
@@ -189,7 +189,7 @@ export default function AboutPage() {
               <a
                 href="/resume/Ravindra_Chavan_Resume.pdf"
                 download="Ravindra_Chavan_Resume.pdf"
-                className="flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white/[0.03] hover:bg-white/5 text-text-title border border-white/5 hover:border-primary/20 text-xs font-bold active:scale-95 transition-all duration-300 cursor-pointer hover:shadow-[0_0_15px_rgba(139,92,246,0.15)]"
+                className="flex items-center gap-2 px-6 py-3.5 rounded-xl bg-neutral-100 hover:bg-neutral-200 text-neutral-900 border border-neutral-300 dark:bg-white/[0.03] dark:hover:bg-white/5 dark:text-text-title dark:border-white/5 text-xs font-bold active:scale-95 transition-all duration-300 cursor-pointer shadow-sm"
               >
                 📥 Download Resume
               </a>
@@ -292,7 +292,7 @@ export default function AboutPage() {
         </div>
 
         {/* Section 2: Real Developer Stats & Current Status Cards (Grid 4 Columns) */}
-        <div className="border-t border-white/5 pt-16 space-y-8">
+        <div className="border-t border-neutral-200 dark:border-white/5 pt-16 space-y-8">
           <div className="text-center max-w-xl mx-auto">
             <h2 className="text-2xl md:text-3xl font-bold font-display text-text-title tracking-tight">
               Developer Overview
@@ -306,7 +306,7 @@ export default function AboutPage() {
             {infoCards.map((card, idx) => (
               <motion.div
                 key={card.title}
-                className={`p-6 rounded-2xl glass-aurora border border-white/5 text-left flex flex-col justify-between h-40 transition-all duration-300 ${card.color}`}
+                className={`p-6 rounded-2xl bg-white dark:bg-white/[0.02] border border-neutral-200 dark:border-white/5 shadow-sm text-left flex flex-col justify-between h-40 transition-all duration-300 ${card.color}`}
                 initial={{ opacity: 0, y: 25 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -328,7 +328,7 @@ export default function AboutPage() {
         </div>
 
         {/* Section 3: Tech Stack Grid */}
-        <div className="border-t border-white/5 pt-16 space-y-8">
+        <div className="border-t border-neutral-200 dark:border-white/5 pt-16 space-y-8">
           <div className="text-center max-w-xl mx-auto">
             <span className="text-xs font-mono font-bold text-primary uppercase tracking-widest">TECH STACK</span>
             <h2 className="text-2xl md:text-3xl font-bold font-display text-text-title tracking-tight mt-2">
@@ -346,7 +346,7 @@ export default function AboutPage() {
               { name: "Tailwind CSS", icon: <SiTailwindcss className="text-[#38BDF8]" />, desc: "Responsive Modern Utility Styling" },
               { name: "TypeScript", icon: <SiTypescript className="text-[#3178C6]" />, desc: "Type-safe Client Application Logic" }
             ].map((tech) => (
-              <div key={tech.name} className="p-4 rounded-xl bg-white/[0.02] border border-white/5 flex items-center gap-3 hover:border-primary/30 transition-all duration-300 text-left">
+              <div key={tech.name} className="p-4 rounded-xl bg-neutral-50 dark:bg-white/[0.02] border border-neutral-200 dark:border-white/5 flex items-center gap-3 hover:border-primary/30 transition-all duration-300 text-left">
                 <span className="text-2xl shrink-0">{tech.icon}</span>
                 <div>
                   <h4 className="text-xs font-bold text-text-title">{tech.name}</h4>
@@ -358,7 +358,7 @@ export default function AboutPage() {
         </div>
 
         {/* Section 4: Animated Learning Timeline */}
-        <div className="border-t border-white/5 pt-16 pb-12 space-y-8">
+        <div className="border-t border-neutral-200 dark:border-white/5 pt-16 pb-12 space-y-8">
           <div className="text-center max-w-xl mx-auto">
             <span className="text-xs font-mono font-bold text-secondary uppercase tracking-widest">TIMELINE</span>
             <h2 className="text-2xl md:text-3xl font-bold font-display text-text-title tracking-tight mt-2">
@@ -377,7 +377,7 @@ export default function AboutPage() {
                   <div className="absolute left-0 top-1.5 w-8 h-8 rounded-full bg-bg-darkest border border-white/10 flex items-center justify-center text-[10px] font-bold text-text-title shadow-lg z-10">
                     <span className="w-2 h-2 rounded-full bg-gradient-to-r from-primary to-secondary" />
                   </div>
-                  <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-primary/20 transition-colors">
+                  <div className="p-5 rounded-2xl bg-neutral-50 dark:bg-white/[0.02] border border-neutral-200 dark:border-white/5 hover:border-primary/20 transition-colors">
                     <div className="flex items-center gap-2">
                       <span className="text-[10px] font-mono font-bold text-primary-light uppercase tracking-wider">{step.year}</span>
                       <span className="text-text-muted">•</span>

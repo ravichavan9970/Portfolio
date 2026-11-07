@@ -7,11 +7,11 @@ export default function Footer() {
   const navigate = useNavigate();
 
   const socialLinks = [
-    { icon: <FaGithub size={15} />, url: "https://github.com/ravichavan9970", label: "GitHub", color: "hover:text-white" },
-    { icon: <FaLinkedin size={15} />, url: "https://www.linkedin.com/in/ravindra-chavan-4ba744250/", label: "LinkedIn", color: "hover:text-blue-400" },
-    { icon: <FaWhatsapp size={15} />, url: "https://wa.me/917447661921", label: "WhatsApp", color: "hover:text-emerald-400" },
-    { icon: <FaInstagram size={15} />, url: "https://www.instagram.com/ravi_chavan_2002?igsh=MTBsd2dnN2N0bjlyOA==", label: "Instagram", color: "hover:text-pink-400" },
-    { icon: <Mail size={15} />, url: "https://mail.google.com/mail/?view=cm&fs=1&to=ravindrachavan265125@gmail.com", label: "Email via Gmail", color: "hover:text-cyan-400" },
+    { icon: <FaGithub size={15} />, url: "https://github.com/ravichavan9970", label: "GitHub", color: "hover:text-neutral-900 dark:hover:text-white" },
+    { icon: <FaLinkedin size={15} />, url: "https://www.linkedin.com/in/ravindra-chavan-4ba744250/", label: "LinkedIn", color: "hover:text-blue-600 dark:hover:text-blue-400" },
+    { icon: <FaWhatsapp size={15} />, url: "https://wa.me/917447661921", label: "WhatsApp", color: "hover:text-emerald-600 dark:hover:text-emerald-400" },
+    { icon: <FaInstagram size={15} />, url: "https://www.instagram.com/ravi_chavan_2002?igsh=MTBsd2dnN2N0bjlyOA==", label: "Instagram", color: "hover:text-pink-600 dark:hover:text-pink-400" },
+    { icon: <Mail size={15} />, url: "https://mail.google.com/mail/?view=cm&fs=1&to=ravindrachavan265125@gmail.com", label: "Email via Gmail", color: "hover:text-cyan-600 dark:hover:text-cyan-400" },
   ];
 
   const quickLinks = [
@@ -89,7 +89,7 @@ export default function Footer() {
               <h4 className="font-bold text-base font-display text-neutral-900 dark:text-white">
                 Ravindra Chavan
               </h4>
-              <span className="text-[11px] font-mono text-cyan-400 block mt-0.5">
+              <span className="text-[11px] font-mono text-cyan-700 dark:text-cyan-400 font-semibold block mt-0.5">
                 Associate Software Engineer · Java Full-Stack
               </span>
             </div>
@@ -103,7 +103,7 @@ export default function Footer() {
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`p-2 rounded-lg bg-white/[0.03] border border-white/10 text-text-muted transition-colors ${social.color}`}
+                  className={`p-2 rounded-lg bg-neutral-200/60 dark:bg-white/[0.03] border border-neutral-300 dark:border-white/10 text-neutral-600 dark:text-text-muted transition-colors ${social.color}`}
                   title={social.label}
                 >
                   {social.icon}
@@ -114,7 +114,7 @@ export default function Footer() {
 
           {/* Column 2: Navigation */}
           <div className="lg:col-span-3 space-y-3 font-mono text-xs">
-            <h5 className="text-white font-bold text-xs uppercase tracking-wider">
+            <h5 className="text-neutral-900 dark:text-white font-bold text-xs uppercase tracking-wider">
               Navigation
             </h5>
             <ul className="space-y-1.5 text-text-muted">
@@ -123,7 +123,7 @@ export default function Footer() {
                   <button
                     type="button"
                     onClick={() => navigate(link.path)}
-                    className="hover:text-white transition-colors cursor-pointer text-left"
+                    className="hover:text-neutral-900 dark:hover:text-white transition-colors cursor-pointer text-left font-medium"
                   >
                     {link.label}
                   </button>
@@ -134,14 +134,14 @@ export default function Footer() {
 
           {/* Column 3: Stack Badges */}
           <div className="lg:col-span-4 space-y-3 font-mono text-xs">
-            <h5 className="text-white font-bold text-xs uppercase tracking-wider">
+            <h5 className="text-neutral-900 dark:text-white font-bold text-xs uppercase tracking-wider">
               Engineering Foundations
             </h5>
             <div className="flex flex-wrap gap-1.5">
               {techStack.map((tech) => (
                 <span
                   key={tech}
-                  className="px-2 py-0.5 rounded bg-white/[0.03] border border-white/[0.08] text-[10px] text-text-muted"
+                  className="px-2 py-0.5 rounded bg-neutral-200/70 dark:bg-white/[0.03] border border-neutral-300 dark:border-white/[0.08] text-[10px] text-neutral-800 dark:text-text-muted font-medium"
                 >
                   {tech}
                 </span>
@@ -149,12 +149,12 @@ export default function Footer() {
             </div>
             <div className="text-[11px] text-text-muted space-y-1 pt-2">
               <div className="flex items-center gap-2">
-                <MapPin size={12} className="text-purple-400" />
-                <span>Pune, Maharashtra, India</span>
+                <MapPin size={12} className="text-purple-600 dark:text-purple-400" />
+                <span className="text-neutral-700 dark:text-text-muted">Pune, Maharashtra, India</span>
               </div>
               <div className="flex items-center gap-2">
-                <Mail size={12} className="text-cyan-400" />
-                <span>ravindrachavan265125@gmail.com</span>
+                <Mail size={12} className="text-cyan-700 dark:text-cyan-400" />
+                <span className="text-neutral-700 dark:text-text-muted">ravindrachavan265125@gmail.com</span>
               </div>
             </div>
           </div>
@@ -164,14 +164,14 @@ export default function Footer() {
         {/* ======================================================== */}
         {/* BOTTOM BAR: Hallmark Anti-Slop Compliance Stamp          */}
         {/* ======================================================== */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-6 border-t border-white/[0.08] text-[11px] font-mono text-text-muted">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-6 border-t border-neutral-200 dark:border-white/[0.08] text-[11px] font-mono text-text-muted">
           <div>
             © 2026 Ravindra Chavan. All rights reserved.
           </div>
           
-          <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.02] border border-white/[0.08] text-[10px]">
-            <ShieldCheck size={12} className="text-emerald-400" />
-            <span>Built with Hallmark Anti-Slop Standards · Verified Enterprise Specs</span>
+          <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-200/60 dark:bg-white/[0.02] border border-neutral-300 dark:border-white/[0.08] text-[10px]">
+            <ShieldCheck size={12} className="text-emerald-600 dark:text-emerald-400" />
+            <span className="text-neutral-700 dark:text-text-muted">Built with Hallmark Anti-Slop Standards · Verified Enterprise Specs</span>
           </div>
         </div>
 
