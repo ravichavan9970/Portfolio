@@ -16,34 +16,6 @@ export default function AnimatedRole({ className = "" }: AnimatedRoleProps) {
   const [roleIndex, setRoleIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  // Monitor theme changes to apply appropriate text color fallbacks and text-shadows
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    const savedMode = localStorage.getItem('portfolio-theme') || 'dark';
-    if (savedMode === 'system') {
-      return window.matchMedia('(prefers-color-scheme: dark)').matches;
-    }
-    return savedMode === 'dark';
-  });
-
-  useEffect(() => {
-    const checkTheme = () => {
-      setIsDarkMode(document.documentElement.classList.contains('dark'));
-    };
-    checkTheme();
-
-    window.addEventListener('themechange', checkTheme);
-    const observer = new MutationObserver(checkTheme);
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['class'],
-    });
-
-    return () => {
-      window.removeEventListener('themechange', checkTheme);
-      observer.disconnect();
-    };
-  }, []);
-
   // Typewriter core animation loop
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout>;
@@ -77,38 +49,17 @@ export default function AnimatedRole({ className = "" }: AnimatedRoleProps) {
     return () => clearTimeout(timer);
   }, [displayText, isDeleting, roleIndex]);
 
-  const textStyle = {
-    background: isDarkMode 
-      ? "linear-gradient(90deg, #38BDF8 0%, #60A5FA 30%, #8B5CF6 65%, #EC4899 100%)"
-      : "linear-gradient(90deg, #0284C7 0%, #2563EB 30%, #7C3AED 65%, #DB2777 100%)",
-    WebkitBackgroundClip: "text",
-    WebkitTextFillColor: "transparent",
-    backgroundClip: "text",
-    color: isDarkMode ? "#F8FAFC" : "#0F172A",
-    textShadow: isDarkMode 
-      ? "0 0 10px rgba(56, 189, 248, 0.25), 0 0 20px rgba(139, 92, 246, 0.20), 0 0 30px rgba(236, 72, 153, 0.15)" 
-      : "none",
-    fontWeight: 700,
-    letterSpacing: "0.02em",
-    lineHeight: "1.2",
-    opacity: 1,
-  };
-
   return (
-    <div className={`inline-flex items-center select-none ${className}`} style={{ opacity: 1 }}>
-      <span style={textStyle}>
+    <span className={`inline-flex items-center select-none font-mono ${className}`}>
+      <span className="font-bold tracking-wide bg-gradient-to-r from-sky-600 via-purple-600 to-pink-600 dark:from-sky-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
         {displayText}
       </span>
       <span 
-        className="animate-typewriter-blink ml-1"
-        style={{
-          color: isDarkMode ? "#60A5FA" : "#3B82F6",
-          fontWeight: 400,
-          lineHeight: "1.2",
-        }}
+        className="animate-typewriter-blink ml-1 text-sky-600 dark:text-sky-400 font-normal select-none"
+        aria-hidden="true"
       >
         |
       </span>
-    </div>
+    </span>
   );
 }
